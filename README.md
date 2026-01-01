@@ -1,2 +1,2 @@
-# DanhengServer-Resources
-A repository containing the resources for DanhengServer
+# DanHengServerResources
+A repository containing the resources for DanHengServer
