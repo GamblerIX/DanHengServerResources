@@ -1,0 +1,559 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "Monster_W2_Kafka_BattleScore1": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnListenModifierDispel",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                        "ModifierName": "MCommon_MindControl",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsTeammate",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Inverse": true,
+                        "TaskEnabled": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Key": {
+                        "Value": "DisPelCount"
+                      },
+                      "AddValue": {
+                        "FixedValue": {
+                          "RawValue": 4294967296,
+                          "Value": 1.0
+                        }
+                      },
+                      "Min": {},
+                      "Max": {
+                        "FixedValue": {
+                          "RawValue": 12884901888,
+                          "Value": 3.0
+                        }
+                      },
+                      "ContextScope": "TargetEntity",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "DynamicKey": {
+                          "Value": "DisPelCount"
+                        },
+                        "ContextScope": "TargetEntity",
+                        "CompareType": "GreaterEqual",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": 12884901888,
+                            "Value": 3.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetBattleAchievement",
+                          "AchievementID": 30039,
+                          "ModifyFunction": "Add",
+                          "ModifyValue": {
+                            "FixedValue": {
+                              "RawValue": 4294967296,
+                              "Value": 1.0
+                            }
+                          },
+                          "TagMatch": true,
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        },
+        "Monster_W2_Kafka_00_AIChange": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "Count": -1,
+          "Stacking": "Unique"
+        }
+      },
+      "Name": "Monster_GridFight_Kafka_00_Passive01",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.SetAttachmentScale",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AttachPoints": [
+            {
+              "Name": "Weapon02"
+            },
+            {
+              "Name": "Weapon03"
+            },
+            {
+              "Name": "Weapon04"
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ],
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Monster_W2_Kafka_BattleScore1"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": {
+            "Value": "DisPelCount"
+          },
+          "ResetValue": {},
+          "ContextScope": "TargetEntity",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "OneMorePerTurn"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Monster_W2_Kafka_00_RL_Pursuit"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Monster_W2_Kafka_00_AIChange"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowBossInfoBar",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "IsShow": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MMonster_GridFight_Kafka_00_PhaseController"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Monster_W2_Kafka_00_RL_Power"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "DynamicValues": {
+            "MDF_DamageUpRatio_PerLayer": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Monster_W2_Kafka_00_RL_LowHP"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "DynamicValues": {
+            "MDF_LowHPRatio": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "GlobalModifiers": {
+    "MMonster_GridFight_Kafka_00_PhaseController": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "_CallbackList": [
+        {
+          "Event": "OnLimboWaitHeal",
+          "Priority": -90,
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": {
+                      "Value": "InsertCheck"
+                    },
+                    "ContextScope": "TargetEntity",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TriggerAnimState",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AnimLogicState": "SkillUse",
+                      "AnimStateName": "ChangePhaseStart",
+                      "NormalizedTimeStart": {},
+                      "NormalizedTimeEnd": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "NormalizedTimeWait": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "NormalizedTransitionDuration": {},
+                      "WaitAnimState": true,
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.DispelStatus",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "OnlyCanDispel": true,
+                      "BuffType": "Debuff",
+                      "IsSilentDispel": true,
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "ModifierName": {
+                        "Value": "Monster_W2_Kafka_00_RL_Endurance"
+                      },
+                      "Chance": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "MaxTargetCount": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "IsShowUIMessageFromModel": true,
+                      "IsShowUIMessageOnUpdate": true,
+                      "ShowUIMessageInternalTime": -1.0,
+                      "UseFixedPosition": true,
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.DefineDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "DynamicKey": {
+                        "Value": "InsertCheck"
+                      },
+                      "ResetValue": {},
+                      "ContextScope": "TargetEntity",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetMonsterPhase",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "SetMode": "Inc",
+                      "PhaseNum": 1,
+                      "ApplyOverrideConfig": true,
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": {
+                        "Value": "Monster_W2_Kafka_00_RL_PassiveSkill_Insert"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "InsertAbilityPriority": "MonsterChangePhase",
+                      "OwnerAliveState": "Mask_AliveOrLimbo",
+                      "TargetAliveState": "Mask_AliveOrLimbo",
+                      "CanRunOnUnselectableTarget": true,
+                      "ShowInActionBar": true,
+                      "AutoStandbyOnAbilityFinish": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "FailedTaskList": [],
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "Unique"
+    }
+  }
+}

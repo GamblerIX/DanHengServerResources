@@ -1,0 +1,2095 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "MStageAbility_GridFight_Luocha_00_BE_Basic": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetEntityVisible",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "MuteColliderWhenInvisible": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "Value": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "DynamicKey": {
+                    "Value": "MDF_FirstAidTime"
+                  },
+                  "SkipInCharmAction": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "RefreshEnergyBar_Luocha",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.LockHP",
+                  "Strength": "Hard",
+                  "Threshold": {
+                    "FixedValue": {
+                      "RawValue": 4294967,
+                      "Value": 0.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "ExtraSpeedAddedRatio3",
+                  "PropertyValue": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenHPChange",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareHPRatio",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "CompareType": "LessEqual",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareGridFightProperty",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "PropertyType": "PresetTag",
+                        "CompareType": "Equal",
+                        "CompareValue": {},
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "DynamicKey": {
+                          "Value": "MDF_FirstAidTime"
+                        },
+                        "CompareType": "GreaterEqual",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": 4294967296,
+                            "Value": 1.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamLight",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByTargetAliveState",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "AliveStateMask": "Bit_Alive",
+                        "TaskEnabled": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": {
+                        "Value": "BattleEvent_GridFight_Luocha_00_Skill02_Phase01_Insert"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "AbilityTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "InsertAbilityPriority": "AvatarHealOthers",
+                      "OwnerAliveState": "Anyone",
+                      "TargetAliveState": "Bit_Alive",
+                      "ShowInActionBar": true,
+                      "PreCheck": {
+                        "$type": "RPG.GameCore.TurnInsertAbilityCondition",
+                        "Type": "AbilityOwnerInsertCount",
+                        "Count": {
+                          "FixedValue": {
+                            "RawValue": 4294967296,
+                            "Value": 1.0
+                          }
+                        }
+                      },
+                      "AutoStandbyOnAbilityFinish": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetEnergyBarState",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Active": "Keep",
+                  "BarType": -1,
+                  "CurrentState": "Normal",
+                  "CD": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxCount": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "CurrentCount": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "ActiveCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "SkipInCharmAction": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "RefreshEnergyBar_Luocha",
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnEnterBattle",
+              "Priority": -55,
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareWaveCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": {
+                        "Value": "BattleEvent_GridFight_Luocha_00_Insert"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "AbilityTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "InsertAbilityPriority": "AvatarBuffSelf",
+                      "DynamicValues": {},
+                      "OwnerAliveState": "Bit_Alive",
+                      "TargetAliveState": "Bit_Alive",
+                      "CanRunOnUnselectableTarget": true,
+                      "AutoStandbyOnAbilityFinish": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetEntityPosition",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "PosTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamCenter"
+                  },
+                  "SetRotation": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "Event": "OnInsertAbilityFinish",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetEnergyBarState",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Active": "Keep",
+                  "BarType": -1,
+                  "CurrentState": "Active",
+                  "CD": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxCount": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "CurrentCount": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "ActiveCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "SkipInCharmAction": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "RefreshEnergyBar_Luocha",
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnInsertAbilityAbort",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "Value": {},
+                  "DynamicKey": {
+                    "Value": "IsInserAbilityTrigger"
+                  },
+                  "SkipInCharmAction": true,
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique",
+          "DynamicValues": {},
+          "TaskListTemplate": [
+            {
+              "Name": "RefreshEnergyBar_Luocha",
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "DynamicKey": {
+                      "Value": "MDF_FirstAidTime"
+                    },
+                    "CompareType": "Greater",
+                    "CompareValue": {},
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetEnergyBarState",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "Active": "True",
+                      "BarType": 3,
+                      "CurrentState": "Active",
+                      "CD": {},
+                      "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1203Passive.png",
+                      "MaxCount": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "CurrentCount": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "ActiveCount": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetEnergyBarState",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "Active": "True",
+                      "BarType": 3,
+                      "CurrentState": "Normal",
+                      "CD": {},
+                      "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1203Passive.png",
+                      "MaxCount": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "CurrentCount": {},
+                      "ActiveCount": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "Name": "StageAbility_GridFight_Luocha_00",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.CreateBattleEventFromGridFightBackend",
+          "BackendID": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "TriggerAllBlockedBECallbacks": true,
+          "OnlyAllowHealBySelf": true,
+          "TreatAsRoleWhenByCompareCharacterID": true,
+          "TriggerRedBreakCallbacks": true,
+          "Team": "TeamLight",
+          "TotalDamageTeam": "TeamLight",
+          "OnBattleEventCreate": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "AliveOnly": true,
+              "ModifierName": {
+                "Value": "MStageAbility_GridFight_Luocha_00_BE_Basic"
+              },
+              "Chance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "MaxTargetCount": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "DynamicValues": {
+                "MDF_InitTime": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                }
+              },
+              "InheritCaster": "TargetSelf",
+              "IsShowUIMessageFromModel": true,
+              "IsShowUIMessageOnUpdate": true,
+              "ShowUIMessageInternalTime": -1.0,
+              "UseFixedPosition": true,
+              "TaskEnabled": true
+            }
+          ],
+          "IsDynamicPreload": true,
+          "TaskEnabled": true
+        }
+      ],
+      "DynamicValues": {}
+    },
+    {
+      "Modifiers": {
+        "MBattleEvent_GridFight_Luocha_00_Passive01_HealHPArea": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "AdditionConfig": {
+            "SubModifierList": [
+              {
+                "Name": "MBattleEvent_GridFight_Luocha_00_Passive01_HealHP",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllLightTeamWithAllLightTeamUnselectable.RemoveBattleEvent.RemoveBEServant"
+                },
+                "DynamicValues": {
+                  "MDF_PropertyValue": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "MDF_PropertyHealValue": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "MDF_PropertyValueSkillTreeB2": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "MDF_PropertyHealValueSkillTreeB2": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  }
+                },
+                "IsHaloStatus": true,
+                "AliveOnly": "Keep"
+              },
+              {
+                "Name": "MBattleEvent_GridFight_Luocha_00_Passive01_DamageUP",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllLightTeamWithAllLightTeamUnselectable.RemoveBattleEvent + GridFight_AllBackEnd"
+                },
+                "IncludeBattleEvent": true,
+                "DynamicValues": {
+                  "MDF_PropertyRatio_DamageUP": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  }
+                },
+                "IsHaloStatus": true,
+                "AliveOnly": "Keep"
+              },
+              {
+                "Name": "MGridFight_Luocha_Rank01_ATKUp",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllLightTeamWithAllLightTeamUnselectable.RemoveBattleEvent + GridFight_AllBackEnd"
+                },
+                "IncludeBattleEvent": true,
+                "DynamicValues": {
+                  "MDF_PropertyRatio": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  }
+                },
+                "Predicate": {
+                  "$type": "RPG.GameCore.ByRankActivated",
+                  "TriggerKey": {
+                    "Hash": 2089636447,
+                    "HashKey": "2089636447"
+                  },
+                  "TaskEnabled": true
+                },
+                "IsHaloStatus": true,
+                "AliveOnly": "Keep"
+              },
+              {
+                "Name": "MGridFight_Luocha_Rank04_Fatigue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllDarkTeam"
+                },
+                "DynamicValues": {
+                  "MDF_PropertyRatio": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  }
+                },
+                "Predicate": {
+                  "$type": "RPG.GameCore.ByRankActivated",
+                  "TriggerKey": {
+                    "Hash": 1686351920,
+                    "HashKey": "1686351920"
+                  },
+                  "TaskEnabled": true
+                },
+                "IsHaloStatus": true,
+                "AliveOnly": "Keep"
+              }
+            ]
+          },
+          "Count": -1,
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {}
+        },
+        "MBattleEvent_GridFight_Luocha_00_Passive01_DamageUP": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "AllDamageTypeAddedRatio",
+                  "PropertyValue": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        },
+        "MBattleEvent_GridFight_Luocha_00_Passive01_HealHP": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnAfterAttack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Common_Heal.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.HealHP",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "AliveOnly": true,
+                  "HealPercentage": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "SPHitRatio": {},
+                  "ModifyValue": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "PerformanceDelay": {},
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.HealHP",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntityAllTeammate"
+                  },
+                  "AliveOnly": true,
+                  "HealPercentage": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "SPHitRatio": {},
+                  "ModifyValue": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "PerformanceDelay": {},
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "BattleEvent_GridFight_Luocha_00_Insert",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PosTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "DarkTeamCenter"
+          },
+          "OffsetX": {},
+          "OffsetY": {},
+          "OffsetZ": {
+            "FixedValue": {
+              "RawValue": 38654705664,
+              "Value": 9.0
+            }
+          },
+          "SetRotation": true,
+          "YawAngle": {
+            "FixedValue": {
+              "RawValue": 773094113280,
+              "Value": 180.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamRootOffset",
+          "Team": "TeamDark",
+          "Reset": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.GridFightShowRightCutIn",
+          "UIPrefabPath": "UI/GridFight/Battle/SpecialAction/SpecialAction_GridFight_Avatar.prefab",
+          "TitleTextID": {
+            "Hash": -836081561,
+            "Hash64": 7214406442679134728
+          },
+          "ImagePath": "SpriteOutput/AvatarSpecialActionFigures/ImgSpecialAction_1203.png",
+          "AvatarTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "BattleEvent_GridFight_Luocha_00_Insert_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "PassiveSkill",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "PassiveSkill",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1288490190,
+              "Value": 0.3
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MBattleEvent_GridFight_Luocha_00_Passive01_HealHPArea"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "LifeTime": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "DynamicValues": {
+            "MDF_PropertyValue": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_PropertyRatio_Fatigue": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_PropertyHealValue": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_PropertyValueSkillTreeB2": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_PropertyHealValueSkillTreeB2": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_PropertyRatio_Rank01": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_PropertyRatio_DamageUP": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_LifeTime": {
+              "FixedValue": {
+                "RawValue": -4294967296,
+                "Value": -1.0
+              }
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitTimelineFinish",
+          "TimelineName": "Character_Luocha_00_PassiveSkill_TimeLine",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeamCenter"
+          },
+          "Flags": [
+            "Field"
+          ],
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Luocha_00/Eff_Avatar_Luocha_00_BattleArea_Circular.prefab",
+          "Scale": {
+            "x": -1.0,
+            "y": -1.0,
+            "z": -1.0,
+            "normalized": {
+              "x": -0.577350259,
+              "y": -0.577350259,
+              "z": -0.577350259,
+              "normalized": {
+                "x": -0.5773503,
+                "y": -0.5773503,
+                "z": -0.5773503,
+                "magnitude": 1.00000012,
+                "sqrMagnitude": 1.00000024
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 1.73205078,
+            "sqrMagnitude": 3.0
+          },
+          "IsNeedFadeIn": true,
+          "ForceSimulateImmediately": true,
+          "ParamEntityUsage": "LookAt",
+          "TowardMaxPitchAngle": 90.0,
+          "MinMutexTime": -1.0,
+          "MinMutexType": "Entity",
+          "MaxMutexCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "AnimStateName": "StandBy",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": "TeamFormation",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ],
+      "DynamicValues": {}
+    },
+    {
+      "Name": "BattleEvent_GridFight_Luocha_00_Insert_Camera",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "CloseupShotConfig": {
+              "CameraTimelineAssetName": "Character_Luocha_00_PassiveSkill_TimeLine",
+              "TimelineStartTime": {},
+              "TimelineFinishTime": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "CloseupShotPath": "true",
+              "TransTypeFollow": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "TransTypeAim": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              }
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "IsAliveOnly": true,
+              "FieldHideMode": "All"
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "BattleEvent_GridFight_Luocha_00_Skill02_Phase01",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Value": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "DynamicKey": {
+            "Value": "MDF_FirstAidTime"
+          },
+          "SkipInCharmAction": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.GridFightShowRightCutIn",
+          "UIPrefabPath": "UI/GridFight/Battle/SpecialAction/SpecialAction_GridFight_Avatar.prefab",
+          "TitleTextID": {
+            "Hash": 10893445,
+            "Hash64": 6884528791031587695
+          },
+          "ImagePath": "SpriteOutput/AvatarSpecialActionFigures/ImgSpecialAction_1203.png",
+          "AvatarTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PosTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "DarkTeamCenter"
+          },
+          "OffsetX": {},
+          "OffsetY": {},
+          "OffsetZ": {
+            "FixedValue": {
+              "RawValue": -38654705664,
+              "Value": -9.0
+            }
+          },
+          "SetRotation": true,
+          "YawAngle": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamRootOffset",
+          "Team": "TeamDark",
+          "Reset": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SyncCharLightAndCameraDir",
+          "IsSync": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "Avatar_Luocha_00_Skill02_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "BattleEvent_GridFight_Luocha_00_Skill02_Phase02"
+          },
+          "IsSkillPerform": true,
+          "DynamicValues": {
+            "MDF_FirstAidAttackRatio": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_FirstAidValue": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_DebuffCount": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill02",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TryStartConnectUltraSkillFrameCapture",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitFrame",
+          "WaitFrameCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ],
+      "DynamicValues": {}
+    },
+    {
+      "Name": "BattleEvent_GridFight_Luocha_00_Skill02_Phase02",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 2276332669,
+              "Value": 0.53
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Luocha_00/Eff_Avatar_Luocha_00_Skill02_03.prefab",
+          "AttachPoint": "Origin",
+          "Scale": {
+            "x": -1.0,
+            "y": -1.0,
+            "z": -1.0,
+            "normalized": {
+              "x": -0.577350259,
+              "y": -0.577350259,
+              "z": -0.577350259,
+              "normalized": {
+                "x": -0.5773503,
+                "y": -0.5773503,
+                "z": -0.5773503,
+                "magnitude": 1.00000012,
+                "sqrMagnitude": 1.00000024
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 1.73205078,
+            "sqrMagnitude": 3.0
+          },
+          "IsNeedFadeIn": true,
+          "ForceSimulateImmediately": true,
+          "ParamEntityUsage": "LookAt",
+          "TowardMaxPitchAngle": 90.0,
+          "MaxMutexCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 2534030707,
+              "Value": 0.59
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByRankActivated",
+            "TriggerKey": {
+              "Hash": 523552506,
+              "HashKey": "523552506"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareHPRatio",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AbilityTargetEntity"
+                },
+                "CompareType": "Less",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 2147483650,
+                    "Value": 0.5
+                  }
+                },
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AliveOnly": true,
+                  "ModifierName": {
+                    "Value": "MGridFight_Luocha_Rank02_AddHealRatio"
+                  },
+                  "Chance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxTargetCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_AddHealRatio": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    }
+                  },
+                  "IsShowUIMessageFromModel": true,
+                  "IsShowUIMessageOnUpdate": true,
+                  "ShowUIMessageInternalTime": -1.0,
+                  "UseFixedPosition": true,
+                  "TaskEnabled": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "AliveOnly": true,
+                  "ModifierName": {
+                    "Value": "MGridFight_Luocha_Rank02_Shield"
+                  },
+                  "Chance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxTargetCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "LifeTime": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_ShieldPercentage": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    },
+                    "MDF_ShieldValue": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    }
+                  },
+                  "IsShowUIMessageFromModel": true,
+                  "IsShowUIMessageOnUpdate": true,
+                  "ShowUIMessageInternalTime": -1.0,
+                  "UseFixedPosition": true,
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.HealHP",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AliveOnly": true,
+          "HealPercentage": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "SPHitRatio": {},
+          "ModifyValue": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1.0,
+            "DitherRangeX": 0.05,
+            "DitherRangeY": 0.05,
+            "AttachPoint": "Origin",
+            "Duration": 1.5,
+            "Scale": 1.0,
+            "FixedPosition": true
+          },
+          "PerformanceDelay": {},
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DispelStatus",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "OnlyAlive": true,
+          "OnlyCanDispel": true,
+          "BuffType": "Debuff",
+          "Numbers": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsTurnActionEntity",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "AbilityTargetEntity"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.CharacterPlayVO",
+              "VOType": "ReceiveHealing",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "IsInserAbilityTrigger"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {},
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SkillPerformFinish",
+              "TaskEnabled": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Value": {},
+              "DynamicKey": {
+                "Value": "IsInserAbilityTrigger"
+              },
+              "SkipInCharmAction": true,
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "OnInsertAbort": [],
+      "Name": "BattleEvent_GridFight_Luocha_00_Skill02_Phase01_Insert",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Value": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "DynamicKey": {
+            "Value": "IsInserAbilityTrigger"
+          },
+          "SkipInCharmAction": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Value": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "DynamicKey": {
+            "Value": "MDF_FirstAidTime"
+          },
+          "SkipInCharmAction": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PosTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "DarkTeamCenter"
+          },
+          "OffsetX": {},
+          "OffsetY": {},
+          "OffsetZ": {
+            "FixedValue": {
+              "RawValue": -34359738368,
+              "Value": -8.0
+            }
+          },
+          "SetRotation": true,
+          "YawAngle": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.GridFightShowRightCutIn",
+          "UIPrefabPath": "UI/GridFight/Battle/SpecialAction/SpecialAction_GridFight_Avatar.prefab",
+          "TitleTextID": {
+            "Hash": 10893445,
+            "Hash64": 6884528791031587695
+          },
+          "ImagePath": "SpriteOutput/AvatarSpecialActionFigures/ImgSpecialAction_1203.png",
+          "AvatarTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamRootOffset",
+          "Team": "TeamDark",
+          "Reset": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SyncCharLightAndCameraDir",
+          "IsSync": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "Avatar_Luocha_00_Skill02_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "BattleEvent_GridFight_Luocha_00_Skill02_Phase02"
+          },
+          "IsSkillPerform": true,
+          "DynamicValues": {
+            "MDF_FirstAidAttackRatio": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_FirstAidValue": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "MDF_DebuffCount": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill02",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TryStartConnectUltraSkillFrameCapture",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitFrame",
+          "WaitFrameCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ],
+      "DynamicValues": {}
+    },
+    {
+      "Name": "BattleEvent_GridFight_Luocha_00_Passive",
+      "OnStart": []
+    }
+  ],
+  "GlobalModifiers": {
+    "MGridFight_Luocha_Rank01_ATKUp": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "AttackAddedRatio",
+              "PropertyValue": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {}
+    },
+    "MGridFight_Luocha_Rank02_AddHealRatio": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeDealHeal",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ModifyHealData",
+              "Healer_Attack": {},
+              "Healer_AttackAddedRatio": {},
+              "Healer_AttackDelta": {},
+              "Healer_AttackConvert": {},
+              "Healer_HealRatio": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "Target_HealTakenRatio": {},
+              "Task_HealPercentage": {},
+              "Task_HealValue": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier",
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {}
+    },
+    "MGridFight_Luocha_Rank02_Shield": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "BehaviorFlagList": [
+        "Shield"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveShield",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "TaskEnabled": true
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.InitShield",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "FormulaType": "ShieldByCasterAttack",
+              "ShieldValue": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "ShieldPercentage": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "UseAddedRatio": true,
+              "ShowText": true,
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "Replace",
+      "DynamicValues": {}
+    },
+    "MGridFight_Luocha_Rank04_Fatigue": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "BehaviorFlagList": [
+        "STAT_Fatigue"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.StackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "Property": "FatigueRatio",
+              "PropertyValue": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "ReplaceByCaster",
+      "DynamicValues": {}
+    }
+  },
+  "GlobalTemplates": []
+}

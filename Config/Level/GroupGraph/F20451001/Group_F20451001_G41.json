@@ -1,0 +1,918 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": []
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "TriggerName": "StopTrigger",
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.PauseTimeRewindTarget",
+              "IsPause": true,
+              "Target": {
+                "$type": "RPG.GameCore.TargetFetchTaskActionTarget"
+              },
+              "PauseReason": "PauseItem",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "OnExit": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                "Name": {
+                  "Value": "FCV_UpRoomStop02"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {},
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PauseTimeRewindTarget",
+                  "Target": {
+                    "$type": "RPG.GameCore.TargetFetchTaskActionTarget"
+                  },
+                  "PauseReason": "PauseItem",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "IsOverrideValidGuestConfig": true,
+          "OverridedValidGuestConfig": {
+            "ConfigType": "ByInstanceID",
+            "LocalPlayer": true,
+            "Teammember": true,
+            "TargetList": [
+              {
+                "GroupID": {
+                  "FixedValue": {
+                    "RawValue": 81604378624,
+                    "Value": 19.0
+                  }
+                },
+                "InstancecID": {
+                  "FixedValue": {
+                    "RawValue": 1288494483767296,
+                    "Value": 300001.0
+                  }
+                }
+              }
+            ]
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCheckTimelineEntityState",
+            "Target": {
+              "$type": "RPG.GameCore.GroupFetchLocalTarget",
+              "TargetType": "Prop",
+              "Targets": [
+                300001
+              ]
+            },
+            "StateName": {
+              "Value": "L1_Broken"
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvEnableTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300001
+                ]
+              },
+              "IsEnable": true,
+              "TriggerName": "StopTrigger",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvEnableTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300001
+                ]
+              },
+              "TriggerName": "StopTrigger",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AddTimelineEntityEventListener",
+          "Target": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "StateEnterListener": [
+            {
+              "ListenState": [
+                "L1_Broken"
+              ],
+              "Callback": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByComparePropState",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                          "FetchType": "SinglePropByPropID",
+                          "SinglePropID": {
+                            "GroupID": {
+                              "FixedValue": {
+                                "RawValue": 137438953472,
+                                "Value": 32.0
+                              }
+                            },
+                            "ID": {
+                              "FixedValue": {
+                                "RawValue": 1288494483767296,
+                                "Value": 300001.0
+                              }
+                            }
+                          }
+                        },
+                        "State": "Open",
+                        "TaskEnabled": true,
+                        "IsClientOnly": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByComparePropState",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                          "FetchType": "SinglePropByPropID",
+                          "SinglePropID": {
+                            "GroupID": {
+                              "FixedValue": {
+                                "RawValue": 137438953472,
+                                "Value": 32.0
+                              }
+                            },
+                            "ID": {
+                              "FixedValue": {
+                                "RawValue": 1288498778734592,
+                                "Value": 300002.0
+                              }
+                            }
+                          }
+                        },
+                        "State": "Open",
+                        "TaskEnabled": true,
+                        "IsClientOnly": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                      "Name": {
+                        "Value": "FCV_UpRoomStop01"
+                      },
+                      "Value": {
+                        "FixedValue": {
+                          "RawValue": 4294967296,
+                          "Value": 1.0
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                      "Name": {
+                        "Value": "FCV_UpRoomStop01"
+                      },
+                      "Value": {},
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "ListenState": [
+                "L0_Idle"
+              ],
+              "Callback": [
+                {
+                  "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                  "Name": {
+                    "Value": "FCV_UpRoomStop01"
+                  },
+                  "Value": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            }
+          ],
+          "StateLeaveListener": [],
+          "OnStartControlEntity": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+              "Name": {
+                "Value": "FCV_UpRoomStop01"
+              },
+              "Value": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "OnEndControlEntity": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckTimelineEntityState",
+                "Target": {
+                  "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                  "TargetType": "Prop",
+                  "Targets": [
+                    300001
+                  ]
+                },
+                "StateName": {
+                  "Value": "L1_Broken"
+                },
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByComparePropState",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                          "FetchType": "SinglePropByPropID",
+                          "SinglePropID": {
+                            "GroupID": {
+                              "FixedValue": {
+                                "RawValue": 137438953472,
+                                "Value": 32.0
+                              }
+                            },
+                            "ID": {
+                              "FixedValue": {
+                                "RawValue": 1288494483767296,
+                                "Value": 300001.0
+                              }
+                            }
+                          }
+                        },
+                        "State": "Open",
+                        "TaskEnabled": true,
+                        "IsClientOnly": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByComparePropState",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                          "FetchType": "SinglePropByPropID",
+                          "SinglePropID": {
+                            "GroupID": {
+                              "FixedValue": {
+                                "RawValue": 137438953472,
+                                "Value": 32.0
+                              }
+                            },
+                            "ID": {
+                              "FixedValue": {
+                                "RawValue": 1288498778734592,
+                                "Value": 300002.0
+                              }
+                            }
+                          }
+                        },
+                        "State": "Open",
+                        "TaskEnabled": true,
+                        "IsClientOnly": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                      "Name": {
+                        "Value": "FCV_UpRoomStop01"
+                      },
+                      "Value": {
+                        "FixedValue": {
+                          "RawValue": 4294967296,
+                          "Value": 1.0
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                      "Name": {
+                        "Value": "FCV_UpRoomStop01"
+                      },
+                      "Value": {},
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                  "Name": {
+                    "Value": "FCV_UpRoomStop01"
+                  },
+                  "Value": {},
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCheckTimelineEntityState",
+            "Target": {
+              "$type": "RPG.GameCore.GroupFetchLocalTarget",
+              "TargetType": "Prop",
+              "Targets": [
+                300001
+              ]
+            },
+            "StateName": {
+              "Value": "L1_Broken"
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByComparePropState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                      "FetchType": "SinglePropByPropID",
+                      "SinglePropID": {
+                        "GroupID": {
+                          "FixedValue": {
+                            "RawValue": 137438953472,
+                            "Value": 32.0
+                          }
+                        },
+                        "ID": {
+                          "FixedValue": {
+                            "RawValue": 1288494483767296,
+                            "Value": 300001.0
+                          }
+                        }
+                      }
+                    },
+                    "State": "Open",
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByComparePropState",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                      "FetchType": "SinglePropByPropID",
+                      "SinglePropID": {
+                        "GroupID": {
+                          "FixedValue": {
+                            "RawValue": 137438953472,
+                            "Value": 32.0
+                          }
+                        },
+                        "ID": {
+                          "FixedValue": {
+                            "RawValue": 1288498778734592,
+                            "Value": 300002.0
+                          }
+                        }
+                      }
+                    },
+                    "State": "Open",
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  }
+                ],
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                  "Name": {
+                    "Value": "FCV_UpRoomStop01"
+                  },
+                  "Value": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                  "Name": {
+                    "Value": "FCV_UpRoomStop01"
+                  },
+                  "Value": {},
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+              "Name": {
+                "Value": "FCV_UpRoomStop01"
+              },
+              "Value": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorSavedValueChangeV2",
+          "Name": {
+            "Value": "FSV_ChangeTRConsole1"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+                "DynamicName": {
+                  "Value": "FSV_ChangeTRConsole1"
+                },
+                "CompareType": "Equal",
+                "CompareValue": 1,
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetTimeRewindEntityControlMode",
+                  "Target": {
+                    "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                    "TargetType": "Prop",
+                    "Targets": [
+                      300001
+                    ]
+                  },
+                  "ControlMode": "Tap",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetTimeRewindEntityControlMode",
+                  "Target": {
+                    "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                    "TargetType": "Prop",
+                    "Targets": [
+                      300001
+                    ]
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+            "DynamicName": {
+              "Value": "FSV_ChangeTRConsole1"
+            },
+            "CompareType": "Equal",
+            "CompareValue": 1,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetTimeRewindEntityControlMode",
+              "Target": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300001
+                ]
+              },
+              "ControlMode": "Tap",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetTimeRewindEntityControlMode",
+              "Target": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300001
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                "Name": {
+                  "Value": "FCV_UpRoomStop01"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                "Name": {
+                  "Value": "FCV_UpRoomStop02"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+              "Name": {
+                "Value": "FCV_UpRoomStableStop"
+              },
+              "Value": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+              "Name": {
+                "Value": "FCV_UpRoomStableStop"
+              },
+              "Value": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_UpRoomStop01"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+              "Name": {
+                "Value": "FCV_UpRoomStableStop"
+              },
+              "Value": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+            "Name": {
+              "Value": "FCV_UpRoomStop01"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_UpRoomStop01"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                "Name": {
+                  "Value": "FCV_UpRoomStop02"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {},
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                  "Name": {
+                    "Value": "FCV_UpRoomStableStop"
+                  },
+                  "Value": {},
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                  "Name": {
+                    "Value": "FCV_UpRoomStableStop"
+                  },
+                  "Value": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+            "Name": {
+              "Value": "FCV_UpRoomStop01"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {},
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_UpRoomStop02"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                "Name": {
+                  "Value": "FCV_UpRoomStop01"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {},
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                  "Name": {
+                    "Value": "FCV_UpRoomStableStop"
+                  },
+                  "Value": {},
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+                  "Name": {
+                    "Value": "FCV_UpRoomStableStop"
+                  },
+                  "Value": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+            "Name": {
+              "Value": "FCV_UpRoomStop02"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {},
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_UpRoomStop02"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+              "Name": {
+                "Value": "FCV_UpRoomStableStop"
+              },
+              "Value": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+            "Name": {
+              "Value": "FCV_UpRoomStop02"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}

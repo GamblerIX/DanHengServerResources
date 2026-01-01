@@ -1,0 +1,222 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [
+            2030601
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMissionCustomValue",
+            "MainMissionID": 2030601,
+            "MissionCustomValue": {
+              "Index": 9,
+              "Name": "OldValue_9",
+              "isLocal": true,
+              "ValidValueParamList": [
+                0,
+                1,
+                2
+              ]
+            },
+            "EquationType": "Equal",
+            "TargetValue": 1,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetForceStreamingThisFrame",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitStreamingJobFinished",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PlayFullScreenTransfer",
+              "Type": "Black",
+              "PrevDuration": -1.0,
+              "PostDuration": 0.5,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetMissionCustomValue",
+              "SubmissionID": 203060107,
+              "MissionCustomValue": {
+                "Index": 9,
+                "Name": "OldValue_9",
+                "isLocal": true,
+                "ValidValueParamList": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EnterArea_G146"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.AdvDestroyGroupEntity",
+              "InstanceIDList": [
+                300001
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "ValueSource": {},
+              "PerformanceType": "E",
+              "PerformanceID": 203060105,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PerformanceEndSeq",
+              "Cases": [
+                {
+                  "Case": 1,
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.ClientFinishMission",
+                      "SubmissionID": 203060107,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                },
+                {
+                  "Case": 2,
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.AdvCreateGroupEntity",
+                      "InstanceIDList": [
+                        300001
+                      ],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                        "TargetType": "Prop",
+                        "Targets": [
+                          300001
+                        ]
+                      },
+                      "TriggerName": "MissionTrigger",
+                      "ButtonsByName": [],
+                      "ButtonConfigs": [
+                        {
+                          "ID": "StartWork",
+                          "IconType": {
+                            "JsonValueStr": "ChatIcon"
+                          },
+                          "ButtonText": {
+                            "Value": "PropInteractTitle_424"
+                          },
+                          "ShowPriority": "Default"
+                        }
+                      ],
+                      "InteractAngleRange": 180.0,
+                      "OwnerForwardAngleRange": 90.0,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "TriggerName": "MissionTrigger",
+          "ButtonsByName": [],
+          "ButtonConfigs": [
+            {
+              "ID": "StartWork",
+              "IconType": {
+                "JsonValueStr": "ChatIcon"
+              },
+              "ButtonText": {
+                "Value": "PropInteractTitle_424"
+              },
+              "ShowPriority": "Default"
+            }
+          ],
+          "InteractAngleRange": 180.0,
+          "OwnerForwardAngleRange": 90.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvOnButtonPressed",
+          "ButtonName": "StartWork",
+          "OnPressedCallback": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "EnterArea_G146"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group"
+}

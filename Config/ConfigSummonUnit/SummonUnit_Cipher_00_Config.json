@@ -1,0 +1,122 @@
+{
+  "GroupConfigName": "FollowField",
+  "ConfigEntityPath": "Config/ConfigEntity/SummonUnit/SummonUnit_Common_TeamField_Entity.json",
+  "TickLodTemplateName": "DefaultStaticEntity",
+  "ShoesType": "boot",
+  "AttachPoint": "Origin",
+  "Duration": {
+    "FixedValue": {
+      "RawValue": -4294967296,
+      "Value": -1.0
+    }
+  },
+  "OnCreate": [
+    {
+      "$type": "RPG.GameCore.AdvMarkAsTauntProxy",
+      "TargetType": {
+        "$type": "RPG.GameCore.TargetAlias",
+        "Alias": "CasterSummoner"
+      },
+      "ProxyTargetType": {
+        "$type": "RPG.GameCore.TargetAlias",
+        "Alias": "Caster"
+      },
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    }
+  ],
+  "OnBeReplaced": [
+    {
+      "$type": "RPG.GameCore.RemoveMazeBuff",
+      "TargetType": {
+        "$type": "RPG.GameCore.TargetAlias",
+        "Alias": "CasterSummoner"
+      },
+      "ID": 140602,
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    }
+  ],
+  "TriggerConfig": {
+    "CustomTriggers": [
+      {
+        "TriggerName": "AttractNpcMonsterTrigger",
+        "DefaultEnable": true,
+        "Radius": {
+          "FixedValue": {
+            "RawValue": 42949672960,
+            "Value": 10.0
+          }
+        },
+        "UseVerticalBound": true,
+        "NeedRaycast": true,
+        "RayStartOffsetY": 1.0,
+        "TargetTypes": [
+          "NPCMonster"
+        ],
+        "OnlyCheckFilterOnEnter": true,
+        "OnTriggerEnter": [
+          {
+            "$type": "RPG.GameCore.PredicateTaskList",
+            "Predicate": {
+              "$type": "RPG.GameCore.ByCompareCarryMazebuff",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TaskActionTarget"
+              },
+              "BuffID": 140603,
+              "Inverse": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            "SuccessTaskList": [
+              {
+                "$type": "RPG.GameCore.TriggerMazeSkillDrop",
+                "TaskEnabled": true
+              },
+              {
+                "$type": "RPG.GameCore.RemoveAdventureModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "TaskActionTarget"
+                },
+                "ModifierName": "ADV_StageAbility_Maze_Cipher_00_Mark",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.AddMazeBuff",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "TaskActionTarget"
+                },
+                "ID": 140603,
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.AddMazeBuff",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "TaskActionTarget"
+                },
+                "ID": 140602,
+                "LifeTime": {
+                  "FixedValue": {
+                    "RawValue": 42949673,
+                    "Value": 0.01
+                  }
+                },
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              }
+            ],
+            "TaskEnabled": true
+          }
+        ],
+        "SkipFakeAvatar": true
+      }
+    ]
+  },
+  "DynamicValues": {}
+}

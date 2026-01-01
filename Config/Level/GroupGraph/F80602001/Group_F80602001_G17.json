@@ -1,0 +1,462 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": []
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+            "Name": "FSV_ChainBridge",
+            "CompareType": "Equal",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEntityServerEvent",
+              "TaskEnabled": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+                "Name": "FSV_ChainBridge",
+                "CompareType": "Equal",
+                "CompareValue": 1,
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerEntityServerEvent",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEntityServerEvent",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEntityServerEvent",
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.LoopWaitServerFloorSavedValueChange",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PropStateChangeServerListenerConfig",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300002
+            ]
+          },
+          "TriggerName": "EnterTrigger",
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+                "Name": "FSV_ChainBridge",
+                "CompareType": "Equal",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerEntityEventV2",
+                  "EventName": {
+                    "Value": "Clt_TriggerOpen"
+                  },
+                  "TargetType": {
+                    "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                    "TargetType": "Prop",
+                    "Targets": [
+                      300002
+                    ]
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorSavedValueChangeV2",
+          "Name": {
+            "Value": "FSV_ChainBridge"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefFloorSavedValue",
+                "Name": {
+                  "Value": "FSV_ChainBridge"
+                }
+              },
+              "Cases": [
+                {
+                  "$type": "RPG.GameCore.NumberCaseContainer",
+                  "Case": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": {
+                        "FixedValue": {
+                          "RawValue": 1288490190,
+                          "Value": 0.3
+                        }
+                      },
+                      "MaxAdvencePerTick": -1.0,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.VCameraConfigChange",
+                      "CameraConfig": {
+                        "ShakeTemplateName": "Common_Rapid_Middle",
+                        "OverrideShakeConfigV2": {
+                          "ShakeScale": 10.0,
+                          "ShakeTime": 3.0,
+                          "LoopTime": 1.0,
+                          "ShakeDir": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "normalized": {
+                              "x": 0.707106769,
+                              "y": 0.707106769,
+                              "normalized": {
+                                "x": 0.7071068,
+                                "y": 0.7071068,
+                                "magnitude": 1.0,
+                                "sqrMagnitude": 1.00000012
+                              },
+                              "magnitude": 0.99999994,
+                              "sqrMagnitude": 0.99999994
+                            },
+                            "magnitude": 1.41421354,
+                            "sqrMagnitude": 2.0
+                          },
+                          "RangeAttenuationDelay": -1.0,
+                          "RangeAttenuationTarget": -1.0,
+                          "RangeAttenuationDuration": -1.0
+                        },
+                        "NoiseConfig": {
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": {
+                        "FixedValue": {
+                          "RawValue": 15032385538,
+                          "Value": 3.5
+                        }
+                      },
+                      "MaxAdvencePerTick": -1.0,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.VCameraConfigChange",
+                      "CameraConfig": {
+                        "ShakeTemplateName": "Common_Rapid_Middle",
+                        "OverrideShakeConfigV2": {
+                          "ShakeScale": 2.0,
+                          "ShakeTime": 1.0,
+                          "LoopTime": 1.0,
+                          "ShakeDir": {
+                            "x": 1.0,
+                            "y": 1.0,
+                            "normalized": {
+                              "x": 0.707106769,
+                              "y": 0.707106769,
+                              "normalized": {
+                                "x": 0.7071068,
+                                "y": 0.7071068,
+                                "magnitude": 1.0,
+                                "sqrMagnitude": 1.00000012
+                              },
+                              "magnitude": 0.99999994,
+                              "sqrMagnitude": 0.99999994
+                            },
+                            "magnitude": 1.41421354,
+                            "sqrMagnitude": 2.0
+                          },
+                          "RangeAttenuationDelay": 0.5,
+                          "RangeAttenuationDuration": 0.2
+                        },
+                        "NoiseConfig": {
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChange",
+          "Name": {
+            "Value": "FCV_OracleMachine_Thunder_1"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.TriggerEntityEventV2",
+              "EventName": {
+                "Value": "Clt_TriggerClose"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300003
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEntityEventV2",
+              "EventName": {
+                "Value": "Clt_TriggerClose"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300004
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerSound",
+              "SoundName": {
+                "Value": "Ev_sfx_amphoreus_oraclepuzzle_object_appear"
+              },
+              "EmitterType": "TargetEvaluator",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300003
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+            "DynamicName": {
+              "Value": "FSV_OracleMachine_Thunder_1"
+            },
+            "CompareType": "Equal",
+            "CompareValue": 1,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEntityServerEvent",
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEntityServerEvent",
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300009
+            ]
+          },
+          "TriggerName": "EnterTrigger",
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.TriggerEntityEventV2",
+              "EventName": {
+                "Value": "Clt_TriggerClose"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300007
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsOverrideValidGuestConfig": true,
+          "OverridedValidGuestConfig": {
+            "ConfigType": "ByInstanceID",
+            "LocalPlayer": true,
+            "Teammember": true,
+            "TargetList": [
+              {
+                "GroupID": {
+                  "FixedValue": {
+                    "RawValue": 730144440320,
+                    "Value": 170.0
+                  }
+                },
+                "InstancecID": {
+                  "FixedValue": {
+                    "RawValue": 1717991213367296,
+                    "Value": 400001.0
+                  }
+                }
+              }
+            ]
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300010
+            ]
+          },
+          "TriggerName": "EnterTrigger",
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.TriggerEntityEventV2",
+              "EventName": {
+                "Value": "Clt_TriggerClose"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300005
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsOverrideValidGuestConfig": true,
+          "OverridedValidGuestConfig": {
+            "ConfigType": "ByInstanceID",
+            "LocalPlayer": true,
+            "Teammember": true,
+            "TargetList": [
+              {
+                "GroupID": {
+                  "FixedValue": {
+                    "RawValue": 730144440320,
+                    "Value": 170.0
+                  }
+                },
+                "InstancecID": {
+                  "FixedValue": {
+                    "RawValue": 1717991213367296,
+                    "Value": 400001.0
+                  }
+                }
+              }
+            ]
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}

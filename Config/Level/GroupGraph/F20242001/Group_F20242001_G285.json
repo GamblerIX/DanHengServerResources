@@ -1,0 +1,207 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvDistrictSetupTrigger",
+          "GroupID": {
+            "FixedValue": {
+              "RawValue": 1224065679360,
+              "Value": 285.0
+            }
+          },
+          "DistrictID": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "DisableAfterTrigger": true,
+          "TickInterval": 0.1,
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.PlayMissionTalk",
+              "MuteBattleVO": true,
+              "SimpleTalkList": [
+                {
+                  "TextSpeed": 20.0,
+                  "TalkSentenceID": 434037903,
+                  "ProtectTime": 2.0,
+                  "ForceToNextTime": 3.0
+                },
+                {
+                  "TextSpeed": 20.0,
+                  "TalkSentenceID": 434037904,
+                  "ProtectTime": 2.0,
+                  "ForceToNextTime": 4.0
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "TriggerName": "MissionTrigger",
+          "ButtonsByName": [],
+          "ButtonConfigs": [
+            {
+              "ID": "Press01",
+              "IconType": {
+                "JsonValueStr": "SecretMissionIcon"
+              },
+              "ButtonText": {
+                "Value": "PropInteractTitle_12"
+              },
+              "ShowPriority": "Default"
+            }
+          ],
+          "InteractAngleRange": 180.0,
+          "OwnerForwardAngleRange": 90.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [
+            4340129
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.AdvOnButtonPressed",
+          "ButtonName": "Press01",
+          "OnPressedCallback": [
+            {
+              "$type": "RPG.GameCore.AddStreamingSource",
+              "StreamingSource": {
+                "CenterName": "Streaming_434012904",
+                "AreaName": "LevelArea_P20242_F20242001_G285",
+                "AnchorName": "Anchor2"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "ValueSource": {},
+              "PerformanceType": "D",
+              "PerformanceID": 434012904,
+              "MaskConfig": {
+                "StartBlack": "Full",
+                "EndBlack": "Full",
+                "MaskColor": "Black"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveStreamingSource",
+              "StreamingSource": "Streaming_434012904",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareMissionCustomValue",
+                "MainMissionID": 4340129,
+                "MissionCustomValue": {
+                  "Index": 4,
+                  "Name": "OldValue_4",
+                  "isLocal": true,
+                  "ValidValueParamList": [
+                    1,
+                    2
+                  ]
+                },
+                "EquationType": "Equal",
+                "TargetValue": 1,
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SwitchCharacterAnchorV2",
+                  "SwitchCharacterAnchorConfig": {
+                    "IsLocalPlayer": true,
+                    "CharacterUniqueName": "LocalPlayer",
+                    "AreaName": {
+                      "Value": "LevelArea_P20242_F20242001_G286"
+                    },
+                    "AnchorName": {
+                      "Value": "Anchor1"
+                    },
+                    "ResetAnimation": true,
+                    "ResetCamera": true,
+                    "ClearSpecialVision": true,
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.ClientFinishMission",
+                  "SubmissionID": 434012902,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SwitchCharacterAnchorV2",
+                  "SwitchCharacterAnchorConfig": {
+                    "IsLocalPlayer": true,
+                    "CharacterUniqueName": "LocalPlayer",
+                    "AreaName": {
+                      "Value": "LevelArea_P20242_F20242001_G285"
+                    },
+                    "AnchorName": {
+                      "Value": "Anchor1"
+                    },
+                    "ResetAnimation": true,
+                    "ResetCamera": true,
+                    "ClearSpecialVision": true,
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group"
+}

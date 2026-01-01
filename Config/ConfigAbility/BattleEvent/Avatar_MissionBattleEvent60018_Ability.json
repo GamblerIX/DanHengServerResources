@@ -1,0 +1,493 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "MStageMissionBattleEvent60018": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "BlockDamage",
+            "Stealth"
+          ],
+          "OnDynamicValueChange": [],
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": []
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.OwnerEntityAddAbility",
+                  "AbilityName": {
+                    "Value": "Avatar_MissionBattleEvent60018_Insert_Phase01"
+                  },
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.OwnerEntityAddAbility",
+                  "AbilityName": {
+                    "Value": "Avatar_MissionBattleEvent60018_Skill03_Camera"
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnTriggerDeath",
+              "CallbackConfig": []
+            },
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": []
+            },
+            {
+              "Event": "OnEnterBattle",
+              "Priority": -90,
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.TriggerAbility",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "AbilityName": {
+                    "Value": "Avatar_MissionBattleEvent60018_Skill03_Camera"
+                  },
+                  "IsSkillPerform": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.TurnInsertAbility",
+                  "AbilityName": {
+                    "Value": "Avatar_MissionBattleEvent60018_Insert_Phase01"
+                  },
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllDarkTeam"
+                  },
+                  "InsertAbilityPriority": "LevelPerformAvatar",
+                  "OwnerAliveState": "Bit_Alive",
+                  "TargetAliveState": "Bit_Alive",
+                  "CanRunOnUnselectableTarget": true,
+                  "AutoStandbyOnAbilityFinish": true,
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnLeaveBattle",
+              "CallbackConfig": []
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "Avatar_MissionBattleEvent60018_Skill03_Phase01",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MStageMissionBattleEvent60018"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Avatar_MissionBattleEvent60018_Insert_Phase01",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerCustomString",
+          "CustomString": {
+            "Value": "Stage20332071_1"
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "_FirstTalk"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {},
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.BySimulateSpeedUp",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.WaitSecond",
+                  "WaitTime": {
+                    "FixedValue": {
+                      "RawValue": 25769803776,
+                      "Value": 6.0
+                    }
+                  },
+                  "MaxAdvencePerTick": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.WaitSecond",
+                  "WaitTime": {
+                    "FixedValue": {
+                      "RawValue": 13743895348,
+                      "Value": 3.2
+                    }
+                  },
+                  "MaxAdvencePerTick": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Value": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "DynamicKey": {
+            "Value": "_FirstTalk"
+          },
+          "SkipInCharmAction": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByContainBehaviorFlag",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "Flag": "Break",
+            "Inverse": true,
+            "TaskEnabled": true
+          },
+          "MaxNumber": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByProperty",
+              "DynamicKey": "_CurrentStance",
+              "ReadTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "Value": "CurrentStance",
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Ice"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {},
+                "ExtraFormulaType": "ByMaxHP",
+                "ExtraDamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": 8589934592,
+                    "Value": 2.0
+                  }
+                },
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Pursued",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanTriggerLastKill": true,
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_RuanMei_00/Eff_Avatar_RuanMei_Skill03_Imprint_Hit.prefab",
+          "AttachPoint": "SelectRoot",
+          "Scale": {
+            "x": -1.0,
+            "y": -1.0,
+            "z": -1.0,
+            "normalized": {
+              "x": -0.577350259,
+              "y": -0.577350259,
+              "z": -0.577350259,
+              "normalized": {
+                "x": -0.5773503,
+                "y": -0.5773503,
+                "z": -0.5773503,
+                "magnitude": 1.00000012,
+                "sqrMagnitude": 1.00000024
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 1.73205078,
+            "sqrMagnitude": 3.0
+          },
+          "IsNeedFadeIn": true,
+          "ParamEntityUsage": "LookAt",
+          "TowardMaxPitchAngle": 90.0,
+          "MaxMutexCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 2147483650,
+              "Value": 0.5
+            }
+          },
+          "MaxAdvencePerTick": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.RemoveEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "DarkTeamEntity"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_RuanMei_00/Eff_Avatar_RuanMei_00_Skill02_hit.prefab",
+          "IsNeedFadeOut": true,
+          "FadeOutRegionStart": -1.0,
+          "FadeOutRegionEnd": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ],
+      "DynamicValues": {}
+    },
+    {
+      "Name": "Avatar_MissionBattleEvent60018_Skill03_Camera",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "UseSkillPerform",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "IsLocalOffset": true,
+              "AnchorOffset": {
+                "x": 0.01,
+                "y": 2.0,
+                "z": 5.0,
+                "normalized": {
+                  "x": 0.00185695023,
+                  "y": 0.371390045,
+                  "z": 0.928475142,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.00000012
+                },
+                "magnitude": 5.385174,
+                "sqrMagnitude": 29.0001
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "AimOffset": {
+                "x": 0.01,
+                "y": 1.0,
+                "z": 0.01,
+                "normalized": {
+                  "x": 0.009999,
+                  "y": 0.9999,
+                  "z": 0.009999,
+                  "normalized": {
+                    "x": 0.00999900047,
+                    "y": 0.999900043,
+                    "z": 0.00999900047,
+                    "magnitude": 1.0,
+                    "sqrMagnitude": 1.0
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.9999999
+                },
+                "magnitude": 1.0001,
+                "sqrMagnitude": 1.0002
+              },
+              "FollowPoleAngle": 95.0,
+              "FollowRadius": 5.0,
+              "NearClipping": 0.1,
+              "ForbidDynamicOffset": true,
+              "ResetToDefault": true,
+              "ForbidChangeOffset": true,
+              "UseAimTargetToCameraFocus": true
+            },
+            "BlendConfig": {
+              "BlendType": "Cut",
+              "FOVSmoothDampTime": -1.0,
+              "FrameBlendWeightStart": 1.0,
+              "FrameBlendDuration": 1.0
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "FieldHideMode": "All"
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 8589934592,
+              "Value": 2.0
+            }
+          },
+          "MaxAdvencePerTick": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ]
+}

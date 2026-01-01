@@ -1,0 +1,257 @@
+{
+  "GroupConfigName": "FollowField",
+  "ConfigEntityPath": "Config/ConfigEntity/SummonUnit/SummonUnit_Common_TeamField_Entity.json",
+  "TickLodTemplateName": "DefaultStaticEntity",
+  "ResidentEffects": [
+    {
+      "EffectPath": "Effects/Eff_Prefab/Eff_Avatar/Eff_Jingliu_00/Eff_Avatar_Jingliu_00_MazeSkill01_04.prefab",
+      "Scale": {
+        "x": -1.0,
+        "y": -1.0,
+        "z": -1.0,
+        "normalized": {
+          "x": -0.577350259,
+          "y": -0.577350259,
+          "z": -0.577350259,
+          "normalized": {
+            "x": -0.5773503,
+            "y": -0.5773503,
+            "z": -0.5773503,
+            "magnitude": 1.00000012,
+            "sqrMagnitude": 1.00000024
+          },
+          "magnitude": 0.99999994,
+          "sqrMagnitude": 0.99999994
+        },
+        "magnitude": 1.73205078,
+        "sqrMagnitude": 3.0
+      },
+      "IsNeedFadeIn": true,
+      "ParamEntityUsage": "LookAt",
+      "TowardMaxPitchAngle": 90.0,
+      "MaxMutexCount": 1,
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    }
+  ],
+  "ShoesType": "boot",
+  "AttachPoint": "Origin",
+  "Duration": {
+    "FixedValue": {
+      "RawValue": -4294967296,
+      "Value": -1.0
+    }
+  },
+  "OnDestroy": [
+    {
+      "$type": "RPG.GameCore.TriggerSound",
+      "SoundName": {
+        "Value": "Ev_sfx_avatar_skill_maze_outro_jingliu"
+      },
+      "EmitterType": "DefaultEmitter",
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    }
+  ],
+  "OnBeReplaced": [
+    {
+      "$type": "RPG.GameCore.RemoveMazeBuff",
+      "TargetType": {
+        "$type": "RPG.GameCore.TargetAlias",
+        "Alias": "CasterSummoner"
+      },
+      "ID": 121202,
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    }
+  ],
+  "TriggerConfig": {
+    "CustomTriggers": [
+      {
+        "TriggerName": "HitNpcMonsterTrigger",
+        "DefaultEnable": true,
+        "Radius": {
+          "FixedValue": {
+            "RawValue": 25769803776,
+            "Value": 6.0
+          }
+        },
+        "UseVerticalBound": true,
+        "NeedRaycast": true,
+        "RayStartOffsetY": 1.0,
+        "TargetTypes": [
+          "NPCMonster"
+        ],
+        "OnlyCheckFilterOnEnter": true,
+        "OnTriggerEnter": [
+          {
+            "$type": "RPG.GameCore.AddMazeBuff",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "ID": 121201,
+            "LifeTime": {
+              "FixedValue": {
+                "RawValue": 2147483648000,
+                "Value": 500.0
+              }
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          {
+            "$type": "RPG.GameCore.AddMazeBuff",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "ID": 121203,
+            "LifeTime": {
+              "FixedValue": {
+                "RawValue": 2147483648000,
+                "Value": 500.0
+              }
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          {
+            "$type": "RPG.GameCore.TriggerEffect",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "EffectPath": "Effects/Eff_Prefab/Eff_Common/Eff_Buff_Common_Ice_Add.prefab",
+            "AttachPoint": "SelectRoot",
+            "Scale": {
+              "x": -1.0,
+              "y": -1.0,
+              "z": -1.0,
+              "normalized": {
+                "x": -0.577350259,
+                "y": -0.577350259,
+                "z": -0.577350259,
+                "normalized": {
+                  "x": -0.5773503,
+                  "y": -0.5773503,
+                  "z": -0.5773503,
+                  "magnitude": 1.00000012,
+                  "sqrMagnitude": 1.00000024
+                },
+                "magnitude": 0.99999994,
+                "sqrMagnitude": 0.99999994
+              },
+              "magnitude": 1.73205078,
+              "sqrMagnitude": 3.0
+            },
+            "IsNeedFadeIn": true,
+            "ParamEntityUsage": "LookAt",
+            "TowardMaxPitchAngle": 90.0,
+            "MaxMutexCount": 1,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          {
+            "$type": "RPG.GameCore.TriggerSound",
+            "SoundName": {
+              "Value": "Ev_sfx_avatar_skill_maze_hit_01_jingliu"
+            },
+            "EmitterType": "DefaultEmitter",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          }
+        ],
+        "OnTriggerExit": [
+          {
+            "$type": "RPG.GameCore.RefreshMazeBuffTime",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "ID": 121203,
+            "LifeTime": {
+              "FixedValue": {
+                "RawValue": 6442450946,
+                "Value": 1.5
+              }
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          {
+            "$type": "RPG.GameCore.RemoveMazeBuff",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "ID": 121201,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          }
+        ],
+        "SkipFakeAvatar": true
+      },
+      {
+        "TriggerName": "HitPropTrigger",
+        "DefaultEnable": true,
+        "Radius": {
+          "FixedValue": {
+            "RawValue": 25769803776,
+            "Value": 6.0
+          }
+        },
+        "UseVerticalBound": true,
+        "NeedRaycast": true,
+        "RayStartOffsetY": 1.0,
+        "TargetTypes": [
+          "Prop"
+        ],
+        "TargetFilter": {
+          "$type": "RPG.GameCore.ByIsPropLockable",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ParamEntity"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        "OnlyCheckFilterOnEnter": true,
+        "OnTriggerEnter": [
+          {
+            "$type": "RPG.GameCore.TriggerHitProp",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "ClientMode": "PreShow",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          {
+            "$type": "RPG.GameCore.TriggerSound",
+            "SoundName": {
+              "Value": "Ev_sfx_avatar_skill_maze_hit_02_jingliu"
+            },
+            "EmitterType": "DefaultEmitter",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          }
+        ],
+        "OnTriggerExit": [],
+        "OnTriggerEnterRollback": [
+          {
+            "$type": "RPG.GameCore.PropDestructReset",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          }
+        ],
+        "SkipFakeAvatar": true
+      }
+    ]
+  }
+}

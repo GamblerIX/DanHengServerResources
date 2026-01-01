@@ -1,0 +1,756 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EnterArea_G{Group192}"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "ValueSource": {},
+              "PerformanceType": "E",
+              "PerformanceID": 434017803,
+              "MaskConfig": {
+                "StartBlack": "Full",
+                "EndBlack": "Full",
+                "MaskColor": "Black"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ShowMiniGameFuncBtnEffect",
+              "CustomFuncBtnName": "SwitchHand_RocketPunch",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ClientFinishMission",
+              "SubmissionID": 434017803,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitSubMissionStateChange",
+          "SubMissions": [
+            434017803
+          ],
+          "State": "Started",
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.PlayMissionTalk",
+              "MuteBattleVO": true,
+              "SimpleTalkList": [
+                {
+                  "TextSpeed": 20.0,
+                  "TalkSentenceID": 304011106,
+                  "ProtectTime": 2.0
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300005
+                ]
+              },
+              "TriggerName": "MissionTrigger1",
+              "OnEnter": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                    "Name": {
+                      "Value": "FCV_SwitchHand_P27"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareSwitchHandGestureType",
+                        "GestureType": "Rocket",
+                        "TaskEnabled": true,
+                        "IsClientOnly": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerGroupEvent",
+                          "EventName": {
+                            "Value": "EnterArea_G{Group192}"
+                          },
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ],
+              "IsOverrideValidGuestConfig": true,
+              "OverridedValidGuestConfig": {
+                "LocalPlayer": true,
+                "Teammember": true,
+                "FakePlayer": true
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TriggerOnMissionInit": true,
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [
+            434017801,
+            434017802,
+            434017803
+          ],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EnterArea_G{GroupID}"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                "Name": {
+                  "Value": "FCV_SwitchHand_P27"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCompareSubMissionState",
+                        "SubMissionID": 434017801,
+                        "SubMissionState": "Started",
+                        "TaskEnabled": true,
+                        "IsClientOnly": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareSubMissionState",
+                        "SubMissionID": 434017802,
+                        "SubMissionState": "Started",
+                        "TaskEnabled": true,
+                        "IsClientOnly": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareSwitchHandGestureType",
+                        "GestureType": "Rocket",
+                        "TaskEnabled": true,
+                        "IsClientOnly": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerPerformance",
+                          "ValueSource": {},
+                          "PerformanceType": "E",
+                          "PerformanceID": 434017802,
+                          "MaskConfig": {
+                            "StartBlack": "Full",
+                            "EndBlack": "Full",
+                            "MaskColor": "Black"
+                          },
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.ClientFinishMission",
+                          "SubmissionID": 434017802,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerPerformance",
+                          "ValueSource": {},
+                          "PerformanceType": "E",
+                          "PerformanceID": 434017801,
+                          "MaskConfig": {
+                            "StartBlack": "Full",
+                            "EndBlack": "Full",
+                            "MaskColor": "Black"
+                          },
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.PerformanceEndSeq",
+                          "Cases": [
+                            {
+                              "Case": 1,
+                              "OnSuccess": [
+                                {
+                                  "$type": "RPG.GameCore.ClientFinishMission",
+                                  "SubmissionID": 434017801,
+                                  "TaskEnabled": true,
+                                  "IsClientOnly": true
+                                }
+                              ]
+                            }
+                          ],
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300004
+            ]
+          },
+          "TriggerName": "MissionTrigger",
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "EnterArea_G{GroupID}"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "DisableAfterTriggered": true,
+          "IsOverrideValidGuestConfig": true,
+          "OverridedValidGuestConfig": {
+            "LocalPlayer": true,
+            "Teammember": true,
+            "FakePlayer": true
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_TrojanCtrl"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefFloorCustomFloat",
+                "Name": {
+                  "Value": "FCV_TrojanCtrl"
+                }
+              },
+              "Cases": [
+                {
+                  "$type": "RPG.GameCore.NumberCaseContainer",
+                  "Case": {},
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEntityEventV2",
+                      "EventName": {
+                        "Value": "Clt_TriggerClose"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                        "TargetType": "Prop",
+                        "Targets": [
+                          300001
+                        ]
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.NumberCaseContainer",
+                  "Case": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEntityEventV2",
+                      "EventName": {
+                        "Value": "Clt_TriggerOpen01"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                        "TargetType": "Prop",
+                        "Targets": [
+                          300001
+                        ]
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.NumberCaseContainer",
+                  "Case": {
+                    "FixedValue": {
+                      "RawValue": 8589934592,
+                      "Value": 2.0
+                    }
+                  },
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEntityEventV2",
+                      "EventName": {
+                        "Value": "Clt_TriggerOpen02"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                        "TargetType": "Prop",
+                        "Targets": [
+                          300001
+                        ]
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.NumberCaseContainer",
+                  "Case": {
+                    "FixedValue": {
+                      "RawValue": 12884901888,
+                      "Value": 3.0
+                    }
+                  },
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEntityEventV2",
+                      "EventName": {
+                        "Value": "Clt_TriggerOpen03"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                        "TargetType": "Prop",
+                        "Targets": [
+                          300001
+                        ]
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_isHand"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.ShowMiniGameFuncBtnEffect",
+              "CustomFuncBtnName": "SwitchHand_RocketPunch",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+            "Name": {
+              "Value": "FCV_isHand"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {},
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitSubMissionStateChange",
+          "SubMissions": [
+            434017803
+          ],
+          "State": "Started",
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.AdvDistrictSetupTrigger",
+              "GroupID": {
+                "FixedValue": {
+                  "RawValue": 824633720832,
+                  "Value": 192.0
+                }
+              },
+              "DistrictID": {
+                "FixedValue": {
+                  "RawValue": 2147487942967296,
+                  "Value": 500001.0
+                }
+              },
+              "TickInterval": 0.5,
+              "OnEnter": [
+                {
+                  "$type": "RPG.GameCore.ShowMiniGameFuncBtnEffect",
+                  "IsShow": true,
+                  "CustomFuncBtnName": "SwitchHand_RocketPunch",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "OnExit": [
+                {
+                  "$type": "RPG.GameCore.ShowMiniGameFuncBtnEffect",
+                  "CustomFuncBtnName": "SwitchHand_RocketPunch",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TriggerOnMissionInit": true,
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [
+            434017801,
+            434017802,
+            434017803
+          ],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareSubMissionState",
+            "SubMissionID": 434017803,
+            "SubMissionState": "Started",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvDistrictSetupTrigger",
+              "GroupID": {
+                "FixedValue": {
+                  "RawValue": 824633720832,
+                  "Value": 192.0
+                }
+              },
+              "DistrictID": {
+                "FixedValue": {
+                  "RawValue": 2147487942967296,
+                  "Value": 500001.0
+                }
+              },
+              "TickInterval": 0.5,
+              "OnEnter": [
+                {
+                  "$type": "RPG.GameCore.ShowMiniGameFuncBtnEffect",
+                  "IsShow": true,
+                  "CustomFuncBtnName": "SwitchHand_RocketPunch",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "OnExit": [
+                {
+                  "$type": "RPG.GameCore.ShowMiniGameFuncBtnEffect",
+                  "CustomFuncBtnName": "SwitchHand_RocketPunch",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [
+            434017801,
+            434017802,
+            434017803
+          ],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareSubMissionState",
+            "SubMissionID": 434017803,
+            "SubMissionState": "Started",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.PlayMissionTalk",
+              "MuteBattleVO": true,
+              "SimpleTalkList": [
+                {
+                  "TextSpeed": 20.0,
+                  "TalkSentenceID": 304011106,
+                  "ProtectTime": 2.0
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300005
+                ]
+              },
+              "TriggerName": "MissionTrigger1",
+              "OnEnter": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                    "Name": {
+                      "Value": "FCV_SwitchHand_P27"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareSwitchHandGestureType",
+                        "GestureType": "Rocket",
+                        "TaskEnabled": true,
+                        "IsClientOnly": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.TriggerGroupEvent",
+                          "EventName": {
+                            "Value": "EnterArea_G{Group192}"
+                          },
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ],
+              "IsOverrideValidGuestConfig": true,
+              "OverridedValidGuestConfig": {
+                "LocalPlayer": true,
+                "Teammember": true,
+                "FakePlayer": true
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitSubMissionStateChange",
+          "SubMissions": [
+            434017803
+          ],
+          "State": "Started",
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.ShowMiniGameFuncBtnEffect",
+              "IsShow": true,
+              "CustomFuncBtnName": "SwitchHand_RocketPunch",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TriggerOnMissionInit": true,
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [
+            434017801,
+            434017802,
+            434017803
+          ],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareSubMissionState",
+            "SubMissionID": 434017803,
+            "SubMissionState": "Started",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowMiniGameFuncBtnEffect",
+              "IsShow": true,
+              "CustomFuncBtnName": "SwitchHand_RocketPunch",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}

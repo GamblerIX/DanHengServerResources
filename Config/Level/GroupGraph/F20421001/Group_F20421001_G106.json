@@ -1,0 +1,592 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareQuestProgress",
+            "QuestID": {
+              "FixedValue": {
+                "RawValue": 9451547981250560,
+                "Value": 2200610.0
+              }
+            },
+            "Progress": {
+              "FixedValue": {
+                "RawValue": 85899345920,
+                "Value": 20.0
+              }
+            },
+            "EquationType": "NotEqual",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.InitColonyOrigamiEntity",
+              "ColonyID": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareQuestProgress",
+            "QuestID": {
+              "FixedValue": {
+                "RawValue": 9451547981250560,
+                "Value": 2200610.0
+              }
+            },
+            "Progress": {
+              "FixedValue": {
+                "RawValue": 85899345920,
+                "Value": 20.0
+              }
+            },
+            "EquationType": "NotEqual",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.CreateOrigamiByPropStateChange",
+              "ColonyID": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareQuestProgress",
+                "QuestID": {
+                  "FixedValue": {
+                    "RawValue": 9451547981250560,
+                    "Value": 2200610.0
+                  }
+                },
+                "Progress": {
+                  "FixedValue": {
+                    "RawValue": 85899345920,
+                    "Value": 20.0
+                  }
+                },
+                "EquationType": "Equal",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.AdvByEntityExist",
+                "TargetType": {
+                  "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                  "TargetType": "Prop",
+                  "Targets": [
+                    300002
+                  ]
+                },
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvDestroyGroupEntity",
+              "InstanceIDList": [
+                300002
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "TraceOrigami"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.TraceOrigamiByColony",
+              "ColonyID": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "OpenBigMap": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareQuestProgress",
+                "QuestID": {
+                  "FixedValue": {
+                    "RawValue": 9451547981250560,
+                    "Value": 2200610.0
+                  }
+                },
+                "Progress": {
+                  "FixedValue": {
+                    "RawValue": 85899345920,
+                    "Value": 20.0
+                  }
+                },
+                "EquationType": "Equal",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareItemNum",
+                "ItemPair": [
+                  {
+                    "ItemID": 150065,
+                    "ItemNum": 1
+                  }
+                ],
+                "Inverse": true,
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvCreateGroupEntity",
+              "InstanceIDList": [
+                300004,
+                300005,
+                300008
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PlayNPCBubbleTalk",
+              "BubbleTalkInfoList": [
+                {
+                  "AutoSkipTime": 2.0,
+                  "InstanceID": 300004,
+                  "TalkSentenceID": 404015084
+                }
+              ],
+              "BubbleTalkType": "Normal",
+              "IsLoop": true,
+              "LoopInterval": 5.0,
+              "InstantFinish": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareItemNum",
+                "ItemPair": [
+                  {
+                    "ItemID": 150065,
+                    "ItemNum": 1
+                  }
+                ],
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareQuestProgress",
+                "QuestID": {
+                  "FixedValue": {
+                    "RawValue": 9451547981250560,
+                    "Value": 2200610.0
+                  }
+                },
+                "Progress": {
+                  "FixedValue": {
+                    "RawValue": 85899345920,
+                    "Value": 20.0
+                  }
+                },
+                "EquationType": "Equal",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvCreateGroupEntity",
+              "InstanceIDList": [
+                300006,
+                300007
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.AdvByEntityExist",
+            "TargetType": {
+              "$type": "RPG.GameCore.GroupFetchLocalTarget",
+              "TargetType": "Prop",
+              "Targets": [
+                300005
+              ]
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetTimeRewindEntityActive",
+              "Target": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300005
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.QuestProgressChangeListener",
+          "QuestID": {
+            "FixedValue": {
+              "RawValue": 9451547981250560,
+              "Value": 2200610.0
+            }
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareQuestProgress",
+                    "QuestID": {
+                      "FixedValue": {
+                        "RawValue": 9451547981250560,
+                        "Value": 2200610.0
+                      }
+                    },
+                    "Progress": {
+                      "FixedValue": {
+                        "RawValue": 85899345920,
+                        "Value": 20.0
+                      }
+                    },
+                    "EquationType": "Equal",
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.AdvByEntityExist",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                      "TargetType": "Prop",
+                      "Targets": [
+                        300002
+                      ]
+                    },
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  }
+                ],
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdvDestroyGroupEntity",
+                  "InstanceIDList": [
+                    300002
+                  ],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.QuestProgressChangeListener",
+          "QuestID": {
+            "FixedValue": {
+              "RawValue": 9451547981250560,
+              "Value": 2200610.0
+            }
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareQuestProgress",
+                    "QuestID": {
+                      "FixedValue": {
+                        "RawValue": 9451547981250560,
+                        "Value": 2200610.0
+                      }
+                    },
+                    "Progress": {
+                      "FixedValue": {
+                        "RawValue": 85899345920,
+                        "Value": 20.0
+                      }
+                    },
+                    "EquationType": "Equal",
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareItemNum",
+                    "ItemPair": [
+                      {
+                        "ItemID": 150065,
+                        "ItemNum": 1
+                      }
+                    ],
+                    "Inverse": true,
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  }
+                ],
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdvCreateGroupEntity",
+                  "InstanceIDList": [
+                    300004,
+                    300005,
+                    300008
+                  ],
+                  "SkipCreated": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.PlayNPCBubbleTalk",
+                  "BubbleTalkInfoList": [
+                    {
+                      "AutoSkipTime": 2.0,
+                      "InstanceID": 300004,
+                      "TalkSentenceID": 404015084
+                    }
+                  ],
+                  "BubbleTalkType": "Normal",
+                  "IsLoop": true,
+                  "LoopInterval": 5.0,
+                  "InstantFinish": true,
+                  "UniqueID": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetTimeRewindEntityActive",
+                  "Target": {
+                    "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                    "TargetType": "Prop",
+                    "Targets": [
+                      300005
+                    ]
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "IsLoop": true,
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "Clt_ShowMap"
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowCurrentMapPage",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.QuestProgressChangeListener",
+          "QuestID": {
+            "FixedValue": {
+              "RawValue": 9451547981250560,
+              "Value": 2200610.0
+            }
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCompareItemNum",
+                    "ItemPair": [
+                      {
+                        "ItemID": 150065,
+                        "ItemNum": 1
+                      }
+                    ],
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareQuestProgress",
+                    "QuestID": {
+                      "FixedValue": {
+                        "RawValue": 9451547981250560,
+                        "Value": 2200610.0
+                      }
+                    },
+                    "Progress": {
+                      "FixedValue": {
+                        "RawValue": 85899345920,
+                        "Value": 20.0
+                      }
+                    },
+                    "EquationType": "Equal",
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  }
+                ],
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AdvCreateGroupEntity",
+                  "InstanceIDList": [
+                    300006,
+                    300007
+                  ],
+                  "SkipCreated": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "ColonyID"
+      }
+    ],
+    "SharedValues": [
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "ColonyID"
+      }
+    ]
+  },
+  "Type": "Group",
+  "EntityEventList": []
+}

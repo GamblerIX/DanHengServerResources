@@ -1,0 +1,1652 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "MGridFight_Origin_1008_Monster_00_PassiveSkill": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "Origin_1008_00_Monster_SkillAttack01",
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetEntityVisible",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "MuteColliderWhenInvisible": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByCopying",
+                  "FromTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "FromDynamicKey": {
+                    "Value": "LevelBaseAttack"
+                  },
+                  "ToTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ToDynamicKey": {
+                    "Value": "_LevelBaseAttack"
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenAfterAttack",
+              "CallbackConfig": []
+            },
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareWaveCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "Origin_1008_00_Monster_SkillBattleCry",
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        }
+      },
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_00_PassiveSkill",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MGridFight_Origin_1008_Monster_00_PassiveSkill"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_00_Skill01_Phase01",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "Evolve_01_Choice"
+            },
+            "CompareType": "GreaterEqual",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.GridFightShowRightCutIn",
+              "UIPrefabPath": "UI/GridFight/Battle/SpecialAction/SpecialAction_GridFight_TraitIcon.prefab",
+              "TitleTextID": {
+                "Hash": 1791969130,
+                "Hash64": 1102859390781750122
+              },
+              "ImagePath": "SpriteOutput/GridFight/BigLycan/GridFight_SmallLycan_Extra.png",
+              "TraitSearchKey": "Origin_1008",
+              "TraitLv": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "TraitShowImgType": "TraitImg",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.GridFightShowRightCutIn",
+              "UIPrefabPath": "UI/GridFight/Battle/SpecialAction/SpecialAction_GridFight_TraitIcon.prefab",
+              "TitleTextID": {
+                "Hash": 1791969130,
+                "Hash64": 1102859390781750122
+              },
+              "ImagePath": "SpriteOutput/GridFight/BigLycan/GridFight_SmallLycan.png",
+              "TraitSearchKey": "Origin_1008",
+              "TraitLv": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "TraitShowImgType": "TraitImg",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 0.8,
+          "Multiplier": {
+            "0": 0.8
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PosTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "OffsetX": {},
+          "OffsetY": {},
+          "OffsetZ": {
+            "FixedValue": {
+              "RawValue": -17179869184,
+              "Value": -4.0
+            }
+          },
+          "SetRotation": true,
+          "YawAngle": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_00_Skill01_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_00_Skill01_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": "AbilityTargetEntity",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill01",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {},
+          "NormalizedTransitionDuration": {},
+          "MovingRangeList": [
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "Speed": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "OffsetTargetDistance": {
+                "FixedValue": {
+                  "RawValue": 6442450946,
+                  "Value": 1.5
+                }
+              },
+              "NormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 365072219,
+                  "Value": 0.08
+                }
+              },
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 691489735,
+                  "Value": 0.16
+                }
+              },
+              "MovePercentage": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "DefaultMoveDistance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              }
+            },
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TeamFormation"
+              },
+              "IgnoreRadius": true,
+              "Speed": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "OffsetTargetDistance": {},
+              "NormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 2611340116,
+                  "Value": 0.61
+                }
+              },
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 3302829851,
+                  "Value": 0.77
+                }
+              },
+              "MovePercentage": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "DefaultMoveDistance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              }
+            }
+          ],
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 3006477110,
+              "Value": 0.7
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 1073741825,
+              "Value": 0.25
+            }
+          },
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": "TeamFormation",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_00_Skill01_Phase02",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 386547057,
+              "Value": 0.09
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1335734830,
+              "Value": 0.31
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
+            "FormulaType": "ByAttack",
+            "DamagePercentage": {},
+            "DamageValue": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "ExtraDamagePercentage": {},
+            "StanceValue": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "HitSplitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "SPHitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "StanceDamageType": {
+              "DamageType": "Physical"
+            },
+            "CustomName": {
+              "Value": "Origin_1008"
+            },
+            "BreakDamagePercentage": {},
+            "FinalFormulaType": "ByBaseDamage",
+            "FrameHalt": {},
+            "HitAnimation": "Hit_H",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Lycan_01/Eff_Monster_W2_Lycan_01_Skill01_Hit01.prefab",
+            "HitEffectMinMutexTime": {
+              "FixedValue": {
+                "RawValue": 214748368,
+                "Value": 0.05
+              }
+            },
+            "HitEffectMaxMutexCount": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "HitEffectHeight": -1.0,
+            "HitPosHeight": 0.75
+          },
+          "TriggerHitSound": true,
+          "DisplayData": {
+            "UIMessageHeight": 1.0,
+            "DitherRangeX": 0.02,
+            "DitherRangeY": 0.02,
+            "AttachPoint": "SelectRoot",
+            "Duration": 1.5,
+            "Scale": 1.0,
+            "FixedPosition": true
+          },
+          "CanOverkill": true,
+          "PerformanceDelay": {},
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_00_Skill02_Phase01",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 0.8,
+          "Multiplier": {
+            "0": 0.8
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 1.3,
+          "Multiplier": {
+            "0": 1.3
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PosTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "OffsetX": {},
+          "OffsetY": {},
+          "OffsetZ": {
+            "FixedValue": {
+              "RawValue": 12884901888,
+              "Value": 3.0
+            }
+          },
+          "SetRotation": true,
+          "YawAngle": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "Origin_1008_00_Monster_LightTeamFormation",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_00_Skill02_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_00_Skill02_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": 3092376456,
+              "Value": 0.72
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 644245095,
+              "Value": 0.15
+            }
+          },
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 1.0,
+          "Multiplier": {
+            "0": 1.0
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ],
+      "DynamicValues": {}
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_00_Skill02_Phase02",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1030792152,
+              "Value": 0.24
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "TargetType": "DarkTeamCenter",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Lycan_01/Eff_Monster_W2_Lycan_01_Skill02_Rage_02.prefab",
+          "Scale": {
+            "x": -1.0,
+            "y": -1.0,
+            "z": -1.0,
+            "normalized": {
+              "x": -0.577350259,
+              "y": -0.577350259,
+              "z": -0.577350259,
+              "normalized": {
+                "x": -0.5773503,
+                "y": -0.5773503,
+                "z": -0.5773503,
+                "magnitude": 1.00000012,
+                "sqrMagnitude": 1.00000024
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 1.73205078,
+            "sqrMagnitude": 3.0
+          },
+          "IsNeedFadeIn": true,
+          "ForceSimulateImmediately": true,
+          "ParamEntityUsage": "LookAt",
+          "TowardMaxPitchAngle": 90.0,
+          "MaxMutexCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1627792604,
+              "Value": 0.38
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "Origin_1008_Monster_BattleCryBuff",
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "GlobalModifiers": {},
+  "GlobalTemplates": [
+    {
+      "Name": "Origin_1008_00_Monster_SkillBattleCry",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DynamicKey": {
+                  "Value": "Evolve_01_Choice"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "TaskEnabled": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TurnInsertAbility",
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_00_Skill02_Phase01"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AbilityTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "InsertAbilityPriority": "AvatarBuffOthers",
+              "DynamicValues": {},
+              "OwnerAliveState": "Bit_Alive",
+              "TargetAliveState": "Bit_Alive",
+              "CanRunOnUnselectableTarget": true,
+              "ShowInActionBar": true,
+              "AutoStandbyOnAbilityFinish": true,
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Origin_1008_00_Monster_SkillAttack01",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "ByRandom": true,
+          "MaxNumber": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.TurnInsertAbility",
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_00_Skill01_Phase01"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AbilityTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "InsertAbilityPriority": "AvatarBuffOthers",
+              "DynamicValues": {},
+              "OwnerAliveState": "Bit_Alive",
+              "TargetAliveState": "Bit_Alive",
+              "CanRunOnUnselectableTarget": true,
+              "ShowInActionBar": true,
+              "AutoStandbyOnAbilityFinish": true,
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Origin_1008_00_Monster_LightTeamFormation",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SwitchCaseByTeammateCount",
+          "TeamType": "TeamLight",
+          "CaseTaskList": [
+            {
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+                  "CustomTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "CustomCenterTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamCenter"
+                  },
+                  "TargetFormation": {
+                    "LocalDelta": {
+                      "x": -2.0,
+                      "normalized": {
+                        "x": -1.0,
+                        "magnitude": 1.0,
+                        "sqrMagnitude": 1.0
+                      },
+                      "magnitude": 2.0,
+                      "sqrMagnitude": 4.0
+                    }
+                  },
+                  "LeftSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": 3.5,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 3.5,
+                        "sqrMagnitude": 12.25
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": 2.0,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 2.0,
+                        "sqrMagnitude": 4.0
+                      }
+                    }
+                  ],
+                  "RightSideFormations": [],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 8589934592,
+                  "Value": 2.0
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+                  "CustomTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "CustomCenterTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamCenter"
+                  },
+                  "TargetFormation": {},
+                  "LeftSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": 5.0,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 5.0,
+                        "sqrMagnitude": 25.0
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": 3.5,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 3.5,
+                        "sqrMagnitude": 12.25
+                      }
+                    }
+                  ],
+                  "RightSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": -3.5,
+                        "normalized": {
+                          "x": -1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 3.5,
+                        "sqrMagnitude": 12.25
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": -5.0,
+                        "normalized": {
+                          "x": -1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 5.0,
+                        "sqrMagnitude": 25.0
+                      }
+                    }
+                  ],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 12884901888,
+                  "Value": 3.0
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+                  "CustomTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "CustomCenterTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamCenter"
+                  },
+                  "TargetFormation": {
+                    "LocalDelta": {
+                      "x": -2.0,
+                      "normalized": {
+                        "x": -1.0,
+                        "magnitude": 1.0,
+                        "sqrMagnitude": 1.0
+                      },
+                      "magnitude": 2.0,
+                      "sqrMagnitude": 4.0
+                    }
+                  },
+                  "LeftSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": 3.5,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 3.5,
+                        "sqrMagnitude": 12.25
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": 2.0,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 2.0,
+                        "sqrMagnitude": 4.0
+                      }
+                    }
+                  ],
+                  "RightSideFormations": [],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 17179869184,
+                  "Value": 4.0
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+                  "CustomTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "CustomCenterTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamCenter"
+                  },
+                  "TargetFormation": {},
+                  "LeftSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": 5.0,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 5.0,
+                        "sqrMagnitude": 25.0
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": 3.5,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 3.5,
+                        "sqrMagnitude": 12.25
+                      }
+                    }
+                  ],
+                  "RightSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": -3.5,
+                        "normalized": {
+                          "x": -1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 3.5,
+                        "sqrMagnitude": 12.25
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": -5.0,
+                        "normalized": {
+                          "x": -1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 5.0,
+                        "sqrMagnitude": 25.0
+                      }
+                    }
+                  ],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            }
+          ],
+          "DefaultTaskList": [],
+          "TeamMemberCountingOption": "IgnoreRemoving, IgnoreServant, IgnoreTempLeave, IgnoreExcludeInMultiCharacter",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "Origin_1008_00_Monster_LightTeamFormation_HL",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SwitchCaseByTeammateCount",
+          "TeamType": "TeamLight",
+          "CaseTaskList": [
+            {
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+                  "CustomTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "CustomCenterTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "TargetFormation": {
+                    "LocalDelta": {
+                      "x": -3.0,
+                      "normalized": {
+                        "x": -1.0,
+                        "magnitude": 1.0,
+                        "sqrMagnitude": 1.0
+                      },
+                      "magnitude": 3.0,
+                      "sqrMagnitude": 9.0
+                    }
+                  },
+                  "LeftSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": 4.5,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 4.5,
+                        "sqrMagnitude": 20.25
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": 3.0,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 3.0,
+                        "sqrMagnitude": 9.0
+                      }
+                    }
+                  ],
+                  "RightSideFormations": [],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 8589934592,
+                  "Value": 2.0
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+                  "CustomTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "CustomCenterTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "TargetFormation": {},
+                  "LeftSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": 6.0,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 6.0,
+                        "sqrMagnitude": 36.0
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": 4.5,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 4.5,
+                        "sqrMagnitude": 20.25
+                      }
+                    }
+                  ],
+                  "RightSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": -4.5,
+                        "normalized": {
+                          "x": -1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 4.5,
+                        "sqrMagnitude": 20.25
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": -6.0,
+                        "normalized": {
+                          "x": -1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 6.0,
+                        "sqrMagnitude": 36.0
+                      }
+                    }
+                  ],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 12884901888,
+                  "Value": 3.0
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+                  "CustomTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "CustomCenterTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "TargetFormation": {
+                    "LocalDelta": {
+                      "x": -3.0,
+                      "normalized": {
+                        "x": -1.0,
+                        "magnitude": 1.0,
+                        "sqrMagnitude": 1.0
+                      },
+                      "magnitude": 3.0,
+                      "sqrMagnitude": 9.0
+                    }
+                  },
+                  "LeftSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": 4.5,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 4.5,
+                        "sqrMagnitude": 20.25
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": 3.0,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 3.0,
+                        "sqrMagnitude": 9.0
+                      }
+                    }
+                  ],
+                  "RightSideFormations": [],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 17179869184,
+                  "Value": 4.0
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+                  "CustomTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "CustomCenterTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "TargetFormation": {},
+                  "LeftSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": 6.0,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 6.0,
+                        "sqrMagnitude": 36.0
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": 4.5,
+                        "normalized": {
+                          "x": 1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 4.5,
+                        "sqrMagnitude": 20.25
+                      }
+                    }
+                  ],
+                  "RightSideFormations": [
+                    {
+                      "LocalDelta": {
+                        "x": -4.5,
+                        "normalized": {
+                          "x": -1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 4.5,
+                        "sqrMagnitude": 20.25
+                      }
+                    },
+                    {
+                      "LocalDelta": {
+                        "x": -6.0,
+                        "normalized": {
+                          "x": -1.0,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 6.0,
+                        "sqrMagnitude": 36.0
+                      }
+                    }
+                  ],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            }
+          ],
+          "DefaultTaskList": [],
+          "TeamMemberCountingOption": "IgnoreRemoving, IgnoreServant, IgnoreTempLeave, IgnoreExcludeInMultiCharacter",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ]
+}

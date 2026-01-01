@@ -1,0 +1,380 @@
+{
+  "AbilityList": [
+    {
+      "Name": "WolfBro_Monster_01_AttackReport",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddAdventureModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "ModifierName": "ADV_Modifier_MazeCommon_WolfBro_MonsterHitPlayer",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "MazeMonster_XP_Minion01_04_NormalAtk01",
+      "TargetInfo": {
+        "TargetType": "SkillPointEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "NormalAtk",
+          "AnimStateName": "Attack",
+          "TransitionDuration": 0.05,
+          "StopWhenHitOthers": true,
+          "MovingRangeList": [
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "SteerNormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 429496730,
+                  "Value": 0.1
+                }
+              },
+              "SteerNormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1288490190,
+                  "Value": 0.3
+                }
+              },
+              "MaxSteerSpeed": {
+                "FixedValue": {
+                  "RawValue": 300647710720,
+                  "Value": 70.0
+                }
+              }
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Attack",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1632087574,
+              "Value": 0.38
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.AdventureFireProjectile",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "Projectile": {
+            "ColliderTemplate": "CapsuleZ_MazeMonsterLaserBullet",
+            "Behavior": "LinearWithHitDetect",
+            "FlySpeed": 50.0,
+            "EnableRayCast": true,
+            "FlyTime": -1.0,
+            "SpeedEaseType": "InQuart",
+            "MaxLifeTime": 0.5,
+            "AttachPoint": "Origin",
+            "AlignWithAttachPoint": true,
+            "AttachPointAxis": "Z",
+            "AttachOffset": {
+              "y": 1.0,
+              "z": 0.2,
+              "normalized": {
+                "y": 0.9805807,
+                "z": 0.196116149,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 1.01980388,
+              "sqrMagnitude": 1.04
+            },
+            "TargetAttachPoint": "Root",
+            "FlyEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion01_04/Eff_Monster_XP_Minion01_04_Skill01_Bullet_Loop.prefab",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion01_04/Eff_Monster_XP_Minion01_04_Skill01_Hit.prefab",
+            "LinearPitchAngle": {
+              "FixedValue": {
+                "RawValue": 429496730,
+                "Value": 0.1
+              }
+            },
+            "BoomerangEccentricity": 1.0,
+            "TriggerHitCallback": true,
+            "StaticProjectileCanPassAirWall": true,
+            "ParabolaUseWorldSpaceUp": true,
+            "SubCurveIndex": {}
+          },
+          "OnProjectileHit": [
+            {
+              "$type": "RPG.GameCore.AdventureTriggerAttack",
+              "AttackTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ProjectileHitEntity"
+              },
+              "AttackRootTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ProjectileHitEntity"
+              },
+              "TriggerBattle": true,
+              "TriggerBattleDelay": 0.1,
+              "AttackDetectConfig": {
+                "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                "MaxRadius": 0.1,
+                "FanAngle": 360.0,
+                "Hight": 1.0
+              },
+              "HitConfig": {
+                "HitAnimation": "Hit",
+                "HitSoundEvent": "Ev_sfx_monster_skill_01_hit_aml_minion01_white"
+              },
+              "IncludeProps": true,
+              "AttackDetectCollision": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeTemplateName": "Impact_Middle"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Attack",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "WolfBro_XP_Minion01_04_NormalAtk01",
+      "TargetInfo": {
+        "TargetType": "SkillPointEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AdventureTriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "NormalAtk",
+          "AnimStateName": "Attack",
+          "TransitionDuration": 0.05,
+          "StopWhenHitOthers": true,
+          "MovingRangeList": [
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AdvLocalPlayer"
+              },
+              "SteerNormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 429496730,
+                  "Value": 0.1
+                }
+              },
+              "SteerNormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1288490190,
+                  "Value": 0.3
+                }
+              },
+              "MaxSteerSpeed": {
+                "FixedValue": {
+                  "RawValue": 300647710720,
+                  "Value": 70.0
+                }
+              }
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Attack",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1632087574,
+              "Value": 0.38
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.AdventureFireProjectile",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "SkillPointEntity"
+          },
+          "Projectile": {
+            "ColliderTemplate": "CapsuleZ_MazeCommonBullet",
+            "Behavior": "LinearWithHitDetect",
+            "FlySpeed": 50.0,
+            "EnableRayCast": true,
+            "FlyTime": -1.0,
+            "SpeedEaseType": "InQuart",
+            "MaxLifeTime": 0.5,
+            "AttachPoint": "Origin",
+            "AttachOffset": {
+              "y": 1.0,
+              "z": 0.2,
+              "normalized": {
+                "y": 0.9805807,
+                "z": 0.196116149,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 1.01980388,
+              "sqrMagnitude": 1.04
+            },
+            "TargetAttachPoint": "Head",
+            "FlyEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion01_04/Eff_Monster_XP_Minion01_04_Skill01_Bullet_Loop.prefab",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_XP_Minion01_04/Eff_Monster_XP_Minion01_04_Skill01_Hit.prefab",
+            "LinearPitchAngle": {
+              "FixedValue": {
+                "RawValue": 429496730,
+                "Value": 0.1
+              }
+            },
+            "BoomerangEccentricity": 1.0,
+            "TriggerHitCallback": true,
+            "StaticProjectileCanPassAirWall": true,
+            "ParabolaUseWorldSpaceUp": true,
+            "SubCurveIndex": {}
+          },
+          "OnProjectileHit": [
+            {
+              "$type": "RPG.GameCore.AdventureTriggerAttack",
+              "AttackTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ProjectileHitEntity"
+              },
+              "AttackRootTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ProjectileHitEntity"
+              },
+              "TriggerBattleDelay": 0.1,
+              "AttackDetectConfig": {
+                "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                "MaxRadius": 0.5,
+                "FanAngle": 360.0,
+                "Hight": 1.0
+              },
+              "HitConfig": {
+                "HitAnimation": "Hit",
+                "HitSoundEvent": "Ev_sfx_monster_skill_01_hit_aml_minion01_white"
+              },
+              "AttackDetectCollision": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.WolfBroMonsterHitBoomProp",
+              "AttackTargetType": {
+                "$type": "RPG.GameCore.TargetSequence",
+                "Sequence": [
+                  {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AdvLocalPlayer"
+                  },
+                  {
+                    "$type": "RPG.GameCore.TargetMapEnemyTeamEntity"
+                  },
+                  {
+                    "$type": "RPG.GameCore.TargetMapAllTeamMember",
+                    "RemoveUnselectable": true
+                  }
+                ]
+              },
+              "AttackRootTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ProjectileHitEntity"
+              },
+              "AttackDetectConfig": {
+                "$type": "RPG.GameCore.AdventureAttackDetectCircleConfig",
+                "MaxRadius": 0.5,
+                "FanAngle": 360.0,
+                "Hight": 1.0
+              },
+              "HitConfig": {
+                "HitAnimation": "Hit",
+                "HitSoundEvent": "Ev_sfx_monster_skill_01_hit_aml_minion01_white"
+              },
+              "AttackDetectCollision": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeTemplateName": "Impact_Middle"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Attack",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ]
+}

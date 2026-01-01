@@ -1,0 +1,76 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitDrinkMakerCheersInitFinish",
+          "OnFinish": [
+            {
+              "$type": "RPG.GameCore.SwitchCase",
+              "WithBreak": true,
+              "TaskList": [
+                {
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByDrinkMakerCheersStoryDrinkHasMade",
+                    "Inverse": true,
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SwitchCase",
+                      "WithBreak": true,
+                      "TaskList": [
+                        {
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByDrinkMakerCheersStoryLastMakedDrinkIsPositive",
+                            "TaskEnabled": true,
+                            "IsClientOnly": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.TriggerPerformance",
+                              "ValueSource": {},
+                              "PerformanceType": "D",
+                              "PerformanceID": 803520406,
+                              "MaskConfig": {
+                                "StartBlack": "NoPre",
+                                "EndBlack": "Full",
+                                "MaskColor": "Black"
+                              },
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ClientFinishMission",
+                              "SubmissionID": 803520410,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "DefaultTask": [],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ],
+              "DefaultTask": [],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group"
+}

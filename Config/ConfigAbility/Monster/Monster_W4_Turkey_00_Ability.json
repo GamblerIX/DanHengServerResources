@@ -1,0 +1,1883 @@
+{
+  "AbilityList": [
+    {
+      "Name": "Monster_W4_Turkey_00_Skill01_Phase01",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "Monster_W4_Turkey_00_Skill01_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Turkey_00_Skill01_Phase02",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByIsContainModifier",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "ModifierName": {
+                  "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                },
+                "TaskEnabled": true
+              },
+              {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Flag": "STAT_CTRL",
+                "Inverse": true,
+                "TaskEnabled": true
+              },
+              {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Flag": "DisableAction",
+                "Inverse": true,
+                "TaskEnabled": true
+              },
+              {
+                "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ParamEntity"
+                },
+                "Flag": "Break",
+                "Inverse": true,
+                "TaskEnabled": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "MaxNumber": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "AnimLogicState": "Idle",
+              "NormalizedTimeStart": {},
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTimeWait": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTransitionDuration": {},
+              "ForceStart": true,
+              "WaitAnimState": true,
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Value": {},
+          "DynamicKey": {
+            "Value": "Skill01_AssistCount"
+          },
+          "SkipInCharmAction": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "Monster_W4_Turkey_00_Skill01_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "MaxNumber": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.LookAt",
+              "PerformerType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "TargetType": "AbilityTargetEntity",
+              "ToTargetRatio": 1.0,
+              "Duration": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.RetargetList",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllTeammate"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterUniqueID",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "TargetMonsterUniqueID": {
+              "FixedValue": {
+                "RawValue": 1744620010602496,
+                "Value": 406201.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "MaxNumber": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerParallelAbility",
+              "ParallelAbilityList": [
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill01_Phase01_Assist_00"
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityList"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetFilter",
+                        "Predicate": {
+                          "$type": "RPG.GameCore.ByAnd",
+                          "PredicateList": [
+                            {
+                              "$type": "RPG.GameCore.ByIsContainModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "ModifierName": {
+                                "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                              },
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "STAT_CTRL",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "DisableAction",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "Break",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetIndex",
+                        "IndexType": "IndexStrict"
+                      }
+                    ]
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "Delay": {
+                    "RawValue": 3006477110,
+                    "Value": 0.7
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill01_Phase01_Assist_01"
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityList"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetFilter",
+                        "Predicate": {
+                          "$type": "RPG.GameCore.ByAnd",
+                          "PredicateList": [
+                            {
+                              "$type": "RPG.GameCore.ByIsContainModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "ModifierName": {
+                                "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                              },
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "STAT_CTRL",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "DisableAction",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "Break",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetIndex",
+                        "IndexType": "IndexStrict",
+                        "IndexValue": 1
+                      }
+                    ]
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "Delay": {
+                    "RawValue": 4724464026,
+                    "Value": 1.1
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill01_Phase01_Assist_01"
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityList"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetFilter",
+                        "Predicate": {
+                          "$type": "RPG.GameCore.ByAnd",
+                          "PredicateList": [
+                            {
+                              "$type": "RPG.GameCore.ByIsContainModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "ModifierName": {
+                                "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                              },
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "STAT_CTRL",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "DisableAction",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "Break",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetIndex",
+                        "IndexType": "IndexStrict",
+                        "IndexValue": 2
+                      }
+                    ]
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "Delay": {
+                    "RawValue": 6442450946,
+                    "Value": 1.5
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill01_Phase01_Assist_01"
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityList"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetFilter",
+                        "Predicate": {
+                          "$type": "RPG.GameCore.ByAnd",
+                          "PredicateList": [
+                            {
+                              "$type": "RPG.GameCore.ByIsContainModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "ModifierName": {
+                                "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                              },
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "STAT_CTRL",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "DisableAction",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ByContainBehaviorFlag",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "Flag": "Break",
+                              "Inverse": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetIndex",
+                        "IndexType": "IndexStrict",
+                        "IndexValue": 3
+                      }
+                    ]
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "Delay": {
+                    "RawValue": 8160437866,
+                    "Value": 1.9
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill01_Phase01_Assist_01"
+                  }
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerParallelAbility",
+              "ParallelAbilityList": [
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill01_Phase01_Assist_00"
+                  }
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 858993460,
+              "Value": 0.2
+            }
+          },
+          "MaxAdvencePerTick": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SkillPerformFinish",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Turkey_00_Skill01_Phase01_Assist_00",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill01",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "MovingRangeList": [
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "IgnoreRadius": true,
+              "Speed": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "OffsetTargetDistance": {
+                "FixedValue": {
+                  "RawValue": 8589934592,
+                  "Value": 2.0
+                }
+              },
+              "NormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 390842024,
+                  "Value": 0.09
+                }
+              },
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1267015352,
+                  "Value": 0.29
+                }
+              },
+              "MovePercentage": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "DefaultMoveDistance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              }
+            },
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TeamFormation"
+              },
+              "IgnoreRadius": true,
+              "Speed": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "OffsetTargetDistance": {},
+              "NormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 2306397438,
+                  "Value": 0.54
+                }
+              },
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 3010772077,
+                  "Value": 0.7
+                }
+              },
+              "MovePercentage": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "DefaultMoveDistance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              }
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 4151944889,
+              "Value": 0.97
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Imaginary"
+            },
+            "FormulaType": "ByAttack",
+            "DamagePercentage": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "DamageValue": {},
+            "ExtraDamagePercentage": {},
+            "StanceValue": {},
+            "HitSplitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "SPHitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "AttackType": "Normal",
+            "BreakDamagePercentage": {},
+            "FrameHalt": {},
+            "HitAnimation": "Hit",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Turkey_00/Eff_Monster_W4_Turkey_00_Skill01_Hit.prefab",
+            "HitEffectMinMutexTime": {
+              "FixedValue": {
+                "RawValue": 214748368,
+                "Value": 0.05
+              }
+            },
+            "HitEffectMaxMutexCount": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "HitEffectHeight": -1.0,
+            "HitPosHeight": 0.75
+          },
+          "SpecialHitSoundEvent": "Ev_sfx_monster_Skill01_Hit_W4_Turkey_00",
+          "CanOverkill": true,
+          "PerformanceDelay": {},
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "ShakeTemplateName": "Common_Rapid_Middle"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 7015111822,
+              "Value": 1.63
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "Skill01_AssistCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Imaginary"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 1717986920,
+                    "Value": 0.4
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Turkey_00/Eff_Monster_W4_Turkey_00_Skill01_Hit.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "SpecialHitSoundEvent": "Ev_sfx_monster_Skill01_Hit_W4_Turkey_00",
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeTemplateName": "Common_Rapid_Light"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 8733098738,
+              "Value": 2.03
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "Skill01_AssistCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 8589934592,
+                "Value": 2.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Imaginary"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 1717986920,
+                    "Value": 0.4
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Turkey_00/Eff_Monster_W4_Turkey_00_Skill01_Hit.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "SpecialHitSoundEvent": "Ev_sfx_monster_Skill01_Hit_W4_Turkey_00",
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeTemplateName": "Common_Rapid_Light"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 10451085658,
+              "Value": 2.43
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "Skill01_AssistCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 12884901888,
+                "Value": 3.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Imaginary"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 1717986920,
+                    "Value": 0.4
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Turkey_00/Eff_Monster_W4_Turkey_00_Skill01_Hit.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "SpecialHitSoundEvent": "Ev_sfx_monster_Skill01_Hit_W4_Turkey_00",
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeTemplateName": "Common_Rapid_Light"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 12169072578,
+              "Value": 2.83
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "Skill01_AssistCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 17179869184,
+                "Value": 4.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Imaginary"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 1717986920,
+                    "Value": 0.4
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Turkey_00/Eff_Monster_W4_Turkey_00_Skill01_Hit.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "SpecialHitSoundEvent": "Ev_sfx_monster_Skill01_Hit_W4_Turkey_00",
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.VCameraConfigChange",
+              "CameraConfig": {
+                "ShakeTemplateName": "Common_Rapid_Light"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 12884901888,
+              "Value": 3.0
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 1073741825,
+              "Value": 0.25
+            }
+          },
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Turkey_00_Skill01_Phase01_Assist_01",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill01",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "MovingRangeList": [
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "IgnoreRadius": true,
+              "Speed": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "OffsetTargetDistance": {
+                "FixedValue": {
+                  "RawValue": 8589934592,
+                  "Value": 2.0
+                }
+              },
+              "NormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 390842024,
+                  "Value": 0.09
+                }
+              },
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1267015352,
+                  "Value": 0.29
+                }
+              },
+              "MovePercentage": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "DefaultMoveDistance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              }
+            },
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TeamFormation"
+              },
+              "IgnoreRadius": true,
+              "Speed": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "OffsetTargetDistance": {},
+              "NormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 2306397438,
+                  "Value": 0.54
+                }
+              },
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 3010772077,
+                  "Value": 0.7
+                }
+              },
+              "MovePercentage": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "DefaultMoveDistance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              }
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 3865470570,
+              "Value": 0.9
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "CurrentTurnOwnerEntity"
+          },
+          "Key": {
+            "Value": "Skill01_AssistCount"
+          },
+          "AddValue": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "Min": {},
+          "Max": {
+            "FixedValue": {
+              "RawValue": 17179869184,
+              "Value": 4.0
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 12884901888,
+              "Value": 3.0
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 1073741825,
+              "Value": 0.25
+            }
+          },
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Turkey_00_Skill02_Phase01",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "Monster_W4_Turkey_00_Skill02_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Turkey_00_Skill02_Phase02",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "Monster_W4_Turkey_00_Skill02_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.RetargetList",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterUniqueID",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "TargetMonsterUniqueID": {
+              "FixedValue": {
+                "RawValue": 1744620010602496,
+                "Value": 406201.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "MaxNumber": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerParallelAbility",
+              "ParallelAbilityList": [
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityList"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetIndex",
+                        "IndexType": "IndexStrict"
+                      }
+                    ]
+                  },
+                  "AbortBehaviorFlags": [
+                    "STAT_CTRL",
+                    "DisableAction",
+                    "Break"
+                  ],
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                    },
+                    "Inverse": true,
+                    "TaskEnabled": true
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill02_Phase01_Assist"
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityList"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetIndex",
+                        "IndexType": "IndexStrict",
+                        "IndexValue": 1
+                      }
+                    ]
+                  },
+                  "AbortBehaviorFlags": [
+                    "STAT_CTRL",
+                    "DisableAction",
+                    "Break"
+                  ],
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                    },
+                    "Inverse": true,
+                    "TaskEnabled": true
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill02_Phase01_Assist"
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityList"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetIndex",
+                        "IndexType": "IndexStrict",
+                        "IndexValue": 2
+                      }
+                    ]
+                  },
+                  "AbortBehaviorFlags": [
+                    "STAT_CTRL",
+                    "DisableAction",
+                    "Break"
+                  ],
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                    },
+                    "Inverse": true,
+                    "TaskEnabled": true
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill02_Phase01_Assist"
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityList"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetIndex",
+                        "IndexType": "IndexStrict",
+                        "IndexValue": 3
+                      }
+                    ]
+                  },
+                  "AbortBehaviorFlags": [
+                    "STAT_CTRL",
+                    "DisableAction",
+                    "Break"
+                  ],
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                    },
+                    "Inverse": true,
+                    "TaskEnabled": true
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill02_Phase01_Assist"
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetSequence",
+                    "Sequence": [
+                      {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntityList"
+                      },
+                      {
+                        "$type": "RPG.GameCore.TargetIndex",
+                        "IndexType": "IndexStrict",
+                        "IndexValue": 4
+                      }
+                    ]
+                  },
+                  "AbortBehaviorFlags": [
+                    "STAT_CTRL",
+                    "DisableAction",
+                    "Break"
+                  ],
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+                    },
+                    "Inverse": true,
+                    "TaskEnabled": true
+                  },
+                  "AbilityName": {
+                    "Value": "Monster_W4_Turkey_00_Skill02_Phase01_Assist"
+                  }
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 3435973840,
+              "Value": 0.8
+            }
+          },
+          "MaxAdvencePerTick": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SkillPerformFinish",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Turkey_00_Skill02_Phase01_Assist",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MMonster_W4_Turkey_00_Skill02_Power_EffectLoop"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill02",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 3006477110,
+              "Value": 0.7
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 2791728745,
+              "Value": 0.65
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MMonster_W4_Turkey_00_Skill02_Power"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitParallelTimeStamp",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 11596411702,
+              "Value": 2.7
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 429496730,
+              "Value": 0.1
+            }
+          },
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "GlobalModifiers": {
+    "MMonster_W4_Turkey_00_Skill02_Power": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": {
+                "Value": "MMonster_W4_Turkey_00_Skill02_Power_EffectLoop"
+              },
+              "TaskEnabled": true
+            }
+          ]
+        },
+        {
+          "Event": "OnBeingBreak",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier",
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "Unique"
+    },
+    "MMonster_W4_Turkey_00_Skill02_Power_EffectLoop": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "_CallbackList": [
+        {
+          "Event": "OnCreate",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Turkey_00/Eff_Monster_W4_Turkey_00_Skill02_Body01.prefab",
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ModifierAttachEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Turkey_00/Eff_Monster_W4_Turkey_00_Skill02_Body03.prefab",
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "Unique"
+    }
+  }
+}

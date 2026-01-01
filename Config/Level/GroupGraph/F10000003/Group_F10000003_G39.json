@@ -1,0 +1,167 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvOnButtonPressed",
+          "ButtonName": "OpenUI",
+          "OnPressedCallback": [
+            {
+              "$type": "RPG.GameCore.ShowUI",
+              "Name": "Ui.PamSkin.PamSkinSelectPage",
+              "WaitForExit": true,
+              "OnUIEnter": [
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "StartEvent"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "OnUIExitImmediately": [
+                {
+                  "$type": "RPG.GameCore.EndDialogueEntityInteract",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "TriggerName": "InteractTrigger",
+          "ButtonsByName": [],
+          "ButtonConfigs": [
+            {
+              "ID": "OpenUI",
+              "ButtonIcon": {
+                "Value": "SpriteOutput/MapPics/Collect/IconCollect107.png"
+              },
+              "IconType": {
+                "JsonValueStr": "ChatIcon"
+              },
+              "ButtonText": {
+                "Value": "UIText_PamSkin_Entrance_Title"
+              },
+              "ShowPriority": "Default"
+            }
+          ],
+          "InteractAngleRange": 180.0,
+          "OwnerForwardAngleRange": 180.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.HideSummonUnit",
+          "SummonUnit": {
+            "$type": "RPG.GameCore.TargetFetchSummonUnit",
+            "Summoner": {
+              "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+              "IncludeStoryPlayer": true
+            },
+            "SummonUnitID": 11121
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "StartEvent"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.StartDialogueEntityInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvNpcEx",
+                "FetchType": "SingleNpcByUniqueName",
+                "SingleUniqueName": {
+                  "Value": "PamSkin_Pam"
+                }
+              },
+              "LevelGraphPath": "Config/Level/Props/InteractMode/TriggerEvent_TriggerType_08.json",
+              "UseOverrideData": true,
+              "ValueSource": {
+                "Values": [
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "Level/Common_Adventure/UseInteractPam.prefab",
+                    "Key": "DialogueEntityInteract_AreaPath"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "UseInteractPam,UseInteractPam_Camera",
+                    "Key": "DialogueEntityInteract_CameraKey"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "UseInteractPam",
+                    "Key": "DialogueEntityInteract_AreaName"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedFloat",
+                    "Key": "ResetEntityTransform"
+                  }
+                ],
+                "SharedValues": [
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "Level/Common_Adventure/UseInteractPam.prefab",
+                    "Key": "DialogueEntityInteract_AreaPath"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "UseInteractPam,UseInteractPam_Camera",
+                    "Key": "DialogueEntityInteract_CameraKey"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "UseInteractPam",
+                    "Key": "DialogueEntityInteract_AreaName"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedFloat",
+                    "Key": "ResetEntityTransform"
+                  }
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group"
+}

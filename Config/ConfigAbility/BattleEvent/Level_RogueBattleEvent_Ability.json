@@ -1,0 +1,2850 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "Modifier_BattleEventAbility_RogueChallengeTurnLimit_SpecialDrop": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "STAT_TurnCountAccumulator"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetBattleScoringItem",
+                  "ScoringID": 80001,
+                  "ModifyFunction": "Set",
+                  "ModifyValue": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnPhase1",
+              "Priority": -12,
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.LevelChallengeTurnAcc",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                    "CompareType": "Greater",
+                    "CompareValue": 3,
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                      "DynamicKey": "BattleEventTurnLeftParam",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.ToastPile",
+                      "DescTextID": {
+                        "Hash": -1183433594,
+                        "Hash64": 1770778755110255613
+                      },
+                      "TextIDFloatParam": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 3,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "LevelEntity"
+                            },
+                            "ModifierName": {
+                              "Value": "StageAbility_RogueTimeLimit_Special_Modifier"
+                            },
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ShowUIPage",
+                              "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                              "UITextNodes": [
+                                {
+                                  "TextPath": "AreaInfoPanel/Title/Text",
+                                  "TextContent": {
+                                    "Hash": -1713195759,
+                                    "Hash64": 62945172054891551
+                                  }
+                                }
+                              ],
+                              "LifeTime": 1.0,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ShowUIPage",
+                              "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                              "UITextNodes": [
+                                {
+                                  "TextPath": "AreaInfoPanel/Title/Text",
+                                  "TextContent": {
+                                    "Hash": -1298628928,
+                                    "Hash64": 3592499436159066124
+                                  }
+                                }
+                              ],
+                              "LifeTime": 1.0,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 2,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "LevelEntity"
+                            },
+                            "ModifierName": {
+                              "Value": "StageAbility_RogueTimeLimit_Special_Modifier"
+                            },
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ShowUIPage",
+                              "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                              "UITextNodes": [
+                                {
+                                  "TextPath": "AreaInfoPanel/Title/Text",
+                                  "TextContent": {
+                                    "Hash": -1713195758,
+                                    "Hash64": 13553460078662283185
+                                  }
+                                }
+                              ],
+                              "LifeTime": 1.0,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ShowUIPage",
+                              "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                              "UITextNodes": [
+                                {
+                                  "TextPath": "AreaInfoPanel/Title/Text",
+                                  "TextContent": {
+                                    "Hash": -1298628929,
+                                    "Hash64": 16858372231962188595
+                                  }
+                                }
+                              ],
+                              "LifeTime": 1.0,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 1,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "LevelEntity"
+                            },
+                            "ModifierName": {
+                              "Value": "StageAbility_RogueTimeLimit_Special_Modifier"
+                            },
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ShowUIPage",
+                              "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                              "UITextNodes": [
+                                {
+                                  "TextPath": "AreaInfoPanel/Title/Text",
+                                  "TextContent": {
+                                    "Hash": -1713195761,
+                                    "Hash64": 12099410293933440451
+                                  }
+                                }
+                              ],
+                              "LifeTime": 1.0,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ShowUIPage",
+                              "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                              "UITextNodes": [
+                                {
+                                  "TextPath": "AreaInfoPanel/Title/Text",
+                                  "TextContent": {
+                                    "Hash": -1298628930,
+                                    "Hash64": 14712526930076729044
+                                  }
+                                }
+                              ],
+                              "LifeTime": 1.0,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                            "CompareType": "LessEqual",
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ForceKill",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "DeathSource": "KilledBySelf",
+                              "CanOverkill": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetBattleScoringItem",
+                          "ScoringID": 80001,
+                          "ModifyFunction": "Set",
+                          "ModifyValue": {},
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByIsContainModifier",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "LevelEntity"
+                            },
+                            "ModifierName": {
+                              "Value": "StageAbility_RogueTimeLimit_Special_Modifier"
+                            },
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ShowUIPage",
+                              "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                              "UITextNodes": [
+                                {
+                                  "TextPath": "AreaInfoPanel/Title/Text",
+                                  "TextContent": {
+                                    "Hash": -1713195760,
+                                    "Hash64": 17233008703888709018
+                                  }
+                                }
+                              ],
+                              "LifeTime": 1.0,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ShowUIPage",
+                              "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                              "UITextNodes": [
+                                {
+                                  "TextPath": "AreaInfoPanel/Title/Text",
+                                  "TextContent": {
+                                    "Hash": -1298628931,
+                                    "Hash64": 1170681856553086166
+                                  }
+                                }
+                              ],
+                              "LifeTime": 1.0,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "StageAbility_RogueTimeLimit_Special_Modifier"
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                      "WaitShowPageFinish": true,
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": 1712767232,
+                            "Hash64": 2290311405860192642
+                          }
+                        }
+                      ],
+                      "LifeTime": 1.5,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                      "WaitShowPageFinish": true,
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": 1897042513,
+                            "Hash64": 2695826097906801718
+                          }
+                        }
+                      ],
+                      "LifeTime": 1.5,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnLeaveBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByLocalWin",
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleScoringItem",
+                      "ScoringID": 80001,
+                      "ModifyFunction": "Set",
+                      "ModifyValue": {},
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "BattleEventAbility_RogueChallengeTurnLimit_SpecialDrop",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.ModifyActionDelay",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AddNormalizedValue": {
+            "FixedValue": {
+              "RawValue": 2147483650,
+              "Value": 0.5
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetLevelChallengeTurnLimit",
+          "LimitType": "Custom",
+          "LimitCount": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Modifier_BattleEventAbility_RogueChallengeTurnLimit_SpecialDrop"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "DynamicValues": {
+            "BattleEventTurnLeftParam": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Modifier_BattleEventAbility_RogueChallengeTurnLimitSurvive_SpecialDrop": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "STAT_TurnCountAccumulator"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetBattleScoringItem",
+                  "ScoringID": 80001,
+                  "ModifyFunction": "Set",
+                  "ModifyValue": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnPhase1",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.LevelChallengeTurnAcc",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                    "CompareType": "Greater",
+                    "CompareValue": 3,
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                      "DynamicKey": "BattleEventTurnLeftParam",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.ToastPile",
+                      "DescTextID": {
+                        "Hash": -1183433594,
+                        "Hash64": 1770778755110255613
+                      },
+                      "TextIDFloatParam": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 3,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -755661021,
+                                "Hash64": 11407482062291620290
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 2,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -14552779,
+                                "Hash64": 15404830917914663966
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 1,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": 2143290665,
+                                "Hash64": 12345944414100494460
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.Retarget",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllLightTeamWithAllUnselectableLightTeam.RemoveServant"
+                          },
+                          "ByRandom": true,
+                          "IncludeLimbo": true,
+                          "MaxNumber": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "TaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetDynamicValue",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "Value": {
+                                "FixedValue": {
+                                  "RawValue": -149061134974976,
+                                  "Value": -34706.0
+                                }
+                              },
+                              "DynamicKey": {
+                                "Value": "AliveCount"
+                              },
+                              "SkipInCharmAction": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "Caster"
+                            },
+                            "DynamicKey": {
+                              "Value": "AliveCount"
+                            },
+                            "CompareType": "Less",
+                            "CompareValue": {
+                              "FixedValue": {
+                                "RawValue": -149061134974976,
+                                "Value": -34706.0
+                              }
+                            },
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetBattleScoringItem",
+                              "ScoringID": 80001,
+                              "ModifyFunction": "Set",
+                              "ModifyValue": {},
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ForceKill",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "DeathSource": "KilledBySelf",
+                              "CanOverkill": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.TriggerCustomString",
+                              "CustomString": {
+                                "Value": "Level_SpecialWin"
+                              },
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterDie",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamLight",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Inverse": true,
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByTargetEntityType",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "EntityTypeMask": "Servant",
+                        "AliveStateMask": "Mask_AliveOrLimbo",
+                        "Inverse": true,
+                        "TaskEnabled": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleScoringItem",
+                      "ScoringID": 80001,
+                      "ModifyFunction": "Set",
+                      "ModifyValue": {},
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "LevelEntity"
+                        },
+                        "ModifierName": {
+                          "Value": "StageAbility_RogueTimeLimit_Special_Modifier"
+                        },
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": 226273863,
+                                "Hash64": 10058715996776368312
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": 226273865,
+                                "Hash64": 13592451933821029556
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "StageAbility_RogueTimeLimit_Special_Modifier"
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                      "WaitShowPageFinish": true,
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": 226273866,
+                            "Hash64": 17730638881296482964
+                          }
+                        }
+                      ],
+                      "LifeTime": 1.5,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                      "WaitShowPageFinish": true,
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": -101704021,
+                            "Hash64": 18121237761367231914
+                          }
+                        }
+                      ],
+                      "LifeTime": 1.5,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeamWithAllUnselectableLightTeam.RemoveServant"
+                  },
+                  "ByRandom": true,
+                  "IncludeLimbo": true,
+                  "MaxNumber": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "DynamicKey": {
+                        "Value": "AliveCountinitial"
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnLeaveBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByLocalWin",
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleScoringItem",
+                      "ScoringID": 80001,
+                      "ModifyFunction": "Set",
+                      "ModifyValue": {},
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "BattleEventAbility_RogueChallengeTurnLimitSurvive_SpecialDrop",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.ModifyActionDelay",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AddNormalizedValue": {
+            "FixedValue": {
+              "RawValue": 2147483650,
+              "Value": 0.5
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetLevelChallengeTurnLimit",
+          "LimitType": "Custom",
+          "LimitCount": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Modifier_BattleEventAbility_RogueChallengeTurnLimitSurvive_SpecialDrop"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "DynamicValues": {
+            "BattleEventTurnLeftParam": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Modifier_BattleEventAbility_RogueChallengeTurnLimitEvent_SpecialDrop": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "STAT_TurnCountAccumulator"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetBattleScoringItem",
+                  "ScoringID": 80001,
+                  "ModifyFunction": "Set",
+                  "ModifyValue": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnPhase1",
+              "Priority": -12,
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.LevelChallengeTurnAcc",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                    "CompareType": "Greater",
+                    "CompareValue": 3,
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                      "DynamicKey": "BattleEventTurnLeftParam",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.ToastPile",
+                      "DescTextID": {
+                        "Hash": -1183433594,
+                        "Hash64": 1770778755110255613
+                      },
+                      "TextIDFloatParam": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 3,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -1298628928,
+                                "Hash64": 3592499436159066124
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 2,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -1298628929,
+                                "Hash64": 16858372231962188595
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 1,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -1298628930,
+                                "Hash64": 14712526930076729044
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                            "CompareType": "LessEqual",
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ForceKill",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "DeathSource": "KilledBySelf",
+                              "CanOverkill": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetBattleScoringItem",
+                          "ScoringID": 80001,
+                          "ModifyFunction": "Set",
+                          "ModifyValue": {},
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -1298628931,
+                                "Hash64": 1170681856553086166
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "StageAbility_RogueDLCTVLevel_Modifier"
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                      "WaitShowPageFinish": true,
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": -1811985651,
+                            "Hash64": 15571407718335700909
+                          }
+                        }
+                      ],
+                      "LifeTime": 1.5,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "StageAbility_RogueDLCVirtualLevel_Modifier"
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                      "WaitShowPageFinish": true,
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": -1034614384,
+                            "Hash64": 13304212805848319861
+                          }
+                        }
+                      ],
+                      "LifeTime": 1.5,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnLeaveBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByLocalWin",
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleScoringItem",
+                      "ScoringID": 80001,
+                      "ModifyFunction": "Set",
+                      "ModifyValue": {},
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "BattleEventAbility_RogueChallengeTurnLimitEvent_SpecialDrop",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.ModifyActionDelay",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AddNormalizedValue": {
+            "FixedValue": {
+              "RawValue": 2147483650,
+              "Value": 0.5
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetLevelChallengeTurnLimit",
+          "LimitType": "Custom",
+          "LimitCount": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Modifier_BattleEventAbility_RogueChallengeTurnLimitEvent_SpecialDrop"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "DynamicValues": {
+            "BattleEventTurnLeftParam": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Modifier_BattleEventAbility_RogueChallengeTurnLimitEventSurvive_SpecialDrop": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "STAT_TurnCountAccumulator"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetBattleScoringItem",
+                  "ScoringID": 80001,
+                  "ModifyFunction": "Set",
+                  "ModifyValue": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnPhase1",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.LevelChallengeTurnAcc",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                    "CompareType": "Greater",
+                    "CompareValue": 3,
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                      "DynamicKey": "BattleEventTurnLeftParam",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.ToastPile",
+                      "DescTextID": {
+                        "Hash": -1183433594,
+                        "Hash64": 1770778755110255613
+                      },
+                      "TextIDFloatParam": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 3,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -755661021,
+                                "Hash64": 11407482062291620290
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 2,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -14552779,
+                                "Hash64": 15404830917914663966
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "CompareValue": 1,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": 2143290665,
+                                "Hash64": 12345944414100494460
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareChallengeLeft",
+                        "CompareType": "Equal",
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.Retarget",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "AllLightTeamWithAllUnselectableLightTeam.RemoveServant"
+                          },
+                          "ByRandom": true,
+                          "IncludeLimbo": true,
+                          "MaxNumber": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "TaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetDynamicValue",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "Value": {
+                                "FixedValue": {
+                                  "RawValue": -149061134974976,
+                                  "Value": -34706.0
+                                }
+                              },
+                              "DynamicKey": {
+                                "Value": "AliveCount"
+                              },
+                              "SkipInCharmAction": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "Caster"
+                            },
+                            "DynamicKey": {
+                              "Value": "AliveCount"
+                            },
+                            "CompareType": "Less",
+                            "CompareValue": {
+                              "FixedValue": {
+                                "RawValue": -149061134974976,
+                                "Value": -34706.0
+                              }
+                            },
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetBattleScoringItem",
+                              "ScoringID": 80001,
+                              "ModifyFunction": "Set",
+                              "ModifyValue": {},
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ForceKill",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "DeathSource": "KilledBySelf",
+                              "CanOverkill": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "FailedTaskList": [
+                            {
+                              "$type": "RPG.GameCore.TriggerCustomString",
+                              "CustomString": {
+                                "Value": "Level_SpecialWin"
+                              },
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterDie",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamLight",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsBattleEventEntity",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Inverse": true,
+                        "TaskEnabled": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleScoringItem",
+                      "ScoringID": 80001,
+                      "ModifyFunction": "Set",
+                      "ModifyValue": {},
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "StageAbility_RogueDLCTVLevel_Modifier"
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                      "WaitShowPageFinish": true,
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": -1811985651,
+                            "Hash64": 15571407718335700909
+                          }
+                        }
+                      ],
+                      "LifeTime": 1.5,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "LevelEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "StageAbility_RogueDLCVirtualLevel_Modifier"
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ShowUIPage",
+                      "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                      "WaitShowPageFinish": true,
+                      "UITextNodes": [
+                        {
+                          "TextPath": "AreaInfoPanel/Title/Text",
+                          "TextContent": {
+                            "Hash": -1034614384,
+                            "Hash64": 13304212805848319861
+                          }
+                        }
+                      ],
+                      "LifeTime": 1.5,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeamWithAllUnselectableLightTeam.RemoveServant"
+                  },
+                  "ByRandom": true,
+                  "IncludeLimbo": true,
+                  "MaxNumber": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "DynamicKey": {
+                        "Value": "AliveCountinitial"
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnLeaveBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByLocalWin",
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetBattleScoringItem",
+                      "ScoringID": 80001,
+                      "ModifyFunction": "Set",
+                      "ModifyValue": {},
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "BattleEventAbility_RogueChallengeTurnLimitEventSurvive_SpecialDrop",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.ModifyActionDelay",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AddNormalizedValue": {
+            "FixedValue": {
+              "RawValue": 2147483650,
+              "Value": 0.5
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetLevelChallengeTurnLimit",
+          "LimitType": "Custom",
+          "LimitCount": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Modifier_BattleEventAbility_RogueChallengeTurnLimitEventSurvive_SpecialDrop"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "DynamicValues": {
+            "BattleEventTurnLeftParam": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "Modifier_BattleEventAbility_RogueMagicTurnCount": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "STAT_TurnCountAccumulator"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
+              "Priority": -12,
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.LevelChallengeTurnAcc",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "Key": {
+                    "Value": "BattleEventTurnLeftParam"
+                  },
+                  "AddValue": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "Min": {},
+                  "Max": {
+                    "FixedValue": {
+                      "RawValue": 429496729600,
+                      "Value": 100.0
+                    }
+                  },
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetCountDownWarning",
+                  "CountDownTime": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": {
+                      "Value": "BattleEventTurnLeftParam"
+                    },
+                    "CompareType": "Greater",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 12884901888,
+                        "Value": 3.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                      "DynamicKey": "BattleEventTurnLeftParam",
+                      "VariateType": "RogueMagic_BattleRoundLeft",
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": {
+                          "Value": "BattleEventTurnLeftParam"
+                        },
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": 12884901888,
+                            "Value": 3.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -755661021,
+                                "Hash64": 11407482062291620290
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": {
+                          "Value": "BattleEventTurnLeftParam"
+                        },
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": 8589934592,
+                            "Value": 2.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": -14552779,
+                                "Hash64": 15404830917914663966
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": {
+                          "Value": "BattleEventTurnLeftParam"
+                        },
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": 4294967296,
+                            "Value": 1.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": 2143290665,
+                                "Hash64": 12345944414100494460
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DynamicKey": {
+                              "Value": "BattleEventTurnLeftParam"
+                            },
+                            "CompareType": "LessEqual",
+                            "CompareValue": {},
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                              "DynamicKey": "BattleEventTurnLeftParam_ExtraTurn",
+                              "VariateType": "RogueMagic_GlobalRoundLeft",
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.PredicateTaskList",
+                              "Predicate": {
+                                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ModifierOwnerEntity"
+                                },
+                                "DynamicKey": {
+                                  "Value": "BattleEventTurnLeftParam_ExtraTurn"
+                                },
+                                "CompareType": "Greater",
+                                "CompareValue": {},
+                                "TaskEnabled": true
+                              },
+                              "SuccessTaskList": [
+                                {
+                                  "$type": "RPG.GameCore.ShowUIPage",
+                                  "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                                  "UITextNodes": [
+                                    {
+                                      "TextPath": "AreaInfoPanel/Title/Text",
+                                      "TextContent": {
+                                        "Hash": 556384002,
+                                        "Hash64": 5763268536332283309
+                                      }
+                                    }
+                                  ],
+                                  "LifeTime": 1.0,
+                                  "TaskEnabled": true,
+                                  "IsClientOnly": true
+                                }
+                              ],
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.CreateBattleEvent",
+                              "EventID": {
+                                "FixedValue": {
+                                  "RawValue": 206192789946368,
+                                  "Value": 48008.0
+                                }
+                              },
+                              "SpecifyCaster": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "LevelEntity"
+                              },
+                              "TotalDamageTeam": "TeamNeutral",
+                              "OnBattleEventCreate": [
+                                {
+                                  "$type": "RPG.GameCore.AddModifier",
+                                  "TargetType": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "ParamEntity"
+                                  },
+                                  "AliveOnly": true,
+                                  "ModifierName": {
+                                    "Value": "Modifier_BattleEventAbility_RogueMagicTurnCount_2"
+                                  },
+                                  "Chance": {
+                                    "FixedValue": {
+                                      "RawValue": -4294967296,
+                                      "Value": -1.0
+                                    }
+                                  },
+                                  "MaxTargetCount": {
+                                    "FixedValue": {
+                                      "RawValue": -4294967296,
+                                      "Value": -1.0
+                                    }
+                                  },
+                                  "InheritCaster": "TargetSelf",
+                                  "IsShowUIMessageFromModel": true,
+                                  "IsShowUIMessageOnUpdate": true,
+                                  "ShowUIMessageInternalTime": -1.0,
+                                  "UseFixedPosition": true,
+                                  "TaskEnabled": true
+                                },
+                                {
+                                  "$type": "RPG.GameCore.DebugLog",
+                                  "Message": "==============成功召唤新BE======================",
+                                  "TaskEnabled": true
+                                }
+                              ],
+                              "IsDynamicPreload": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ForceKill",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "DeathSource": "KilledBySelf",
+                              "CanOverkill": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.ModifyActionDelay",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AddNormalizedValue": {
+                    "FixedValue": {
+                      "RawValue": 2147483650,
+                      "Value": 0.5
+                    }
+                  },
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "BattleEventTurnLeftParam",
+                  "VariateType": "RogueMagic_BattleRoundLeft",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": {
+                      "Value": "BattleEventTurnLeftParam"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {},
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                      "DynamicKey": "BattleEventTurnLeftParam_ExtraTurn",
+                      "VariateType": "RogueMagic_GlobalRoundLeft",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": {
+                          "Value": "BattleEventTurnLeftParam_ExtraTurn"
+                        },
+                        "CompareType": "Greater",
+                        "CompareValue": {},
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.ShowUIPage",
+                          "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                          "UITextNodes": [
+                            {
+                              "TextPath": "AreaInfoPanel/Title/Text",
+                              "TextContent": {
+                                "Hash": 556384002,
+                                "Hash64": 5763268536332283309
+                              }
+                            }
+                          ],
+                          "LifeTime": 1.0,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.CreateBattleEvent",
+                      "EventID": {
+                        "FixedValue": {
+                          "RawValue": 206192789946368,
+                          "Value": 48008.0
+                        }
+                      },
+                      "SpecifyCaster": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "LevelEntity"
+                      },
+                      "TotalDamageTeam": "TeamNeutral",
+                      "OnBattleEventCreate": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "AliveOnly": true,
+                          "ModifierName": {
+                            "Value": "Modifier_BattleEventAbility_RogueMagicTurnCount_2"
+                          },
+                          "Chance": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "MaxTargetCount": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "InheritCaster": "TargetSelf",
+                          "IsShowUIMessageFromModel": true,
+                          "IsShowUIMessageOnUpdate": true,
+                          "ShowUIMessageInternalTime": -1.0,
+                          "UseFixedPosition": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.DebugLog",
+                          "Message": "==============成功召唤新BE======================",
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "IsDynamicPreload": true,
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.ForceKill",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "DeathSource": "KilledBySelf",
+                      "CanOverkill": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetCountDownWarning",
+                      "CountDownTime": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "BattleEventAbility_RogueMagicTurnCount",
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "Modifier_BattleEventAbility_RogueMagicTurnCount"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ],
+      "DynamicValues": {}
+    }
+  ],
+  "GlobalModifiers": {
+    "Modifier_BattleEventAbility_RogueMagicTurnCount_2": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "BehaviorFlagList": [
+        "STAT_TurnCountAccumulator"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnPhase1",
+          "Priority": -12,
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.LevelChallengeTurnAcc",
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Key": {
+                "Value": "BattleEventTurnLeftParam"
+              },
+              "AddValue": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "Min": {},
+              "Max": {
+                "FixedValue": {
+                  "RawValue": 429496729600,
+                  "Value": 100.0
+                }
+              },
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.SetCountDownWarning",
+              "CountDownTime": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DynamicKey": {
+                  "Value": "BattleEventTurnLeftParam"
+                },
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ShowUIPage",
+                  "AssetPath": "UI/Common/Widget/BattleLimitedTurnHint.prefab",
+                  "UITextNodes": [
+                    {
+                      "TextPath": "AreaInfoPanel/Title/Text",
+                      "TextContent": {
+                        "Hash": 1297258941,
+                        "Hash64": 2673990294332030043
+                      },
+                      "ParamList": [
+                        {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "LifeTime": 1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "=============BattleEventTurnLeftParam:{BattleEventTurnLeftParam}======================",
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": {
+                  "Value": "BattleEventTurnLeftParam"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 12884901888,
+                    "Value": 3.0
+                  }
+                },
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+                  "DynamicKey": "BattleEventTurnLeftParam",
+                  "VariateType": "RogueMagic_GlobalRoundLeft",
+                  "TaskEnabled": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": {
+                      "Value": "BattleEventTurnLeftParam"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 12884901888,
+                        "Value": 3.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": {
+                      "Value": "BattleEventTurnLeftParam"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 8589934592,
+                        "Value": 2.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": {
+                      "Value": "BattleEventTurnLeftParam"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": {
+                          "Value": "BattleEventTurnLeftParam"
+                        },
+                        "CompareType": "LessEqual",
+                        "CompareValue": {},
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.CreateBattleEvent",
+                          "EventID": {
+                            "FixedValue": {
+                              "RawValue": 206197084913664,
+                              "Value": 48009.0
+                            }
+                          },
+                          "SpecifyCaster": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "LevelEntity"
+                          },
+                          "TotalDamageTeam": "TeamNeutral",
+                          "OnBattleEventCreate": [
+                            {
+                              "$type": "RPG.GameCore.DebugLog",
+                              "Message": "==============开始狂暴======================",
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ModifyActionDelay",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "AddNormalizedValue": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "IsDynamicPreload": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.DebugLog",
+                          "Message": "==============PowerDeliver Listen======================",
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.ForceKill",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DeathSource": "KilledBySelf",
+                          "CanOverkill": true,
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": {
+                      "Value": "BattleEventTurnLeftParam"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {},
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [],
+                  "FailedTaskList": [],
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByVariateType",
+              "DynamicKey": "BattleEventTurnLeftParam",
+              "VariateType": "RogueMagic_GlobalRoundLeft",
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "=============BattleEventTurnLeftParam:{BattleEventTurnLeftParam}======================",
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": {
+                  "Value": "BattleEventTurnLeftParam"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {},
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetCountDownWarning",
+                  "CountDownTime": {},
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetCountDownWarning",
+                  "CountDownTime": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "Unique",
+      "DynamicValues": {}
+    }
+  }
+}

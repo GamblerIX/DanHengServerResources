@@ -1,0 +1,660 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.GenericSwitchCase",
+          "SwitchRef": {
+            "$type": "RPG.GameCore.SwitchRefGroupProperty",
+            "PropertyName": {
+              "Value": "Lock"
+            }
+          },
+          "Cases": [
+            {
+              "$type": "RPG.GameCore.NumberCaseContainer",
+              "Case": {},
+              "OnSuccess": [
+                {
+                  "$type": "RPG.GameCore.GenericSwitchCase",
+                  "SwitchRef": {
+                    "$type": "RPG.GameCore.SwitchRefGroupProperty",
+                    "PropertyName": {
+                      "Value": "PuzzleState"
+                    }
+                  },
+                  "Cases": [
+                    {
+                      "$type": "RPG.GameCore.NumberCaseContainer",
+                      "Case": {},
+                      "OnSuccess": [
+                        {
+                          "$type": "RPG.GameCore.GroupInitMemberEntityPropState",
+                          "PropInstanceID": 300001,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ]
+                    }
+                  ],
+                  "Default": [
+                    {
+                      "$type": "RPG.GameCore.GroupInitMemberEntityPropState",
+                      "PropInstanceID": 300001,
+                      "InitPropState": "Open",
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "$type": "RPG.GameCore.NumberCaseContainer",
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "OnSuccess": [
+                {
+                  "$type": "RPG.GameCore.GroupInitMemberEntityPropState",
+                  "PropInstanceID": 300001,
+                  "InitPropState": "Locked",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.GenericSwitchCase",
+          "SwitchRef": {
+            "$type": "RPG.GameCore.SwitchRefFloorSavedValue",
+            "Name": {
+              "Value": "FSV_Rainbow"
+            }
+          },
+          "Cases": [
+            {
+              "$type": "RPG.GameCore.NumberCaseContainer",
+              "Case": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "OnSuccess": [
+                {
+                  "$type": "RPG.GameCore.GroupInitMemberEntityDynamicValues",
+                  "EntityInstanceID": 300001,
+                  "InitDynamicValueSet": {
+                    "FloatOverrides": [],
+                    "StringOverrides": [],
+                    "UIntOverrides": [
+                      {
+                        "Name": "Loc_CanCallLift",
+                        "Value": {}
+                      }
+                    ]
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            }
+          ],
+          "Default": [
+            {
+              "$type": "RPG.GameCore.GroupInitMemberEntityDynamicValues",
+              "EntityInstanceID": 300001,
+              "InitDynamicValueSet": {
+                "FloatOverrides": [],
+                "StringOverrides": [],
+                "UIntOverrides": [
+                  {
+                    "Name": "Loc_CanCallLift",
+                    "Value": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    }
+                  }
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorSavedValueChangeV2",
+          "Name": {
+            "Value": "FSV_Rainbow"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefFloorSavedValue",
+                "Name": {
+                  "Value": "FSV_Rainbow"
+                }
+              },
+              "Cases": [
+                {
+                  "$type": "RPG.GameCore.NumberCaseContainer",
+                  "Case": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.SetGraphDynamicFloat",
+                      "Name": "Loc_CanCallLift",
+                      "TargetIDs": [
+                        300001
+                      ],
+                      "Value": {},
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "Default": [
+                {
+                  "$type": "RPG.GameCore.SetGraphDynamicFloat",
+                  "Name": "Loc_CanCallLift",
+                  "TargetIDs": [
+                    300001
+                  ],
+                  "Value": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "Clt_UpdateResult"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefGraphDynamicString",
+                "Name": "Loc_Result01",
+                "TargetType": {
+                  "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                  "TargetType": "Prop",
+                  "Targets": [
+                    300001
+                  ]
+                }
+              },
+              "Cases": [
+                {
+                  "$type": "RPG.GameCore.StringCaseContainer",
+                  "Case": {
+                    "Custom": true,
+                    "Key": "Result01_01"
+                  },
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.GenericSwitchCase",
+                      "SwitchRef": {
+                        "$type": "RPG.GameCore.SwitchRefGraphDynamicString",
+                        "Name": "Loc_Result02",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                          "TargetType": "Prop",
+                          "Targets": [
+                            300001
+                          ]
+                        }
+                      },
+                      "Cases": [
+                        {
+                          "$type": "RPG.GameCore.StringCaseContainer",
+                          "Case": {
+                            "Custom": true,
+                            "Key": "Result02_01"
+                          },
+                          "OnSuccess": [
+                            {
+                              "$type": "RPG.GameCore.RequestSetServerGroupPropertyV2",
+                              "DynamicName": {
+                                "Value": "PuzzleState"
+                              },
+                              "Value": 1,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ]
+                        }
+                      ],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.LoopWaitServerGroupPropertyChange",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "Group_UpdateCompassState"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.GenericSwitchCase",
+              "SwitchRef": {
+                "$type": "RPG.GameCore.SwitchRefGroupProperty",
+                "PropertyName": {
+                  "Value": "Lock"
+                }
+              },
+              "Cases": [
+                {
+                  "$type": "RPG.GameCore.NumberCaseContainer",
+                  "Case": {},
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.GenericSwitchCase",
+                      "SwitchRef": {
+                        "$type": "RPG.GameCore.SwitchRefGroupProperty",
+                        "PropertyName": {
+                          "Value": "PuzzleState"
+                        }
+                      },
+                      "Cases": [
+                        {
+                          "$type": "RPG.GameCore.NumberCaseContainer",
+                          "Case": {},
+                          "OnSuccess": [
+                            {
+                              "$type": "RPG.GameCore.TriggerEntityEventV2",
+                              "EventName": {
+                                "Value": "Clt_TriggerDeactivate"
+                              },
+                              "TargetType": {
+                                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                                "TargetType": "Prop",
+                                "Targets": [
+                                  300001
+                                ]
+                              },
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ]
+                        }
+                      ],
+                      "Default": [
+                        {
+                          "$type": "RPG.GameCore.TriggerEntityEventV2",
+                          "EventName": {
+                            "Value": "Clt_TriggerActivate"
+                          },
+                          "TargetType": {
+                            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                            "TargetType": "Prop",
+                            "Targets": [
+                              300001
+                            ]
+                          },
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                },
+                {
+                  "$type": "RPG.GameCore.NumberCaseContainer",
+                  "Case": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.TriggerEntityEventV2",
+                      "EventName": {
+                        "Value": "Clt_TriggerLock"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                        "TargetType": "Prop",
+                        "Targets": [
+                          300001
+                        ]
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitEntityEventV2",
+          "EventName": {
+            "Value": "Clt_OnPuzzleFinish"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "Clt_UpdateResult"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitEntityEventV2",
+          "EventName": {
+            "Value": "Clt_OnCallLift"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.RequestSetServerGroupPropertyV2",
+              "DynamicName": {
+                "Value": "CallLift"
+              },
+              "Value": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupPropertyChange",
+          "Name": {
+            "Value": "Lock"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "Group_UpdateCompassState"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupPropertyChange",
+          "Name": {
+            "Value": "PuzzleState"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "Group_UpdateCompassState"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.LoopWaitServerGroupPropertyChange",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_BossDoorRainBow"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.RequestSetServerGroupPropertyV2",
+              "DynamicName": {
+                "Value": "PuzzleState"
+              },
+              "Value": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitServerFloorSavedValueChange",
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "Loc_PuzzleState"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Route_Day_Area01_to_Area02_01_01",
+        "Key": "Result01_01"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Route_Day_Area01_to_Area02_01_02",
+        "Key": "Result01_02"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result01_03"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result01_04"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result01_05"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Route_Day_Area01_to_Area02_02_01",
+        "Key": "Result02_01"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result02_02"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result02_03"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result02_04"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result02_05"
+      }
+    ],
+    "SharedValues": [
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "Loc_PuzzleState"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Route_Day_Area01_to_Area02_01_01",
+        "Key": "Result01_01"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Route_Day_Area01_to_Area02_01_02",
+        "Key": "Result01_02"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result01_03"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result01_04"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result01_05"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Route_Day_Area01_to_Area02_02_01",
+        "Key": "Result02_01"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result02_02"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result02_03"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result02_04"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "Result02_05"
+      }
+    ]
+  },
+  "Type": "Group",
+  "EntityEventList": []
+}

@@ -1,0 +1,5566 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "MGridFight_Origin_1008_Monster_03_PassiveSkill": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnPhase1",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "Origin_1008_03_Monster_SkillAttack02",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "Origin_1008_03_Monster_SkillAttack03",
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetEntityVisible",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "MuteColliderWhenInvisible": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByCopying",
+                  "FromTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LevelEntity"
+                  },
+                  "FromDynamicKey": {
+                    "Value": "LevelBaseAttack"
+                  },
+                  "ToTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "ToDynamicKey": {
+                    "Value": "_LevelBaseAttack"
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenAfterAttack",
+              "CallbackConfig": []
+            },
+            {
+              "Event": "OnEnterBattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareWaveCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "Origin_1008_03_Monster_SkillRage",
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        }
+      },
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_PassiveSkill",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnAdd": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MGridFight_Origin_1008_Monster_03_PassiveSkill"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_Skill02_Phase01",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_Monster_02_PassiveSkill"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.GridFightShowFullScreenCutIn",
+              "CutInType": "Normal",
+              "TraitKey": "Origin_1008",
+              "TraitLv": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "OverrideImagePath": "SpriteOutput/GridFight/BigLycan/GridFight_LycanKing.png",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ScaleCharacterModel",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AliveOnly": true,
+              "ModelScaleBase": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "OutlineWidthScale": 0.8,
+              "Multiplier": {
+                "0": 0.8
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetTeamFormation",
+              "Team": "TeamDark",
+              "FormationType": "DarkTeamNormal",
+              "CustomCenterTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "None"
+              },
+              "CustomFormationIgnoreDying": true,
+              "TeamMemberCountingOption": "IgnoreTempLeave",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Visible": true,
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityPosition",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "PosTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "OffsetX": {},
+              "OffsetY": {},
+              "OffsetZ": {
+                "FixedValue": {
+                  "RawValue": -17179869184,
+                  "Value": -4.0
+                }
+              },
+              "SetRotation": true,
+              "YawAngle": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityInherentTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill02_Phase02"
+              },
+              "IsSkillPerform": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.Retarget",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "Key": {
+                      "Hash": -635409194,
+                      "HashKey": "-635409194"
+                    },
+                    "TaskEnabled": true
+                  }
+                ],
+                "TaskEnabled": true
+              },
+              "MaxNumber": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerAbility",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "AbilityName": {
+                    "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill02_Camera_Xuanlu"
+                  },
+                  "IsSkillPerform": true,
+                  "TaskEnabled": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerAbility",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AbilityInherentTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AbilityTargetEntity"
+                  },
+                  "AbilityName": {
+                    "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill02_Camera"
+                  },
+                  "IsSkillPerform": true,
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.LookAt",
+              "PerformerType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "TargetType": "AbilityTargetEntity",
+              "ToTargetRatio": 1.0,
+              "Duration": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimLogicState": "SkillUse",
+              "AnimStateName": "Skill02",
+              "NormalizedTimeStart": {},
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "NormalizedTimeWait": {
+                "FixedValue": {
+                  "RawValue": 3092376456,
+                  "Value": 0.72
+                }
+              },
+              "NormalizedTransitionDuration": {},
+              "WaitAnimState": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimLogicState": "Idle",
+              "AnimStateName": "StandBy",
+              "NormalizedTimeStart": {},
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTimeWait": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTransitionDuration": {},
+              "WaitAnimState": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "Visible": true,
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.ScaleCharacterModel",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AliveOnly": true,
+              "ModelScaleBase": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "OutlineWidthScale": 0.8,
+              "Multiplier": {
+                "0": 0.8
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetTeamFormation",
+              "Team": "TeamDark",
+              "FormationType": "DarkTeamNormal",
+              "CustomCenterTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "None"
+              },
+              "CustomFormationIgnoreDying": true,
+              "TeamMemberCountingOption": "IgnoreTempLeave",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Visible": true,
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityPosition",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "PosTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "OffsetX": {},
+              "OffsetY": {},
+              "OffsetZ": {
+                "FixedValue": {
+                  "RawValue": -17179869184,
+                  "Value": -4.0
+                }
+              },
+              "SetRotation": true,
+              "YawAngle": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityInherentTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill02_Phase02"
+              },
+              "IsSkillPerform": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityInherentTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill02_Camera"
+              },
+              "IsSkillPerform": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.LookAt",
+              "PerformerType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "TargetType": "AbilityTargetEntity",
+              "ToTargetRatio": 1.0,
+              "Duration": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimLogicState": "SkillUse",
+              "AnimStateName": "Skill02",
+              "NormalizedTimeStart": {},
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "NormalizedTimeWait": {
+                "FixedValue": {
+                  "RawValue": 3092376456,
+                  "Value": 0.72
+                }
+              },
+              "NormalizedTransitionDuration": {},
+              "WaitAnimState": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimLogicState": "Idle",
+              "AnimStateName": "StandBy",
+              "NormalizedTimeStart": {},
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTimeWait": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTransitionDuration": {},
+              "WaitAnimState": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "Visible": true,
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_Skill02_Phase02",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 785979015,
+              "Value": 0.18
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_Rage"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill02_Dilie.prefab",
+              "Scale": {
+                "x": 1.5,
+                "y": 1.5,
+                "z": 1.5,
+                "normalized": {
+                  "x": 0.5773503,
+                  "y": 0.5773503,
+                  "z": 0.5773503,
+                  "normalized": {
+                    "x": 0.577350259,
+                    "y": 0.577350259,
+                    "z": 0.577350259,
+                    "magnitude": 0.99999994,
+                    "sqrMagnitude": 0.99999994
+                  },
+                  "magnitude": 1.00000012,
+                  "sqrMagnitude": 1.00000024
+                },
+                "magnitude": 2.598076,
+                "sqrMagnitude": 6.75
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill02_Start03.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill02_Dilie1.prefab",
+              "Scale": {
+                "x": 1.5,
+                "y": 1.5,
+                "z": 1.5,
+                "normalized": {
+                  "x": 0.5773503,
+                  "y": 0.5773503,
+                  "z": 0.5773503,
+                  "normalized": {
+                    "x": 0.577350259,
+                    "y": 0.577350259,
+                    "z": 0.577350259,
+                    "magnitude": 0.99999994,
+                    "sqrMagnitude": 0.99999994
+                  },
+                  "magnitude": 1.00000012,
+                  "sqrMagnitude": 1.00000024
+                },
+                "magnitude": 2.598076,
+                "sqrMagnitude": 6.75
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill02_Start02.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 932007902,
+              "Value": 0.22
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_Rage"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill02_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "DisplayData": {
+                "UIMessageHeight": 1.0,
+                "DitherRangeX": 0.05,
+                "DitherRangeY": 0.05,
+                "AttachPoint": "SelectRoot",
+                "Duration": 1.5,
+                "Scale": 1.0,
+                "FixedPosition": true
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetAdjoinEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill02_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "DisplayData": {
+                "UIMessageHeight": 1.0,
+                "DitherRangeX": 0.05,
+                "DitherRangeY": 0.05,
+                "AttachPoint": "SelectRoot",
+                "Duration": 1.5,
+                "Scale": 1.0,
+                "FixedPosition": true
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill02_Hit02.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "DisplayData": {
+                "UIMessageHeight": 1.0,
+                "DitherRangeX": 0.05,
+                "DitherRangeY": 0.05,
+                "AttachPoint": "SelectRoot",
+                "Duration": 1.5,
+                "Scale": 1.0,
+                "FixedPosition": true
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetAdjoinEntity"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill02_Hit02.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "DisplayData": {
+                "UIMessageHeight": 1.0,
+                "DitherRangeX": 0.05,
+                "DitherRangeY": 0.05,
+                "AttachPoint": "SelectRoot",
+                "Duration": 1.5,
+                "Scale": 1.0,
+                "FixedPosition": true
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.GlobalTimeSlow",
+          "TimeScale": {
+            "FixedValue": {
+              "RawValue": 3006477110,
+              "Value": 0.7
+            }
+          },
+          "UnscaledDuration": {
+            "FixedValue": {
+              "RawValue": 1288490190,
+              "Value": 0.3
+            }
+          },
+          "FadeInTime": {},
+          "FadeOutTime": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TargetTimeSlow",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "TimeScale": 0.85,
+          "UnscaledDuration": 0.3,
+          "FadeInTime": {},
+          "FadeOutTime": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TargetTimeSlow",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetAdjoinEntity"
+          },
+          "TimeScale": 0.85,
+          "UnscaledDuration": 0.3,
+          "FadeInTime": {},
+          "FadeOutTime": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_Skill03_Phase01",
+      "TargetInfo": {
+        "TargetType": "AllDarkTeamMember"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_Monster_03_PassiveSkill"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "==============有狂暴======================",
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.GridFightShowFullScreenCutIn",
+              "CutInType": "Normal",
+              "TraitKey": "Origin_1008",
+              "TraitLv": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "OverrideImagePath": "SpriteOutput/GridFight/BigLycan/GridFight_LycanKing_Extra.png",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DebugLog",
+              "Message": "==============狂暴技能======================",
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.ScaleCharacterModel",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AliveOnly": true,
+              "ModelScaleBase": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "OutlineWidthScale": 0.8,
+              "Multiplier": {
+                "0": 0.8
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetTeamFormation",
+              "Team": "TeamDark",
+              "FormationType": "DarkTeamNormal",
+              "CustomCenterTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "None"
+              },
+              "CustomFormationIgnoreDying": true,
+              "TeamMemberCountingOption": "IgnoreTempLeave",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Visible": true,
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityPosition",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "PosTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "OffsetX": {},
+              "OffsetY": {},
+              "OffsetZ": {
+                "FixedValue": {
+                  "RawValue": -17179869184,
+                  "Value": -4.0
+                }
+              },
+              "SetRotation": true,
+              "YawAngle": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.LookAt",
+              "PerformerType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "TargetType": "DarkTeamCenter",
+              "ToTargetRatio": 1.0,
+              "Duration": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill03_Phase02"
+              },
+              "IsSkillPerform": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill03_Camera"
+              },
+              "IsSkillPerform": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.MoveToTargetList",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimLogicState": "SkillUse",
+              "AnimStateName": "Skill03",
+              "NormalizedTimeStart": {},
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "NormalizedTransitionDuration": {},
+              "NormalizedTimeWait": {
+                "FixedValue": {
+                  "RawValue": 2534030707,
+                  "Value": 0.59
+                }
+              },
+              "MovingRangeList": [
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "DarkTeamCenter"
+                  },
+                  "Speed": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "OffsetTargetDistance": {
+                    "FixedValue": {
+                      "RawValue": 12884901888,
+                      "Value": 3.0
+                    }
+                  },
+                  "NormalizedTimeStart": {
+                    "FixedValue": {
+                      "RawValue": 193273527,
+                      "Value": 0.04
+                    }
+                  },
+                  "NormalizedTimeEnd": {
+                    "FixedValue": {
+                      "RawValue": 339302414,
+                      "Value": 0.08
+                    }
+                  },
+                  "MovePercentage": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "DefaultMoveDistance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamCenter"
+                  },
+                  "IgnoreRadius": true,
+                  "Speed": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "OffsetTargetDistance": {},
+                  "OffsetForward": {
+                    "FixedValue": {
+                      "RawValue": 51539607552,
+                      "Value": 12.0
+                    }
+                  },
+                  "NormalizedTimeStart": {
+                    "FixedValue": {
+                      "RawValue": 2409476655,
+                      "Value": 0.56
+                    }
+                  },
+                  "NormalizedTimeEnd": {
+                    "FixedValue": {
+                      "RawValue": 2688649528,
+                      "Value": 0.63
+                    }
+                  },
+                  "MovePercentage": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "DefaultMoveDistance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  }
+                }
+              ],
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.SetTeamRootOffset",
+              "Team": "TeamLight",
+              "Reset": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimLogicState": "Idle",
+              "NormalizedTimeStart": {},
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTimeWait": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTransitionDuration": {},
+              "WaitAnimState": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "Visible": true,
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.ScaleCharacterModel",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AliveOnly": true,
+              "ModelScaleBase": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "OutlineWidthScale": 0.8,
+              "Multiplier": {
+                "0": 0.8
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetTeamFormation",
+              "Team": "TeamDark",
+              "FormationType": "DarkTeamNormal",
+              "CustomCenterTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "None"
+              },
+              "CustomFormationIgnoreDying": true,
+              "TeamMemberCountingOption": "IgnoreTempLeave",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "Visible": true,
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityPosition",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "PosTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "LightTeamCenter"
+              },
+              "OffsetX": {},
+              "OffsetY": {},
+              "OffsetZ": {
+                "FixedValue": {
+                  "RawValue": -17179869184,
+                  "Value": -4.0
+                }
+              },
+              "SetRotation": true,
+              "YawAngle": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.LookAt",
+              "PerformerType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "TargetType": "DarkTeamCenter",
+              "ToTargetRatio": 1.0,
+              "Duration": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill03_Phase02"
+              },
+              "IsSkillPerform": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAbility",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill03_Camera"
+              },
+              "IsSkillPerform": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.MoveToTargetList",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimLogicState": "SkillUse",
+              "AnimStateName": "Skill03",
+              "NormalizedTimeStart": {},
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "NormalizedTransitionDuration": {},
+              "NormalizedTimeWait": {
+                "FixedValue": {
+                  "RawValue": 2534030707,
+                  "Value": 0.59
+                }
+              },
+              "MovingRangeList": [
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "DarkTeamCenter"
+                  },
+                  "Speed": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "OffsetTargetDistance": {
+                    "FixedValue": {
+                      "RawValue": 12884901888,
+                      "Value": 3.0
+                    }
+                  },
+                  "NormalizedTimeStart": {
+                    "FixedValue": {
+                      "RawValue": 193273527,
+                      "Value": 0.04
+                    }
+                  },
+                  "NormalizedTimeEnd": {
+                    "FixedValue": {
+                      "RawValue": 339302414,
+                      "Value": 0.08
+                    }
+                  },
+                  "MovePercentage": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "DefaultMoveDistance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  }
+                },
+                {
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "LightTeamCenter"
+                  },
+                  "IgnoreRadius": true,
+                  "Speed": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "OffsetTargetDistance": {},
+                  "OffsetForward": {
+                    "FixedValue": {
+                      "RawValue": 51539607552,
+                      "Value": 12.0
+                    }
+                  },
+                  "NormalizedTimeStart": {
+                    "FixedValue": {
+                      "RawValue": 2409476655,
+                      "Value": 0.56
+                    }
+                  },
+                  "NormalizedTimeEnd": {
+                    "FixedValue": {
+                      "RawValue": 2688649528,
+                      "Value": 0.63
+                    }
+                  },
+                  "MovePercentage": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "DefaultMoveDistance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  }
+                }
+              ],
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.SetTeamRootOffset",
+              "Team": "TeamLight",
+              "Reset": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimLogicState": "Idle",
+              "NormalizedTimeStart": {},
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTimeWait": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "NormalizedTransitionDuration": {},
+              "WaitAnimState": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetEntityVisible",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeam"
+              },
+              "Visible": true,
+              "MuteColliderWhenInvisible": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_Skill03_Phase02",
+      "TargetInfo": {
+        "TargetType": "AllDarkTeamMember"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.PlayTimeline",
+          "TimelineName": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03.playable",
+          "WrapMode": "None",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 420408036,
+              "Value": 0.1
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_Rage"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit01_V1.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1404454305,
+              "Value": 0.33
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_Rage"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit02.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit02_V1.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1571958030,
+              "Value": 0.37
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_Rage"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit03.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit03_V1.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1653562409,
+              "Value": 0.39
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_Rage"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit03.prefab",
+              "RotationOffset": {
+                "y": 120.0,
+                "normalized": {
+                  "y": 1.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 120.0,
+                "sqrMagnitude": 14400.0
+              },
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit03_V1.prefab",
+              "RotationOffset": {
+                "y": 120.0,
+                "normalized": {
+                  "y": 1.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 120.0,
+                "sqrMagnitude": 14400.0
+              },
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1739461755,
+              "Value": 0.41
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_Rage"
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit03.prefab",
+              "RotationOffset": {
+                "y": 240.0,
+                "normalized": {
+                  "y": 1.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 240.0,
+                "sqrMagnitude": 57600.0
+              },
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Thunder"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {},
+                "DamageValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "ExtraDamagePercentage": {},
+                "StanceValue": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {},
+                "StanceDamageType": {
+                  "DamageType": "Thunder"
+                },
+                "AttackType": "Normal",
+                "CustomName": {
+                  "Value": "Origin_1008"
+                },
+                "BreakDamagePercentage": {},
+                "FinalFormulaType": "ByBaseDamage",
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllDarkTeam"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill03_Hit03_V1.prefab",
+              "RotationOffset": {
+                "y": 240.0,
+                "normalized": {
+                  "y": 1.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 240.0,
+                "sqrMagnitude": 57600.0
+              },
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_Skill04_Phase01",
+      "TargetInfo": {
+        "TargetType": "AllDarkTeamMember"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 1.0,
+          "Multiplier": {
+            "0": 1.0
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PosTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "OffsetX": {},
+          "OffsetY": {},
+          "OffsetZ": {},
+          "SetRotation": true,
+          "YawAngle": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill04_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill04_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill04",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 1073741825,
+              "Value": 0.25
+            }
+          },
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": "TeamFormation",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_Skill04_Phase02",
+      "TargetInfo": {
+        "TargetType": "AllDarkTeamMember"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.PlayTimeline",
+          "TimelineName": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill04_Timeline.playable",
+          "WrapMode": "None",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": {
+            "Value": "UsedShieldFlag"
+          },
+          "ResetValue": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "ContextScope": "TargetEntity",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1095216660,
+              "Value": 0.25
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill04",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 2018634631,
+              "Value": 0.47
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Thunder"
+            },
+            "FormulaType": "ByAttack",
+            "DamagePercentage": {},
+            "DamageValue": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "ExtraDamagePercentage": {},
+            "StanceValue": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "HitSplitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "SPHitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "StanceDamageType": {
+              "DamageType": "Thunder"
+            },
+            "AttackType": "Normal",
+            "CustomName": {
+              "Value": "Origin_1008"
+            },
+            "BreakDamagePercentage": {},
+            "FinalFormulaType": "ByBaseDamage",
+            "FrameHalt": {},
+            "HitAnimation": "Hit_H",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill04_Hit01.prefab",
+            "HitEffectMinMutexTime": {
+              "FixedValue": {
+                "RawValue": 214748368,
+                "Value": 0.05
+              }
+            },
+            "HitEffectMaxMutexCount": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "HitEffectHeight": -1.0,
+            "HitPosHeight": 0.75
+          },
+          "DisplayData": {
+            "UIMessageHeight": 1.0,
+            "DitherRangeX": 0.05,
+            "DitherRangeY": 0.05,
+            "AttachPoint": "SelectRoot",
+            "Duration": 1.5,
+            "Scale": 1.0,
+            "FixedPosition": true
+          },
+          "CanOverkill": true,
+          "PerformanceDelay": {},
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 1288490190,
+              "Value": 0.3
+            }
+          },
+          "MaxAdvencePerTick": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_SkillBattleCry_Phase01",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 0.8,
+          "Multiplier": {
+            "0": 0.8
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 1.3,
+          "Multiplier": {
+            "0": 1.3
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PosTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "OffsetX": {},
+          "OffsetY": {},
+          "OffsetZ": {
+            "FixedValue": {
+              "RawValue": -17179869184,
+              "Value": -4.0
+            }
+          },
+          "SetRotation": true,
+          "YawAngle": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "Origin_1008_00_Monster_LightTeamFormation_HL",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_03_SkillBattleCry_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_03_SkillBattleCry_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeStart": {
+            "FixedValue": {
+              "RawValue": 1503238555,
+              "Value": 0.35
+            }
+          },
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "NormalizedTimeWait": {},
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "TargetType": "DarkTeamCenter",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 2061584304,
+              "Value": 0.48
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 1073741825,
+              "Value": 0.25
+            }
+          },
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 1.0,
+          "Multiplier": {
+            "0": 1.0
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_SkillBattleCry_Phase02",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": "TeamFormation",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 2057289334,
+              "Value": 0.48
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "Origin_1008_Monster_BattleCryBuff",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Lycan_00/Eff_Monster_W2_Lycan_00_Skill02_Rage_02.prefab",
+          "Scale": {
+            "x": -1.0,
+            "y": -1.0,
+            "z": -1.0,
+            "normalized": {
+              "x": -0.577350259,
+              "y": -0.577350259,
+              "z": -0.577350259,
+              "normalized": {
+                "x": -0.5773503,
+                "y": -0.5773503,
+                "z": -0.5773503,
+                "magnitude": 1.00000012,
+                "sqrMagnitude": 1.00000024
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 1.73205078,
+            "sqrMagnitude": 3.0
+          },
+          "IsNeedFadeIn": true,
+          "ForceSimulateImmediately": true,
+          "ParamEntityUsage": "LookAt",
+          "TowardMaxPitchAngle": 90.0,
+          "MaxMutexCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Lycan_01/Eff_Monster_W2_Lycan_01_Skill02_Rage_02.prefab",
+          "Scale": {
+            "x": -1.0,
+            "y": -1.0,
+            "z": -1.0,
+            "normalized": {
+              "x": -0.577350259,
+              "y": -0.577350259,
+              "z": -0.577350259,
+              "normalized": {
+                "x": -0.5773503,
+                "y": -0.5773503,
+                "z": -0.5773503,
+                "magnitude": 1.00000012,
+                "sqrMagnitude": 1.00000024
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 1.73205078,
+            "sqrMagnitude": 3.0
+          },
+          "IsNeedFadeIn": true,
+          "ForceSimulateImmediately": true,
+          "ParamEntityUsage": "LookAt",
+          "TowardMaxPitchAngle": 90.0,
+          "MaxMutexCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 3796751092,
+              "Value": 0.88
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 3732326581,
+              "Value": 0.87
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_Skill07_Phase01",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 0.8,
+          "Multiplier": {
+            "0": 0.8
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 1.3,
+          "Multiplier": {
+            "0": 1.3
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamDark",
+          "FormationType": "DarkTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityPosition",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "PosTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamCenter"
+          },
+          "OffsetX": {},
+          "OffsetY": {},
+          "OffsetZ": {
+            "FixedValue": {
+              "RawValue": -17179869184,
+              "Value": -4.0
+            }
+          },
+          "SetRotation": true,
+          "YawAngle": {},
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.IncludeTaskListTemplate",
+          "Name": "Origin_1008_00_Monster_LightTeamFormation_HL",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill07_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill07_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "NormalizedTimeWait": {},
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "TargetType": "DarkTeamCenter",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 2061584304,
+              "Value": 0.48
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 1073741825,
+              "Value": 0.25
+            }
+          },
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEntityVisible",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "Visible": true,
+          "MuteColliderWhenInvisible": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.ScaleCharacterModel",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "AliveOnly": true,
+          "ModelScaleBase": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "OutlineWidthScale": 1.0,
+          "Multiplier": {
+            "0": 1.0
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "Name": "StageAbility_GridFight_Origin_1008_Monster_03_Skill07_Phase02",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.PlayTimeline",
+          "TimelineName": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill07_Timeline.playable",
+          "WrapMode": "None",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "WolfType"
+            },
+            "CompareType": "GreaterEqual",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 12884901888,
+                "Value": 3.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill07_Body02_Lv2.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Skill07_Body02.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": "TeamFormation",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 214748365,
+              "Value": 0.05
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1275605286,
+              "Value": 0.3
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 2057289334,
+              "Value": 0.48
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Lycan_00/Eff_Monster_W2_Lycan_00_Skill02_Rage_02.prefab",
+          "Scale": {
+            "x": -1.0,
+            "y": -1.0,
+            "z": -1.0,
+            "normalized": {
+              "x": -0.577350259,
+              "y": -0.577350259,
+              "z": -0.577350259,
+              "normalized": {
+                "x": -0.5773503,
+                "y": -0.5773503,
+                "z": -0.5773503,
+                "magnitude": 1.00000012,
+                "sqrMagnitude": 1.00000024
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 1.73205078,
+            "sqrMagnitude": 3.0
+          },
+          "IsNeedFadeIn": true,
+          "ForceSimulateImmediately": true,
+          "ParamEntityUsage": "LookAt",
+          "TowardMaxPitchAngle": 90.0,
+          "MaxMutexCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerEffect",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllLightTeam"
+          },
+          "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Lycan_01/Eff_Monster_W2_Lycan_01_Skill02_Rage_02.prefab",
+          "Scale": {
+            "x": -1.0,
+            "y": -1.0,
+            "z": -1.0,
+            "normalized": {
+              "x": -0.577350259,
+              "y": -0.577350259,
+              "z": -0.577350259,
+              "normalized": {
+                "x": -0.5773503,
+                "y": -0.5773503,
+                "z": -0.5773503,
+                "magnitude": 1.00000012,
+                "sqrMagnitude": 1.00000024
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.99999994
+            },
+            "magnitude": 1.73205078,
+            "sqrMagnitude": 3.0
+          },
+          "IsNeedFadeIn": true,
+          "ForceSimulateImmediately": true,
+          "ParamEntityUsage": "LookAt",
+          "TowardMaxPitchAngle": 90.0,
+          "MaxMutexCount": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "ModifierName": {
+              "Value": "MGridFight_Origin_1008_BattleCry_Basic"
+            },
+            "Inverse": true,
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+              "Name": "Origin_1008_Monster_BattleCryBuff",
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MGridFight_Origin_1008_03_Monster_RageEffect"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MGridFight_Origin_1008_Rage"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 3796751092,
+              "Value": 0.88
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "AnimStateName": "SkillRage",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 3732326581,
+              "Value": 0.87
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "GlobalModifiers": {
+    "MGridFight_Origin_1008_03_Monster_RageEffect": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "BehaviorFlagList": [
+        "KeepOnDeathrattle"
+      ],
+      "_CallbackList": [
+        {
+          "Event": "OnDestroy",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Body01.prefab",
+              "IsNeedFadeOut": true,
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Body02.prefab",
+              "IsNeedFadeOut": true,
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Body03.prefab",
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Lv2.prefab",
+              "IsNeedFadeOut": true,
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01.prefab",
+              "IsNeedFadeOut": true,
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01_L.prefab",
+              "IsNeedFadeOut": true,
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01_R.prefab",
+              "IsNeedFadeOut": true,
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01_L_Lv2.prefab",
+              "IsNeedFadeOut": true,
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01_R_Lv2.prefab",
+              "IsNeedFadeOut": true,
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Weapon.prefab",
+              "IsNeedFadeOut": true,
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_WeaponMaskR.prefab",
+              "ForceImmediateFadeOut": true,
+              "FadeOutRegionStart": -1.0,
+              "FadeOutRegionEnd": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_WeaponMaskB.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DynamicKey": {
+                  "Value": "WolfType"
+                },
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 12884901888,
+                    "Value": 3.0
+                  }
+                },
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line01_Lv2.prefab",
+                  "IsNeedFadeOut": true,
+                  "ForceImmediateFadeOut": true,
+                  "FadeOutRegionStart": -1.0,
+                  "FadeOutRegionEnd": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line02_Lv2.prefab",
+                  "IsNeedFadeOut": true,
+                  "ForceImmediateFadeOut": true,
+                  "FadeOutRegionStart": -1.0,
+                  "FadeOutRegionEnd": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line03_Lv2.prefab",
+                  "IsNeedFadeOut": true,
+                  "ForceImmediateFadeOut": true,
+                  "FadeOutRegionStart": -1.0,
+                  "FadeOutRegionEnd": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line04_Lv2.prefab",
+                  "IsNeedFadeOut": true,
+                  "ForceImmediateFadeOut": true,
+                  "FadeOutRegionStart": -1.0,
+                  "FadeOutRegionEnd": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Loop.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line01.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line02.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line03.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line04.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ]
+        },
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Body01.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "Delay": 0.1,
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MinMutexTime": -1.0,
+              "MinMutexType": "Entity",
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Body02.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MinMutexTime": -1.0,
+              "MinMutexType": "Entity",
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MinMutexTime": -1.0,
+              "MinMutexType": "Entity",
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Weapon.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MinMutexTime": -1.0,
+              "MinMutexType": "Entity",
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DynamicKey": {
+                  "Value": "WolfType"
+                },
+                "CompareType": "GreaterEqual",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 12884901888,
+                    "Value": 3.0
+                  }
+                },
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Lv2.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Loop.prefab",
+                  "IsNeedFadeOut": true,
+                  "ForceImmediateFadeOut": true,
+                  "FadeOutRegionStart": -1.0,
+                  "FadeOutRegionEnd": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line01.prefab",
+                  "IsNeedFadeOut": true,
+                  "ForceImmediateFadeOut": true,
+                  "FadeOutRegionStart": -1.0,
+                  "FadeOutRegionEnd": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line02.prefab",
+                  "IsNeedFadeOut": true,
+                  "ForceImmediateFadeOut": true,
+                  "FadeOutRegionStart": -1.0,
+                  "FadeOutRegionEnd": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line03.prefab",
+                  "IsNeedFadeOut": true,
+                  "ForceImmediateFadeOut": true,
+                  "FadeOutRegionStart": -1.0,
+                  "FadeOutRegionEnd": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line04.prefab",
+                  "IsNeedFadeOut": true,
+                  "ForceImmediateFadeOut": true,
+                  "FadeOutRegionStart": -1.0,
+                  "FadeOutRegionEnd": -1.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line01_Lv2.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line02_Lv2.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line03_Lv2.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_ChangePhase_Line04_Lv2.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01_L_Lv2.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01_R_Lv2.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Body03.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01_L.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Buff_Fire01_R.prefab",
+                  "Scale": {
+                    "x": -1.0,
+                    "y": -1.0,
+                    "z": -1.0,
+                    "normalized": {
+                      "x": -0.577350259,
+                      "y": -0.577350259,
+                      "z": -0.577350259,
+                      "normalized": {
+                        "x": -0.5773503,
+                        "y": -0.5773503,
+                        "z": -0.5773503,
+                        "magnitude": 1.00000012,
+                        "sqrMagnitude": 1.00000024
+                      },
+                      "magnitude": 0.99999994,
+                      "sqrMagnitude": 0.99999994
+                    },
+                    "magnitude": 1.73205078,
+                    "sqrMagnitude": 3.0
+                  },
+                  "IsNeedFadeIn": true,
+                  "ForceSimulateImmediately": true,
+                  "ParamEntityUsage": "LookAt",
+                  "TowardMaxPitchAngle": 90.0,
+                  "MinMutexTime": -1.0,
+                  "MinMutexType": "Entity",
+                  "MaxMutexCount": 1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ]
+        },
+        {
+          "Event": "OnBeforeDying",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Common_Die_BuffFire.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MinMutexTime": -1.0,
+              "MinMutexType": "Entity",
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerEffect",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "EffectPath": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_LycanKing_00/Eff_Monster_W2_LycanKing_00_Common_Die_Buff.prefab",
+              "Scale": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": -1.0,
+                "normalized": {
+                  "x": -0.577350259,
+                  "y": -0.577350259,
+                  "z": -0.577350259,
+                  "normalized": {
+                    "x": -0.5773503,
+                    "y": -0.5773503,
+                    "z": -0.5773503,
+                    "magnitude": 1.00000012,
+                    "sqrMagnitude": 1.00000024
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 1.73205078,
+                "sqrMagnitude": 3.0
+              },
+              "IsNeedFadeIn": true,
+              "ForceSimulateImmediately": true,
+              "ParamEntityUsage": "LookAt",
+              "TowardMaxPitchAngle": 90.0,
+              "MinMutexTime": -1.0,
+              "MinMutexType": "Entity",
+              "MaxMutexCount": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ]
+        },
+        {
+          "Event": "OnModifierRemove",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                "ModifierName": "MGridFight_Origin_1008_Rage",
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier",
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "Unique"
+    }
+  },
+  "GlobalTemplates": [
+    {
+      "Name": "Origin_1008_03_Monster_SkillBattleCry",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAny",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "DynamicKey": {
+                  "Value": "Evolve_01_Choice"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "TaskEnabled": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TurnInsertAbility",
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_03_SkillBattleCry_Phase01"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AbilityTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "InsertAbilityPriority": "AvatarBuffOthers",
+              "DynamicValues": {},
+              "OwnerAliveState": "Bit_Alive",
+              "TargetAliveState": "Bit_Alive",
+              "CanRunOnUnselectableTarget": true,
+              "ShowInActionBar": true,
+              "AutoStandbyOnAbilityFinish": true,
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Origin_1008_03_Monster_SkillAttack01",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.Retarget",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "ByRandom": true,
+          "MaxNumber": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskList": [
+            {
+              "$type": "RPG.GameCore.TurnInsertAbility",
+              "AbilityName": {
+                "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill02_Phase01"
+              },
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "AbilityTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ParamEntity"
+              },
+              "InsertAbilityPriority": "AvatarBuffOthers",
+              "DynamicValues": {},
+              "OwnerAliveState": "Bit_Alive",
+              "TargetAliveState": "Bit_Alive",
+              "CanRunOnUnselectableTarget": true,
+              "ShowInActionBar": true,
+              "AutoStandbyOnAbilityFinish": true,
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Origin_1008_03_Monster_SkillAttack02",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.TurnInsertAbility",
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill03_Phase01"
+          },
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "AbilityTarget": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "InsertAbilityPriority": "AvatarBuffOthers",
+          "DynamicValues": {},
+          "OwnerAliveState": "Bit_Alive",
+          "TargetAliveState": "Bit_Alive",
+          "CanRunOnUnselectableTarget": true,
+          "ShowInActionBar": true,
+          "AutoStandbyOnAbilityFinish": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Origin_1008_03_Monster_SkillAttack03",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.TurnInsertAbility",
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill04_Phase01"
+          },
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "AbilityTarget": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllDarkTeam"
+          },
+          "InsertAbilityPriority": "AvatarBuffOthers",
+          "DynamicValues": {},
+          "OwnerAliveState": "Bit_Alive",
+          "TargetAliveState": "Bit_Alive",
+          "CanRunOnUnselectableTarget": true,
+          "ShowInActionBar": true,
+          "AutoStandbyOnAbilityFinish": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Origin_1008_03_Monster_SkillRage",
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.TurnInsertAbility",
+          "AbilityName": {
+            "Value": "StageAbility_GridFight_Origin_1008_Monster_03_Skill07_Phase01"
+          },
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ModifierOwnerEntity"
+          },
+          "AbilityTarget": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "InsertAbilityPriority": "AvatarBuffOthers",
+          "DynamicValues": {},
+          "OwnerAliveState": "Bit_Alive",
+          "TargetAliveState": "Bit_Alive",
+          "CanRunOnUnselectableTarget": true,
+          "ShowInActionBar": true,
+          "AutoStandbyOnAbilityFinish": true,
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ]
+}

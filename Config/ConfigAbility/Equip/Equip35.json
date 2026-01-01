@@ -1,0 +1,1049 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "MEquip_22005_Main": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCurrentSkillType",
+                    "SkillType": "Skill",
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AliveOnly": true,
+                      "ModifierName": {
+                        "Value": "MEquip_22005_Sub"
+                      },
+                      "Chance": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "MaxTargetCount": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "MaxLayer": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "DynamicValues": {
+                        "MDF_MaxLayer": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        }
+                      },
+                      "IsShowUIMessageFromModel": true,
+                      "IsShowUIMessageOnUpdate": true,
+                      "ShowUIMessageInternalTime": -1.0,
+                      "UseFixedPosition": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        },
+        "MEquip_22005_Sub": {
+          "LifeTime": -1,
+          "MaxLayer": 3,
+          "LayerAddWhenStack": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ValueType": "Layer",
+                  "Multiplier": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "DynamicKey": "_Layer",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "AttackAddedRatio",
+                  "PropertyValue": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "ReplaceByCaster",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "Ability22005",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MEquip_22005_Main"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ],
+      "DynamicValues": {}
+    },
+    {
+      "Modifiers": {
+        "MEquip_23047_Main": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnListenModifierOnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackStatusType",
+                        "TargetStatusType": "Debuff",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamDark",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareTarget",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetSequence",
+                          "Sequence": [
+                            {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ParamEntity2"
+                            },
+                            {
+                              "$type": "RPG.GameCore.TargetFetchActualOwner"
+                            }
+                          ]
+                        },
+                        "CompareType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "AliveStateMask": "Mask_AliveOrLimbo",
+                        "TaskEnabled": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "AliveOnly": true,
+                      "ModifierName": {
+                        "Value": "MEquip_23047_Sub2"
+                      },
+                      "Chance": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "MaxTargetCount": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "LifeTime": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "DynamicValues": {
+                        "MDF_DotDamageAddRatio": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        },
+                        "MDF_DeBuffMaxCount": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        },
+                        "MDF_SpeedUpRatioTemp": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        },
+                        "MDF_SpeedUpLifeTimeTemp": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        }
+                      },
+                      "IsShowUIMessageFromModel": true,
+                      "ShowUIMessageInternalTime": -1.0,
+                      "UseFixedPosition": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        },
+        "MEquip_23047_Sub2": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "RemoveWhenCasterDead"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingHitAll",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAttackType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "AttackTypes": [
+                      "DOT"
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifyDamageData",
+                      "AttackData_DamageValue": {},
+                      "AttackData_DamagePercentage": {},
+                      "AttackData_FinalDamageMax": {},
+                      "AttackData_BreakBaseDamage": {},
+                      "AttackData_BreakDamagePercentage": {},
+                      "AttackData_SPHitRatio": {},
+                      "Attacker_AttackAddedRatio": {},
+                      "Attacker_AttackDelta": {},
+                      "Attacker_AttackConvert": {},
+                      "Attacker_PhysicalAddedRatio": {},
+                      "Attacker_FireAddedRatio": {},
+                      "Attacker_IceAddedRatio": {},
+                      "Attacker_ThunderAddedRatio": {},
+                      "Attacker_WindAddedRatio": {},
+                      "Attacker_QuantumAddedRatio": {},
+                      "Attacker_ImaginaryAddedRatio": {},
+                      "Attacker_AllDamageAddedRatio": {},
+                      "Attacker_AllDamageTypeAddedRatio": {},
+                      "Attacker_DotDamageAddedRatio": {},
+                      "Attacker_BaseDamageMultiRatio": {
+                        "FixedValue": {
+                          "RawValue": 4294967296,
+                          "Value": 1.0
+                        }
+                      },
+                      "Attacker_StanceBreakAddedRatio": {},
+                      "Attacker_ForceStanceBreakRatio": {
+                        "FixedValue": {
+                          "RawValue": -9223372036854775808,
+                          "Value": -2147483648.5
+                        }
+                      },
+                      "Attacker_BreakDamageAddedRatio": {},
+                      "Attacker_BreakDamageExtraAddedRatio": {},
+                      "Attacker_PhysicalPenetrate": {},
+                      "Attacker_FirePenetrate": {},
+                      "Attacker_IcePenetrate": {},
+                      "Attacker_ThunderPenetrate": {},
+                      "Attacker_WindPenetrate": {},
+                      "Attacker_QuantumPenetrate": {},
+                      "Attacker_ImaginaryPenetrate": {},
+                      "Attacker_AllDamageTypePenetrate": {},
+                      "Attacker_FatigueRatio": {},
+                      "Attacker_CriticalChance": {},
+                      "Attacker_CriticalDamage": {},
+                      "Attacker_SPRatio": {},
+                      "AttackerSkill_SPBase": {},
+                      "Defender_DefenceAddedRatio": {},
+                      "Defender_DefenceDelta": {},
+                      "Defender_DefenceConvert": {},
+                      "Defender_PhysicalResistance": {},
+                      "Defender_FireResistance": {},
+                      "Defender_IceResistance": {},
+                      "Defender_ThunderResistance": {},
+                      "Defender_WindResistance": {},
+                      "Defender_QuantumResistance": {},
+                      "Defender_ImaginaryResistance": {},
+                      "Defender_AllDamageTypeResistance": {},
+                      "Defender_AllDamageReduce": {},
+                      "Defender_PhysicalTakenRatio": {},
+                      "Defender_FireTakenRatio": {},
+                      "Defender_IceTakenRatio": {},
+                      "Defender_ThunderTakenRatio": {},
+                      "Defender_WindTakenRatio": {},
+                      "Defender_QuantumTakenRatio": {},
+                      "Defender_ImaginaryTakenRatio": {},
+                      "Defender_AllDamageTypeTakenRatio": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "Defender_Monster_DamageTakenRatio": {},
+                      "Defender_PhysicalStanceBreakTakenRatio": {},
+                      "Defender_FireStanceBreakTakenRatio": {},
+                      "Defender_IceStanceBreakTakenRatio": {},
+                      "Defender_ThunderStanceBreakTakenRatio": {},
+                      "Defender_WindStanceBreakTakenRatio": {},
+                      "Defender_QuantumStanceBreakTakenRatio": {},
+                      "Defender_ImaginaryStanceBreakTakenRatio": {},
+                      "Defender_StanceWeakAddedRatio": {},
+                      "Defender_StanceBreakTakenRatio": {},
+                      "Defender_StanceBreakResistance": {},
+                      "AttackData_ConstFinalDamage": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "AttackData_MortallyWonded": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "AttackData_ForceCritical": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "AttackData_CanIgnoreAttackTypeCritical": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "Attacker_ExtraAllDamageAddedRatio1": {},
+                      "Attacker_ExtraAllDamageAddedRatio2": {},
+                      "Attacker_ExtraAllDamageAddedRatio3": {},
+                      "Attacker_ExtraAllDamageAddedRatio4": {},
+                      "Attacker_ExtraAttackAddedRatio1": {},
+                      "Attacker_ExtraAttackAddedRatio2": {},
+                      "Attacker_ExtraAttackAddedRatio3": {},
+                      "Attacker_ExtraAttackAddedRatio4": {},
+                      "Defender_ExtraDefenceAddedRatio1": {},
+                      "Defender_ExtraDefenceAddedRatio2": {},
+                      "Defender_ExtraDefenceAddedRatio3": {},
+                      "Defender_ExtraDefenceAddedRatio4": {},
+                      "Attacker_ExtraLuckChance": {},
+                      "Attacker_ExtraLuckDamage": {},
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "TaskList_Equip_23047_CheckCasterDebuffCount",
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnBeforeBeingAttacked",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetListIntersects",
+                    "FirstTargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "AllLightTeamWithAllLightTeamUnselectable.RemoveBattleEvent"
+                    },
+                    "FirstTargetAliveOnly": true,
+                    "SecondTargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "SecondTargetAliveOnly": true,
+                    "TaskEnabled": true
+                  },
+                  "MaxNumber": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "AliveOnly": true,
+                      "ModifierName": {
+                        "Value": "MEquip_23047_Sub3"
+                      },
+                      "Chance": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "MaxTargetCount": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "LifeTime": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "DynamicValues": {
+                        "MDF_SpeedUpRatio": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        }
+                      },
+                      "IsShowUIMessageFromModel": true,
+                      "ShowUIMessageInternalTime": -1.0,
+                      "UseFixedPosition": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnModifierAdd",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckModifierCallBackStatusType",
+                    "TargetStatusType": "Debuff",
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "TaskList_Equip_23047_CheckCasterDebuffCount",
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnModifierRemove",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "TaskList_Equip_23047_CheckCasterDebuffCount",
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Replace",
+          "DynamicValues": {},
+          "TaskListTemplate": [
+            {
+              "Name": "TaskList_Equip_23047_CheckCasterDebuffCount",
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValueByStatusCount",
+                  "DynamicKey": "MDF_CurrentDeBuffCount",
+                  "ReadTargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "CasterFilter": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "StatusType": "Debuff",
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "DynamicKey": {
+                      "Value": "MDF_CurrentDeBuffCount"
+                    },
+                    "CompareType": "Greater",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "DynamicKey": {
+                        "Value": "MDF_CurrentDeBuffCount"
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "Value": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "DynamicKey": {
+                    "Value": "MDF_TotalDotDamageAddRatio"
+                  },
+                  "SkipInCharmAction": true,
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ]
+        },
+        "MEquip_23047_Sub3": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "STAT_SpeedUp"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "SpeedAddedRatio",
+                  "PropertyValue": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Replace",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "Ability23047",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MEquip_23047_Main"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ],
+      "DynamicValues": {}
+    },
+    {
+      "Modifiers": {
+        "MEquip_23048_Main": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnAfterAttack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCurrentSkillType",
+                    "SkillType": "Ultra",
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifyTeamBoostPoint",
+                      "Team": "TeamLight",
+                      "ModifyFunction": "Add",
+                      "ModifyValue": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCurrentSkillType",
+                        "SkillType": "Skill",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareTargetCount",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "SkillTargetEntityList"
+                        },
+                        "AliveOnly": true,
+                        "Number": {
+                          "FixedValue": {
+                            "RawValue": 4294967296,
+                            "Value": 1.0
+                          }
+                        },
+                        "CompareType": "Equal",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByTargetListIntersects",
+                        "FirstTargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "SkillTargetEntityList"
+                        },
+                        "SecondTargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "AllLightTeam"
+                        },
+                        "TaskEnabled": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "SkillTargetEntityList"
+                      },
+                      "AliveOnly": true,
+                      "ModifierName": {
+                        "Value": "MEquip_23048_Sub"
+                      },
+                      "Chance": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "MaxTargetCount": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "LifeTime": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "IsShowUIMessageFromModel": true,
+                      "IsShowUIMessageOnUpdate": true,
+                      "ShowUIMessageInternalTime": -1.0,
+                      "UseFixedPosition": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        },
+        "MEquip_23048_Sub": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeHitAll",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAttackType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "AttackTypes": [
+                      "BPSkill"
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.ModifyDamageData",
+                      "AttackData_DamageValue": {},
+                      "AttackData_DamagePercentage": {},
+                      "AttackData_FinalDamageMax": {},
+                      "AttackData_BreakBaseDamage": {},
+                      "AttackData_BreakDamagePercentage": {},
+                      "AttackData_SPHitRatio": {},
+                      "Attacker_AttackAddedRatio": {},
+                      "Attacker_AttackDelta": {},
+                      "Attacker_AttackConvert": {},
+                      "Attacker_PhysicalAddedRatio": {},
+                      "Attacker_FireAddedRatio": {},
+                      "Attacker_IceAddedRatio": {},
+                      "Attacker_ThunderAddedRatio": {},
+                      "Attacker_WindAddedRatio": {},
+                      "Attacker_QuantumAddedRatio": {},
+                      "Attacker_ImaginaryAddedRatio": {},
+                      "Attacker_AllDamageAddedRatio": {},
+                      "Attacker_AllDamageTypeAddedRatio": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "Attacker_DotDamageAddedRatio": {},
+                      "Attacker_BaseDamageMultiRatio": {
+                        "FixedValue": {
+                          "RawValue": 4294967296,
+                          "Value": 1.0
+                        }
+                      },
+                      "Attacker_StanceBreakAddedRatio": {},
+                      "Attacker_ForceStanceBreakRatio": {
+                        "FixedValue": {
+                          "RawValue": -9223372036854775808,
+                          "Value": -2147483648.5
+                        }
+                      },
+                      "Attacker_BreakDamageAddedRatio": {},
+                      "Attacker_BreakDamageExtraAddedRatio": {},
+                      "Attacker_PhysicalPenetrate": {},
+                      "Attacker_FirePenetrate": {},
+                      "Attacker_IcePenetrate": {},
+                      "Attacker_ThunderPenetrate": {},
+                      "Attacker_WindPenetrate": {},
+                      "Attacker_QuantumPenetrate": {},
+                      "Attacker_ImaginaryPenetrate": {},
+                      "Attacker_AllDamageTypePenetrate": {},
+                      "Attacker_FatigueRatio": {},
+                      "Attacker_CriticalChance": {},
+                      "Attacker_CriticalDamage": {},
+                      "Attacker_SPRatio": {},
+                      "AttackerSkill_SPBase": {},
+                      "Defender_DefenceAddedRatio": {},
+                      "Defender_DefenceDelta": {},
+                      "Defender_DefenceConvert": {},
+                      "Defender_PhysicalResistance": {},
+                      "Defender_FireResistance": {},
+                      "Defender_IceResistance": {},
+                      "Defender_ThunderResistance": {},
+                      "Defender_WindResistance": {},
+                      "Defender_QuantumResistance": {},
+                      "Defender_ImaginaryResistance": {},
+                      "Defender_AllDamageTypeResistance": {},
+                      "Defender_AllDamageReduce": {},
+                      "Defender_PhysicalTakenRatio": {},
+                      "Defender_FireTakenRatio": {},
+                      "Defender_IceTakenRatio": {},
+                      "Defender_ThunderTakenRatio": {},
+                      "Defender_WindTakenRatio": {},
+                      "Defender_QuantumTakenRatio": {},
+                      "Defender_ImaginaryTakenRatio": {},
+                      "Defender_AllDamageTypeTakenRatio": {},
+                      "Defender_Monster_DamageTakenRatio": {},
+                      "Defender_PhysicalStanceBreakTakenRatio": {},
+                      "Defender_FireStanceBreakTakenRatio": {},
+                      "Defender_IceStanceBreakTakenRatio": {},
+                      "Defender_ThunderStanceBreakTakenRatio": {},
+                      "Defender_WindStanceBreakTakenRatio": {},
+                      "Defender_QuantumStanceBreakTakenRatio": {},
+                      "Defender_ImaginaryStanceBreakTakenRatio": {},
+                      "Defender_StanceWeakAddedRatio": {},
+                      "Defender_StanceBreakTakenRatio": {},
+                      "Defender_StanceBreakResistance": {},
+                      "AttackData_ConstFinalDamage": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "AttackData_MortallyWonded": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "AttackData_ForceCritical": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "AttackData_CanIgnoreAttackTypeCritical": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "Attacker_ExtraAllDamageAddedRatio1": {},
+                      "Attacker_ExtraAllDamageAddedRatio2": {},
+                      "Attacker_ExtraAllDamageAddedRatio3": {},
+                      "Attacker_ExtraAllDamageAddedRatio4": {},
+                      "Attacker_ExtraAttackAddedRatio1": {},
+                      "Attacker_ExtraAttackAddedRatio2": {},
+                      "Attacker_ExtraAttackAddedRatio3": {},
+                      "Attacker_ExtraAttackAddedRatio4": {},
+                      "Defender_ExtraDefenceAddedRatio1": {},
+                      "Defender_ExtraDefenceAddedRatio2": {},
+                      "Defender_ExtraDefenceAddedRatio3": {},
+                      "Defender_ExtraDefenceAddedRatio4": {},
+                      "Attacker_ExtraLuckChance": {},
+                      "Attacker_ExtraLuckDamage": {},
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "ReplaceByCaster"
+        }
+      },
+      "Name": "Ability23048",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MEquip_23048_Main"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ],
+      "DynamicValues": {}
+    }
+  ],
+  "GlobalModifiers": {}
+}

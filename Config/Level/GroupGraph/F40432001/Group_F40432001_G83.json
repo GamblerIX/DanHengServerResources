@@ -1,0 +1,178 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareGraphDynamicFloat",
+            "Name": "InTrigger",
+            "Value": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "CompareType": "Equal",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300001
+                ]
+              },
+              "TriggerName": "MissionTrigger",
+              "OnEnter": [
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "Self_TriggerPerformance"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvDistrictSetupTrigger",
+              "GroupID": {},
+              "DistrictID": {
+                "FixedValue": {
+                  "RawValue": 2147487942967296,
+                  "Value": 500001.0
+                }
+              },
+              "TickInterval": 0.2,
+              "OnExit": [
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "Self_TriggerPerformance"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "Self_TriggerPerformance"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "PerformanceType": "A",
+              "PerformanceType_DS": {
+                "Custom": true,
+                "Key": "PerformanceType_String"
+              },
+              "PerformanceID_DS": {
+                "Custom": true,
+                "Key": "PerformanceID_String"
+              },
+              "MaskConfig": {
+                "EndBlack": "Full",
+                "MaskColor": "Black"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PerformanceEndSeq",
+              "BeforeCases": [
+                {
+                  "$type": "RPG.GameCore.SwitchCharacterAnchorV2",
+                  "SwitchCharacterAnchorConfig": {
+                    "IsLocalPlayer": true,
+                    "CharacterUniqueName": "LocalPlayer",
+                    "LevelAreaKey": {
+                      "Custom": true,
+                      "Key": "LevelAreaKey"
+                    },
+                    "ResetAnimation": true,
+                    "ResetCamera": true,
+                    "ClearSpecialVision": true,
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Value": 1,
+        "Key": "InTrigger"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "E",
+        "Key": "PerformanceType_String"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "PerformanceID_String"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "LevelAreaKey"
+      }
+    ],
+    "SharedValues": [
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Value": 1,
+        "Key": "InTrigger"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "E",
+        "Key": "PerformanceType_String"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "PerformanceID_String"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Key": "LevelAreaKey"
+      }
+    ]
+  },
+  "Type": "Group",
+  "EntityEventList": []
+}

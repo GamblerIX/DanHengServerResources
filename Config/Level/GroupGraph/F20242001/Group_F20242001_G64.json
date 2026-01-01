@@ -1,0 +1,315 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "TriggerName": "MissionTrigger",
+          "ButtonsByName": [],
+          "ButtonConfigs": [
+            {
+              "ID": "OpenUI",
+              "IconType": {
+                "JsonValueStr": "GeneralActivityIcon"
+              },
+              "ButtonText": {
+                "Value": "PropInteractTitle_442"
+              },
+              "ShowPriority": "Default"
+            }
+          ],
+          "InteractAngleRange": 180.0,
+          "OwnerForwardAngleRange": 90.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvOnButtonPressed",
+          "ButtonName": "OpenUI",
+          "OnPressedCallback": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "G64_TriggerBattle"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ShowTransitionLoadingUI",
+              "Name": "Ui.FightFest.Board.FightFestBoardCutBriefDialog",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ShowUI",
+              "Name": "Ui.FightFest.FightFestMainPage",
+              "WaitForExit": true,
+              "OnUIEnter": [
+                {
+                  "$type": "RPG.GameCore.ExitTransitionLoadingUI",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "G64_TriggerBattle_2"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "ValueSource": {},
+              "PerformanceType": "D",
+              "PerformanceID": 802510505,
+              "MaskConfig": {
+                "EndBlack": "Full",
+                "MaskColor": "Black"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PerformanceEndSeq",
+              "Cases": [
+                {
+                  "Case": 1,
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.TriggerGroupEvent",
+                      "EventName": {
+                        "Value": "FightFestBattleStart"
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerFightFestLineupInMission",
+                      "RaceID": 1005,
+                      "OnConfirm": [
+                        {
+                          "$type": "RPG.GameCore.SetFloorCustomFloat",
+                          "Name": {
+                            "Value": "FCV_2.5_Throng"
+                          },
+                          "Value": {
+                            "FixedValue": {
+                              "RawValue": 4294967296,
+                              "Value": 1.0
+                            }
+                          },
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetFloorCustomFloat",
+                          "Name": {
+                            "Value": "FCV_2.5_Arena"
+                          },
+                          "Value": {
+                            "FixedValue": {
+                              "RawValue": 4294967296,
+                              "Value": 1.0
+                            }
+                          },
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerPerformance",
+                          "ValueSource": {},
+                          "PerformanceType": "C",
+                          "PerformanceID": 802510001,
+                          "MaskConfig": {
+                            "StartBlack": "Full",
+                            "EndBlack": "NoPost",
+                            "MaskColor": "Black"
+                          },
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetMissionAudioState",
+                          "SetBGMEmotionState": true,
+                          "BGMEmotionStateName": "State_BGM_D1",
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerPerformance",
+                          "ValueSource": {},
+                          "PerformanceType": "C",
+                          "PerformanceID": 802510506,
+                          "MaskConfig": {
+                            "StartBlack": "NoPre",
+                            "MaskColor": "Black",
+                            "EndCrack": true
+                          },
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.ResetMissionAudioState",
+                          "ResetBGMEmotionState": true,
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetFloorCustomFloat",
+                          "Name": {
+                            "Value": "FCV_CannonSalute"
+                          },
+                          "Value": {},
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerFightFestBattleInMission",
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.RemoveStreamingSource",
+                          "StreamingSource": "Mission_FightFestBattlePerformance",
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetFloorCustomFloat",
+                          "Name": {
+                            "Value": "FCV_2.5_Arena"
+                          },
+                          "Value": {},
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "FightFest_MainRace_802510508"
+          },
+          "GoNextImmediately": true,
+          "ResetWhenTaskBegin": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerGroupEvent",
+          "EventName": {
+            "Value": "G64_TriggerBattle_2"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "G64_TriggerBattle"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.WaitCustomString",
+              "CustomString": {
+                "Value": "FightFest_MainRace_802510508"
+              },
+              "GoNextImmediately": true,
+              "ResetWhenTaskBegin": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "G64_TriggerBattle_2"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "FightFestBattleStart"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PlayFullScreenTransfer",
+              "Type": "Black",
+              "KeepDuration": 0.5,
+              "PostDuration": 0.5,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AddStreamingSource",
+              "StreamingSource": {
+                "CenterName": "Mission_FightFestBattlePerformance",
+                "AreaName": "LevelArea_P20242_F20242001_G19",
+                "AnchorName": "Anchor7"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group"
+}

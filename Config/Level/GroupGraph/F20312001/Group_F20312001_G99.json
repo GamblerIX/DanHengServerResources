@@ -1,0 +1,143 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SetupRotatableRegionAirlock",
+          "AirlockInstanceID": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "AirlockTrigger": {
+            "Value": "01"
+          },
+          "ValveAInstanceID": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "ValveBInstanceID": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "ValveARegionIndex": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "ValveBRegionIndex": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.LoopWaitServerFloorSavedValueChange",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+            "Name": "StudyDoorState",
+            "CompareType": "Equal",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerEntityServerEvent",
+              "TaskEnabled": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+                "Name": "StudyDoorState",
+                "CompareType": "Equal",
+                "CompareValue": 1,
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerEntityServerEvent",
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockDoor1"
+      },
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockDoor2"
+      },
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockDoor1Region"
+      },
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockDoor2Region"
+      },
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockSpace"
+      }
+    ],
+    "SharedValues": [
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockDoor1"
+      },
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockDoor2"
+      },
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockDoor1Region"
+      },
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockDoor2Region"
+      },
+      {
+        "$type": "RPG.GameCore.SharedInt",
+        "Key": "AirLockSpace"
+      }
+    ]
+  },
+  "Type": "Group"
+}

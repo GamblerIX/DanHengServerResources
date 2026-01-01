@@ -1,0 +1,538 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CreateLevelAreas",
+          "AssetPath": {
+            "Custom": true,
+            "Key": "TrackCameraArea"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "BeginTrack"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+              "Name": {
+                "Value": "FCV_EnableCamera_Down"
+              },
+              "Value": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "LevelAreaCameraKey"
+              },
+              "IsActive": true,
+              "SelectFollowTargetType": "Anchor",
+              "SelectLookAtTargetType": "Anchor",
+              "VCameraDitherMaxDistance": 1.0,
+              "CenterPosX": -1.0,
+              "CenterPosY": -1.0,
+              "DynamicParams": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvHideMazeBtn",
+              "IsHide": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvHideMazeBtn",
+              "SkillType": "MazeSkill",
+              "IsHide": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ActiveTrackCamera",
+              "Enable": true,
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "LevelAreaCameraKey"
+              },
+              "UseOwnerGroup": true,
+              "PathGroupID": {},
+              "PathID": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TrackWidth": {
+                "FixedValue": {
+                  "RawValue": -149061134974976,
+                  "Value": -34706.0
+                }
+              },
+              "ExitFromStart": [
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "EndTrack"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "ExitFromEnd": [
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "EndTrack"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareGraphDynamicFloat",
+                    "Name": "IsDoOnlyOnce",
+                    "Value": {},
+                    "CompareType": "Equal",
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AdvDistrictEnableTrigger",
+                      "GroupID": {},
+                      "DistrictID": {
+                        "FixedValue": {
+                          "RawValue": 4294967296,
+                          "Value": 1.0
+                        }
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ],
+              "OnOutOfRange": [
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "EndTrack"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFrame",
+          "WaitFrameCount": 2,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByInTrackCameraByPathID",
+                "UseOwnerGroup": true,
+                "PathID": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "DetectRange": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+                "DynamicName": {
+                  "Value": "FSV_MapChangeWithBrigde"
+                },
+                "CompareType": "Equal",
+                "CompareValue": 1,
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                "Name": {
+                  "Value": "FCV_EnableCamera_Up"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {},
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "BeginTrack"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EndTrack"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "LevelAreaCameraKey"
+              },
+              "VCameraDitherMaxDistance": 1.0,
+              "CenterPosX": -1.0,
+              "CenterPosY": -1.0,
+              "DynamicParams": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvHideMazeBtn",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvHideMazeBtn",
+              "SkillType": "MazeSkill",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ActiveTrackCamera",
+              "LevelAreaCameraKey": {
+                "Custom": true,
+                "Key": "LevelAreaCameraKey"
+              },
+              "UseOwnerGroup": true,
+              "PathGroupID": {
+                "FixedValue": {
+                  "RawValue": 219043332096,
+                  "Value": 51.0
+                }
+              },
+              "PathID": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TrackWidth": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "ExitFromStart": [],
+              "ExitFromEnd": [],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetFloorCustomFloatV2",
+              "Name": {
+                "Value": "FCV_EnableCamera_Down"
+              },
+              "Value": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvDistrictSetupTrigger",
+          "GroupID": {},
+          "DistrictID": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TickInterval": 0.1,
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByInTrackCamera",
+                    "UseOwnerGroup": true,
+                    "Inverse": true,
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+                    "DynamicName": {
+                      "Value": "FSV_MapChangeWithBrigde"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": 1,
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                    "Name": {
+                      "Value": "FCV_EnableCamera_Up"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {},
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  }
+                ],
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "BeginTrack"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [],
+              "TaskEnabled": true
+            }
+          ],
+          "OnExit": [],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_EnableCamera_Up"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.AdvDistrictEnableTrigger",
+              "GroupID": {},
+              "DistrictID": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "Enable": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+            "Name": {
+              "Value": "FCV_EnableCamera_Up"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {},
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_EnableCamera_Up"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.AdvDistrictEnableTrigger",
+              "GroupID": {},
+              "DistrictID": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+            "Name": {
+              "Value": "FCV_EnableCamera_Up"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorSavedValueChangeV2",
+          "Name": {
+            "Value": "FSV_MapChangeWithBrigde"
+          },
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+            "DynamicName": {
+              "Value": "FSV_MapChangeWithBrigde"
+            },
+            "CompareType": "Equal",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "EndTrack"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "ValueSource": {
+    "Values": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Level/Common_Adventure/DollyTrackPrefab/Default_DollyTrack.prefab",
+        "Key": "TrackCameraArea"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Default_DollyTrack,VC",
+        "Key": "LevelAreaCameraKey"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Key": "IsDoOnlyOnce"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Key": "IsSetMoveInputToAxis"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Value": 10.0,
+        "Key": "TrackWidth"
+      }
+    ],
+    "SharedValues": [
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Level/Common_Adventure/DollyTrackPrefab/Default_DollyTrack.prefab",
+        "Key": "TrackCameraArea"
+      },
+      {
+        "$type": "RPG.GameCore.SharedString",
+        "Value": "Default_DollyTrack,VC",
+        "Key": "LevelAreaCameraKey"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Key": "IsDoOnlyOnce"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Key": "IsSetMoveInputToAxis"
+      },
+      {
+        "$type": "RPG.GameCore.SharedFloat",
+        "Value": 10.0,
+        "Key": "TrackWidth"
+      }
+    ]
+  },
+  "Type": "Group",
+  "EntityEventList": []
+}

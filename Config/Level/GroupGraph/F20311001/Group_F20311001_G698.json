@@ -1,0 +1,62 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitDrinkMakerCheersInitFinish",
+          "OnFinish": [
+            {
+              "$type": "RPG.GameCore.SwitchCase",
+              "WithBreak": true,
+              "TaskList": [
+                {
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByDrinkMakerCheersStoryDrinkHasMade",
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SwitchCase",
+                      "WithBreak": true,
+                      "TaskList": [
+                        {
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByDrinkMakerCheersStoryLastMakedDrinkIsPositive",
+                            "Inverse": true,
+                            "TaskEnabled": true,
+                            "IsClientOnly": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.ClientFinishMission",
+                              "SubmissionID": 803520413,
+                              "TaskEnabled": true,
+                              "IsClientOnly": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "DefaultTask": [],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group"
+}

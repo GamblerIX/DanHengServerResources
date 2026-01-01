@@ -1,0 +1,501 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitStartMarbleGame",
+          "OnStart": [
+            {
+              "$type": "RPG.GameCore.LockPlayerControl",
+              "LockCameraControl": true,
+              "LockInteractSelect": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.CreateLevelAreas",
+              "AssetPath": {
+                "Value": "Gameplays/Marble/MarbleCamera/MarbleGameCamera.prefab"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "LocalPosition": {
+            "x": -6.4,
+            "y": 0.65,
+            "z": -3.98,
+            "normalized": {
+              "x": -0.846048057,
+              "y": 0.08592675,
+              "z": -0.5261361,
+              "normalized": {
+                "x": -0.8460481,
+                "y": 0.0859267563,
+                "z": -0.52613616,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.00000012
+              },
+              "magnitude": 0.99999994,
+              "sqrMagnitude": 0.9999999
+            },
+            "magnitude": 7.56458235,
+            "sqrMagnitude": 57.2229042
+          },
+          "localRotation": {
+            "y": -30.0,
+            "normalized": {
+              "y": -1.0,
+              "magnitude": 1.0,
+              "sqrMagnitude": 1.0
+            },
+            "magnitude": 30.0,
+            "sqrMagnitude": 900.0
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.MarbleEventListener",
+          "Finish": [
+            {
+              "$type": "RPG.GameCore.StopCurrentLittleGame",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.UnLockPlayerControl",
+              "UnLockCameraControl": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveLevelAreas",
+              "AreaName": {
+                "Value": "MarbleGameCamera"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "SealDie": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "SealDead"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "SealDieFinish": [],
+          "LastHit": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "SealDead"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "ActivityMarbleUnloadGameArea"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha",
+              "DitherAlpha": 1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.HideAllEntity",
+              "HideNPC": true,
+              "NotHideEntity": [],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PlayFullScreenTransfer",
+              "Type": "Black",
+              "KeepDuration": 0.5,
+              "PostDuration": 0.5,
+              "Action": [
+                {
+                  "$type": "RPG.GameCore.ScrTrfActTaskList",
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.UnloadLittleGameArea",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitStreamingJobFinished",
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerMarbleAfterStreamingAction",
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "ActivityMarbleLoadGameArea"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.HideAllEntity",
+              "IsHide": true,
+              "HideNPC": true,
+              "NotHideEntity": [
+                {
+                  "GroupID": 867,
+                  "GroupNpcID": 400001,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 867,
+                  "GroupNpcID": 400002,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 867,
+                  "GroupNpcID": 400003,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 867,
+                  "GroupNpcID": 400004,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 867,
+                  "GroupNpcID": 400005,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 867,
+                  "GroupNpcID": 400006,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 867,
+                  "GroupNpcID": 400007,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 868,
+                  "GroupNpcID": 400002,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 868,
+                  "GroupNpcID": 400003,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 868,
+                  "GroupNpcID": 400004,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 868,
+                  "GroupNpcID": 400005,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 868,
+                  "GroupNpcID": 400006,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 868,
+                  "GroupNpcID": 400007,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "GroupID": 868,
+                  "GroupNpcID": 400008,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.LoadLittleGameArea",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "Area": {
+                "Value": "MarblePlayBG"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitStreamingJobFinished",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerMarbleAfterStreamingAction",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "SealDead"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.ActiveMarbleVirtualCamera",
+              "FollowObject": "DeadSeal",
+              "FollowPoint": "PlayerBall__Art",
+              "LookAtObject": "DeadSeal",
+              "LookAtPoint": "PlayerBall__Art",
+              "AreaName": "MarbleGameCamera",
+              "AnchorName": "Kill_Camera",
+              "IsActive": true,
+              "BlendConfig": {
+                "ExportToJson": true,
+                "BlendType": "EaseOut",
+                "CustomCurveData": {
+                  "CachedAnimCurve": {
+                    "keys": []
+                  }
+                },
+                "BlendTime": 0.1,
+                "FOVSmoothDampTime": -1.0,
+                "FrameBlendWeightStart": 1.0,
+                "FrameBlendDuration": 1.0
+              },
+              "VCameraDitherMaxDistance": 1.0,
+              "CenterPosX": -1.0,
+              "CenterPosY": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.LittleGameRadialBlurEffect",
+              "Active": true,
+              "Duration": -1.0,
+              "BlurX": 0.5,
+              "BlurY": 0.5,
+              "BlurRadius": 1.0,
+              "Iteration": 7,
+              "BlurFeather": 0.4,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.LittleGameSpeedLineEffect",
+              "Mode": "Line",
+              "Active": true,
+              "Speed": 0.8,
+              "WhitePercent": 0.5,
+              "Divide": 1.0,
+              "Start": 0.35,
+              "End": 1.0,
+              "Brightness": 1.0,
+              "Density": 0.5,
+              "PosX": 0.5,
+              "PosY": 0.5,
+              "SpeedlineSeedPath": "Effects/Eff_Texture/Special/Noise/Eff_Noise_35.tga",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "FixedValue": {
+                  "RawValue": 2147483650,
+                  "Value": 0.5
+                }
+              },
+              "MaxAdvencePerTick": -1.0,
+              "IsRealtime": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.LittleGameRadialBlurEffect",
+              "Duration": -1.0,
+              "BlurX": 0.5,
+              "BlurY": 0.5,
+              "BlurRadius": 0.6,
+              "Iteration": 7,
+              "BlurStart": 0.18,
+              "BlurFeather": 0.4,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.LittleGameSpeedLineEffect",
+              "Speed": 1.0,
+              "WhitePercent": 0.5,
+              "Divide": 1.0,
+              "End": 1.0,
+              "Brightness": 1.0,
+              "Density": 0.5,
+              "PosX": 0.5,
+              "PosY": 0.5,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitSecond",
+              "WaitTime": {
+                "FixedValue": {
+                  "RawValue": 858993460,
+                  "Value": 0.2
+                }
+              },
+              "MaxAdvencePerTick": -1.0,
+              "IsRealtime": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ActiveMarbleVirtualCamera",
+              "FollowObject": "DeadSeal",
+              "FollowPoint": "PlayerBall__Art",
+              "LookAtObject": "DeadSeal",
+              "LookAtPoint": "PlayerBall__Art",
+              "AreaName": "MarbleGameCamera",
+              "AnchorName": "Kill_Camera",
+              "BlendConfig": {
+                "ExportToJson": true,
+                "BlendType": "EaseOut",
+                "BlendTime": 0.6,
+                "FOVSmoothDampTime": -1.0,
+                "FrameBlendWeightStart": 1.0,
+                "FrameBlendDuration": 1.0
+              },
+              "VCameraDitherMaxDistance": 1.0,
+              "CenterPosX": -1.0,
+              "CenterPosY": -1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "ActivityMarbleMainSubUnloadGameArea"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha",
+              "DitherAlpha": 1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.HideAllEntity",
+              "HideNPC": true,
+              "NotHideEntity": [],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.UnloadLittleGameArea",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitStreamingJobFinished",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerMarbleAfterStreamingAction",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}

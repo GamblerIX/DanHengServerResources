@@ -1,0 +1,109 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "OpenUI_MusicRhythm"
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowTransitionLoadingUI",
+          "Name": "Ui.MusicRhythm.MusicRhythmTransitionDialog",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.ShowUI",
+          "Name": "Ui.MusicRhythm.MusicRhythmMainEntrancePage",
+          "WaitForExit": true,
+          "OnUIEnter": [
+            {
+              "$type": "RPG.GameCore.ExitTransitionLoadingUI",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.LockPlayerControl",
+              "LockCameraControl": true,
+              "LockInteractSelect": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "Cam"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "OnUIExitImmediately": [
+            {
+              "$type": "RPG.GameCore.SetLocalPlayerDitherAlpha",
+              "DitherAlpha": 1.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.UnLockPlayerControl",
+              "UnLockCameraControl": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "AreaName": "LevelArea_P10306_F10306001_G87",
+              "AnchorName": "cam01",
+              "VCameraDitherMaxDistance": 1.0,
+              "CenterPosX": -1.0,
+              "CenterPosY": -1.0,
+              "DynamicParams": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "Cam"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.ActiveVirtualCamera",
+              "AreaName": "LevelArea_P10306_F10306001_G87",
+              "AnchorName": "cam01",
+              "IsActive": true,
+              "VCameraDitherMaxDistance": 1.0,
+              "CenterPosX": -1.0,
+              "CenterPosY": -1.0,
+              "DynamicParams": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group"
+}

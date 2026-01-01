@@ -1,0 +1,1431 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "M_Phainon_00_SkillTargetSubListener": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnBeforeBeingAttacked",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                  "Name": "Phainon_00_Passive_AsSkillTarget",
+                  "ParamTarget": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier",
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenAfterSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.RemoveSelfModifier",
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnModifierAdd",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAny",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Flag": "AttackSign",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackBehaviorFlag",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "Flag": "TeamAction",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                        "ModifierName": "Monster_Beast02_Attack_Sign",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                        "ModifierName": "Monster_W2_Beast02_00_RLElite_Attack_Sign",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCheckModifierCallBackName",
+                        "ModifierName": "MCommon_SkillTarget",
+                        "TaskEnabled": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "Phainon_00_Passive_AsSkillTarget",
+                      "ParamTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity2"
+                      },
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.RemoveSelfModifier",
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        },
+        "MAvatar_Phainon_00_PassiveSkill01": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "ListenBattleEventSkill"
+          ],
+          "OnDynamicValueChange": [
+            {
+              "Key": {
+                "Hash": -133066886,
+                "HashKey": "-133066886"
+              },
+              "ContextScope": "ContextCaster",
+              "Ranges": [
+                {
+                  "Min": {
+                    "FixedValue": {
+                      "RawValue": -9223372036854775808,
+                      "Value": -2147483648.5
+                    }
+                  },
+                  "Max": {
+                    "FixedValue": {
+                      "RawValue": 9223372036854775807,
+                      "Value": 2147483648.5
+                    }
+                  },
+                  "OnChange": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "ModifierName": {
+                          "Value": "MAvatar_Phainon_00_Ultra"
+                        },
+                        "Inverse": true,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetEnergyBarState",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "Active": "Keep",
+                          "BarType": -1,
+                          "CurrentState": "Normal",
+                          "CD": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "MaxCount": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "CurrentCount": {
+                            "FixedValue": {
+                              "RawValue": -149061134974976,
+                              "Value": -34706.0
+                            }
+                          },
+                          "ActiveCount": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "SkipInCharmAction": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "Caster"
+                            },
+                            "DynamicKey": {
+                              "Value": "CurSpecialSP"
+                            },
+                            "CompareType": "GreaterEqual",
+                            "CompareValue": {
+                              "FixedValue": {
+                                "RawValue": -149061134974976,
+                                "Value": -34706.0
+                              }
+                            },
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetEnergyBarState",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "Active": "Keep",
+                              "BarType": -1,
+                              "CurrentState": "Active",
+                              "CD": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "MaxCount": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "CurrentCount": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "ActiveCount": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "SkipInCharmAction": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "Caster"
+                            },
+                            "DynamicKey": {
+                              "Value": "CurOverflowSpecialSP"
+                            },
+                            "CompareType": "Greater",
+                            "CompareValue": {},
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.PredicateTaskList",
+                              "Predicate": {
+                                "$type": "RPG.GameCore.ByIsContainModifier",
+                                "TargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "Caster"
+                                },
+                                "ModifierName": {
+                                  "Value": "MAvatar_Phainon_00_SPOverflow"
+                                },
+                                "Inverse": true,
+                                "TaskEnabled": true
+                              },
+                              "SuccessTaskList": [
+                                {
+                                  "$type": "RPG.GameCore.AddModifier",
+                                  "TargetType": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "Caster"
+                                  },
+                                  "AliveOnly": true,
+                                  "ModifierName": {
+                                    "Value": "MAvatar_Phainon_00_SPOverflow"
+                                  },
+                                  "Chance": {
+                                    "FixedValue": {
+                                      "RawValue": -4294967296,
+                                      "Value": -1.0
+                                    }
+                                  },
+                                  "MaxTargetCount": {
+                                    "FixedValue": {
+                                      "RawValue": -4294967296,
+                                      "Value": -1.0
+                                    }
+                                  },
+                                  "DynamicValues": {
+                                    "MDF_Count": {
+                                      "FixedValue": {
+                                        "RawValue": -149061134974976,
+                                        "Value": -34706.0
+                                      }
+                                    }
+                                  },
+                                  "IsShowUIMessageFromModel": true,
+                                  "IsShowUIMessageOnUpdate": true,
+                                  "ShowUIMessageInternalTime": -1.0,
+                                  "UseFixedPosition": true,
+                                  "TaskEnabled": true
+                                }
+                              ],
+                              "FailedTaskList": [
+                                {
+                                  "$type": "RPG.GameCore.SetModifierDynamicValue",
+                                  "TargetType": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "Caster"
+                                  },
+                                  "ModifierName": {
+                                    "Value": "MAvatar_Phainon_00_SPOverflow"
+                                  },
+                                  "DynamicKey": {
+                                    "Value": "MDF_Count"
+                                  },
+                                  "NewValue": {
+                                    "FixedValue": {
+                                      "RawValue": -149061134974976,
+                                      "Value": -34706.0
+                                    }
+                                  },
+                                  "ModifyFunction": "Set",
+                                  "TaskEnabled": true
+                                }
+                              ],
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "OnAbilityPropertyChange": [
+            {
+              "Property": "CurrentSpecialSP",
+              "Ranges": [
+                {
+                  "Min": {
+                    "FixedValue": {
+                      "RawValue": -9223372036854775808,
+                      "Value": -2147483648.5
+                    }
+                  },
+                  "Max": {
+                    "FixedValue": {
+                      "RawValue": 9223372036854775807,
+                      "Value": 2147483648.5
+                    }
+                  },
+                  "OnChange": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "CurSpecialSP",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": "CurrentSpecialSP",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "ModifierName": {
+                          "Value": "MAvatar_Phainon_00_Ultra"
+                        },
+                        "Inverse": true,
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetEnergyBarState",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "Active": "Keep",
+                          "BarType": -1,
+                          "CurrentState": "Normal",
+                          "CD": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "MaxCount": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "CurrentCount": {
+                            "FixedValue": {
+                              "RawValue": -149061134974976,
+                              "Value": -34706.0
+                            }
+                          },
+                          "ActiveCount": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "SkipInCharmAction": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "Caster"
+                            },
+                            "DynamicKey": {
+                              "Value": "CurSpecialSP"
+                            },
+                            "CompareType": "GreaterEqual",
+                            "CompareValue": {
+                              "FixedValue": {
+                                "RawValue": -149061134974976,
+                                "Value": -34706.0
+                              }
+                            },
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.SetEnergyBarState",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "Active": "Keep",
+                              "BarType": -1,
+                              "CurrentState": "Active",
+                              "CD": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "MaxCount": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "CurrentCount": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "ActiveCount": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "SkipInCharmAction": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Property": "BaseSpeed",
+              "Ranges": [
+                {
+                  "Min": {
+                    "FixedValue": {
+                      "RawValue": -9223372036854775808,
+                      "Value": -2147483648.5
+                    }
+                  },
+                  "Max": {
+                    "FixedValue": {
+                      "RawValue": 9223372036854775807,
+                      "Value": 2147483648.5
+                    }
+                  },
+                  "OnChange": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "Phainon_BaseSpeed",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": "BaseSpeed",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "_ExtraSpeedAddRatio",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": "ExtraSpeedAddedRatio1",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "DynamicKey": {
+                        "Value": "Phainon_BaseSpeed"
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Phainon_UltraBE"
+                      },
+                      "MaxNumber": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetModifierDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": {
+                            "Value": "MAvatar_Phainon_00_Skill03_BattleEvent_BaseSpeed"
+                          },
+                          "DynamicKey": {
+                            "Value": "MDF_PropertyValue"
+                          },
+                          "NewValue": {
+                            "FixedValue": {
+                              "RawValue": -149061134974976,
+                              "Value": -34706.0
+                            }
+                          },
+                          "ModifyFunction": "Set",
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Property": "ExtraSpeedAddedRatio1",
+              "Ranges": [
+                {
+                  "Min": {
+                    "FixedValue": {
+                      "RawValue": -9223372036854775808,
+                      "Value": -2147483648.5
+                    }
+                  },
+                  "Max": {
+                    "FixedValue": {
+                      "RawValue": 9223372036854775807,
+                      "Value": 2147483648.5
+                    }
+                  },
+                  "OnChange": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "Phainon_BaseSpeed",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": "BaseSpeed",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByProperty",
+                      "DynamicKey": "_ExtraSpeedAddRatio",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": "ExtraSpeedAddedRatio1",
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "DynamicKey": {
+                        "Value": "Phainon_BaseSpeed"
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Phainon_UltraBE"
+                      },
+                      "MaxNumber": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetModifierDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": {
+                            "Value": "MAvatar_Phainon_00_Skill03_BattleEvent_BaseSpeed"
+                          },
+                          "DynamicKey": {
+                            "Value": "MDF_PropertyValue"
+                          },
+                          "NewValue": {
+                            "FixedValue": {
+                              "RawValue": -149061134974976,
+                              "Value": -34706.0
+                            }
+                          },
+                          "ModifyFunction": "Set",
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SwitchByCommandType",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "SwitchOn": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.ModifySP",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "ModifyFunction": "Set",
+                  "ModifyValue": {},
+                  "IgnoreBlock": true,
+                  "SyncToSummoner": true,
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenBeforeSkillUse",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "ModifierName": {
+                          "Value": "MAvatar_Phainon_00_Ultra"
+                        },
+                        "Inverse": true,
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareTarget",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "CompareType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "AliveStateMask": "Mask_AliveOrLimbo",
+                        "Inverse": true,
+                        "TaskEnabled": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCurrentSkillTargetType",
+                        "IsDynamic": "True",
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "AliveOnly": true,
+                          "ModifierName": {
+                            "Value": "M_Phainon_00_SkillTargetSubListener"
+                          },
+                          "Chance": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "MaxTargetCount": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "IsShowUIMessageFromModel": true,
+                          "IsShowUIMessageOnUpdate": true,
+                          "ShowUIMessageInternalTime": -1.0,
+                          "UseFixedPosition": true,
+                          "IsSilenceAddAndStack": true,
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "FailedTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByAny",
+                            "PredicateList": [
+                              {
+                                "$type": "RPG.GameCore.ByTargetListIntersects",
+                                "FirstTargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ParamEntitySkillTargetEntityList"
+                                },
+                                "FirstTargetAliveOnly": true,
+                                "SecondTargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "Caster"
+                                },
+                                "SecondTargetAliveOnly": true,
+                                "TaskEnabled": true
+                              },
+                              {
+                                "$type": "RPG.GameCore.ByTargetListIntersects",
+                                "FirstTargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "ParamEntitySkillSubTargetEntityList"
+                                },
+                                "FirstTargetAliveOnly": true,
+                                "SecondTargetType": {
+                                  "$type": "RPG.GameCore.TargetAlias",
+                                  "Alias": "Caster"
+                                },
+                                "SecondTargetAliveOnly": true,
+                                "TaskEnabled": true
+                              }
+                            ],
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                              "Name": "Phainon_00_Passive_AsSkillTarget",
+                              "ParamTarget": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        }
+      },
+      "Name": "Avatar_GridFight_Phainon_00_PassiveSkill01",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AutoUseUltraSkill",
+          "Target": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "WaitCutinFinished": true,
+          "Enable": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PreloadBattleEventByID",
+          "BattleEventID": [
+            11408
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.LevelAudioState",
+          "GroupName": "State_Battle_Avatar_phainon",
+          "StateName": {
+            "Value": "normal"
+          },
+          "SaveToCustomString": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByProperty",
+          "DynamicKey": "CurSpecialSP",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Value": "CurrentSpecialSP",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByProperty",
+          "DynamicKey": "Phainon_BaseSpeed",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Value": "BaseSpeed",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByProperty",
+          "DynamicKey": "_ExtraSpeedAddRatio",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Value": "ExtraSpeedAddedRatio1",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Value": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "DynamicKey": {
+            "Value": "Phainon_BaseSpeed"
+          },
+          "SkipInCharmAction": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetEnergyBarState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Active": "True",
+          "BarType": 4,
+          "CurrentState": "Normal",
+          "CD": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1408SP.png",
+          "MaxCount": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "CurrentCount": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "ActiveCount": {
+            "FixedValue": {
+              "RawValue": -149061134974976,
+              "Value": -34706.0
+            }
+          },
+          "SkipInCharmAction": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MAvatar_Phainon_00_PassiveSkill01"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Modifiers": {
+        "MAvatar_GridFight_Phainon_00_PC01": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "AliveOnly": true,
+                  "ModifierName": {
+                    "Value": "MAvatar_GridFight_Phainon_00_PC01_DamageAdd"
+                  },
+                  "Chance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxTargetCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "IsShowUIMessageFromModel": true,
+                  "IsShowUIMessageOnUpdate": true,
+                  "ShowUIMessageInternalTime": -1.0,
+                  "UseFixedPosition": true,
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnEnterBattle",
+              "Priority": -80,
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareWaveCount",
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "Phainon_00_Passive_ChargeEnergyToGainSP",
+                      "DynamicValues": {
+                        "Arg0_AddValue": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        }
+                      },
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        },
+        "MAvatar_GridFight_Phainon_00_PC01_DamageAdd": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnStack",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.SetDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "Value": {},
+                  "DynamicKey": {
+                    "Value": "MDF_StarSum"
+                  },
+                  "SkipInCharmAction": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeamWithAllLightTeamUnselectable - ModifierOwnerEntity"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetEntityType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "EntityTypeMask": "Avatar",
+                    "AliveStateMask": "Mask_AliveOrLimbo",
+                    "TaskEnabled": true
+                  },
+                  "MaxNumber": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValueByGridFightProperty",
+                      "DynamicKey": "MDF_StarTemp",
+                      "ReadTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "DynamicKey": {
+                        "Value": "MDF_StarSum"
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.StackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ModifierOwnerEntity"
+                  },
+                  "Property": "ExtraFrontPowerAddedRatio1",
+                  "PropertyValue": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterDie",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetEntityType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "EntityTypeMask": "Avatar",
+                    "AliveStateMask": "Mask_AliveOrLimbo",
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": {},
+                      "DynamicKey": {
+                        "Value": "MDF_StarSum"
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeamWithAllLightTeamUnselectable - ModifierOwnerEntity"
+                      },
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByTargetEntityType",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "EntityTypeMask": "Avatar",
+                        "AliveStateMask": "Mask_AliveOrLimbo",
+                        "TaskEnabled": true
+                      },
+                      "MaxNumber": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValueByGridFightProperty",
+                          "DynamicKey": "MDF_StarTemp",
+                          "ReadTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "Value": {
+                            "FixedValue": {
+                              "RawValue": -149061134974976,
+                              "Value": -34706.0
+                            }
+                          },
+                          "DynamicKey": {
+                            "Value": "MDF_StarSum"
+                          },
+                          "SkipInCharmAction": true,
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.StackProperty",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "Property": "ExtraFrontPowerAddedRatio1",
+                      "PropertyValue": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenCharacterCreate",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByTargetEntityType",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "EntityTypeMask": "Avatar",
+                    "AliveStateMask": "Mask_AliveOrLimbo",
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "Value": {},
+                      "DynamicKey": {
+                        "Value": "MDF_StarSum"
+                      },
+                      "SkipInCharmAction": true,
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeamWithAllLightTeamUnselectable - ModifierOwnerEntity"
+                      },
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByTargetEntityType",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "EntityTypeMask": "Avatar",
+                        "AliveStateMask": "Mask_AliveOrLimbo",
+                        "TaskEnabled": true
+                      },
+                      "MaxNumber": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValueByGridFightProperty",
+                          "DynamicKey": "MDF_StarTemp",
+                          "ReadTargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "Value": {
+                            "FixedValue": {
+                              "RawValue": -149061134974976,
+                              "Value": -34706.0
+                            }
+                          },
+                          "DynamicKey": {
+                            "Value": "MDF_StarSum"
+                          },
+                          "SkipInCharmAction": true,
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.StackProperty",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "Property": "ExtraFrontPowerAddedRatio1",
+                      "PropertyValue": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique",
+          "DynamicValues": {}
+        }
+      },
+      "Name": "Avatar_GridFight_Phainon_00_PC01",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MAvatar_GridFight_Phainon_00_PC01"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "GlobalTemplates": []
+}

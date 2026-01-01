@@ -1,0 +1,645 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": []
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.FormationMoveAddStream",
+          "CurveList": [
+            1,
+            2
+          ],
+          "GroupList": [
+            85,
+            176,
+            421,
+            601
+          ],
+          "Speed": 0.6,
+          "SplitCount": 4,
+          "AheadDistance": 1.0,
+          "TeleportLod": 3,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "MovePause"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.FormationMovePause",
+              "StreamId": 85,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "MoveResume"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.FormationMoveResume",
+              "StreamId": 85,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": []
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "RideBegin"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomBool",
+              "Name": {
+                "Value": "FCV_PlayerRidingState"
+              },
+              "Value": {
+                "Value": true
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PlayFullScreenTransfer",
+              "Type": "Black",
+              "PrevDuration": 0.4,
+              "KeepDuration": 0.2,
+              "PostDuration": 0.4,
+              "Action": [
+                {
+                  "$type": "RPG.GameCore.ScrTrfActTaskList",
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetTargetEntityFadeWithAnim",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvNpcEx",
+                        "FetchType": "SingleNpcByOwnerGroupAndID",
+                        "NpcIDInOwnerGroup": {
+                          "FixedValue": {
+                            "RawValue": 1717991213367296,
+                            "Value": 400001.0
+                          }
+                        }
+                      },
+                      "TargetValue": 1.0,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.AdvPlayerRide",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvNpcEx",
+                        "FetchType": "SingleNpcByOwnerGroupAndID",
+                        "NpcIDInOwnerGroup": {
+                          "FixedValue": {
+                            "RawValue": 1717991213367296,
+                            "Value": 400001.0
+                          }
+                        }
+                      },
+                      "AttachPoint": {
+                        "Value": "RidePoint"
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.CharacterTriggerAnimState",
+                      "TargetAlias": {
+                        "$type": "RPG.GameCore.TargetFetchAdvLocalPlayer",
+                        "IncludeStoryPlayer": true
+                      },
+                      "ForceStart": true,
+                      "AnimStateName": "RideLoop",
+                      "NormalizedTransitionDuration": 0.05,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.AdvOverrideCameraModuleConfig",
+                      "OverrideConfigs": [
+                        {
+                          "OverrideType": "Freelook3rdModuleConfig",
+                          "OverrideConfigPath": "Camera/ModuleConfig/OverrideModuleConfig/Freelook3rdModuleConfig_Riding.asset"
+                        },
+                        {
+                          "OverrideType": "ZoomModuleConfig",
+                          "OverrideConfigPath": "Camera/ModuleConfig/OverrideModuleConfig/ZoomModuleConfig_Riding.asset"
+                        }
+                      ],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetHudTemplate",
+                      "TemplateID": 1017,
+                      "EnableTemplate": true,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.DisableMazeLockTarget",
+                      "Target": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AdvLocalPlayer"
+                      },
+                      "Disable": true,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.TriggerGroupEvent",
+                      "EventName": {
+                        "Value": "MoveResume"
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "RideCancel"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PlayFullScreenTransfer",
+              "Type": "Black",
+              "PrevDuration": 0.4,
+              "KeepDuration": 0.2,
+              "PostDuration": 0.4,
+              "Action": [
+                {
+                  "$type": "RPG.GameCore.ScrTrfActTaskList",
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.AdvPlayerCancelRide",
+                      "SelectOffsetList": [
+                        {
+                          "x": 3.0,
+                          "z": -4.0,
+                          "normalized": {
+                            "x": 0.6,
+                            "z": -0.8,
+                            "magnitude": 1.0,
+                            "sqrMagnitude": 1.0
+                          },
+                          "magnitude": 5.0,
+                          "sqrMagnitude": 25.0
+                        },
+                        {
+                          "x": -3.0,
+                          "z": -4.0,
+                          "normalized": {
+                            "x": -0.6,
+                            "z": -0.8,
+                            "magnitude": 1.0,
+                            "sqrMagnitude": 1.0
+                          },
+                          "magnitude": 5.0,
+                          "sqrMagnitude": 25.0
+                        },
+                        {
+                          "x": -4.0,
+                          "z": 4.0,
+                          "normalized": {
+                            "x": -0.707106769,
+                            "z": 0.707106769,
+                            "normalized": {
+                              "x": -0.7071068,
+                              "z": 0.7071068,
+                              "magnitude": 1.0,
+                              "sqrMagnitude": 1.00000012
+                            },
+                            "magnitude": 0.99999994,
+                            "sqrMagnitude": 0.99999994
+                          },
+                          "magnitude": 5.656854,
+                          "sqrMagnitude": 32.0
+                        },
+                        {
+                          "x": 4.0,
+                          "z": 4.0,
+                          "normalized": {
+                            "x": 0.707106769,
+                            "z": 0.707106769,
+                            "normalized": {
+                              "x": 0.7071068,
+                              "z": 0.7071068,
+                              "magnitude": 1.0,
+                              "sqrMagnitude": 1.00000012
+                            },
+                            "magnitude": 0.99999994,
+                            "sqrMagnitude": 0.99999994
+                          },
+                          "magnitude": 5.656854,
+                          "sqrMagnitude": 32.0
+                        }
+                      ],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.AdvOverrideCameraModuleConfig",
+                      "OverrideConfigs": [
+                        {
+                          "OverrideType": "Freelook3rdModuleConfig",
+                          "OverrideConfigPath": "Camera/ModuleConfig/OverrideModuleConfig/Freelook3rdModuleConfig_Riding.asset"
+                        },
+                        {
+                          "OverrideType": "ZoomModuleConfig",
+                          "OverrideConfigPath": "Camera/ModuleConfig/OverrideModuleConfig/ZoomModuleConfig_Riding.asset"
+                        }
+                      ],
+                      "IsReset": true,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetHudTemplate",
+                      "TemplateID": 1017,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.FormationMoveSetStreamSpeed",
+                      "StreamId": 85,
+                      "Speed": 0.6,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.DisableMazeLockTarget",
+                      "Target": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AdvLocalPlayer"
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetFloorCustomBool",
+                      "Name": {
+                        "Value": "FCV_PlayerRidingState"
+                      },
+                      "Value": {},
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.BlockInputController",
+                      "ActionNameList": [],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "Maze_Riding_Cancel"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "RideCancel"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "Maze_Riding_Skip"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PlayFullScreenTransfer",
+              "Type": "Black",
+              "PrevDuration": 0.4,
+              "KeepDuration": 0.2,
+              "PostDuration": 0.4,
+              "Action": [
+                {
+                  "$type": "RPG.GameCore.ScrTrfActTaskList",
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.BlockInputController",
+                      "Enable": true,
+                      "ActionNameList": [],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.FormationMoveToStation",
+                      "StreamId": 85,
+                      "GroupId": 85,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitFrame",
+                      "WaitFrameCount": 1,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetTargetEntityFadeWithAnim",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetFetchAdvNpcEx",
+                        "FetchType": "SingleNpcByOwnerGroupAndID",
+                        "NpcIDInOwnerGroup": {
+                          "FixedValue": {
+                            "RawValue": 1717991213367296,
+                            "Value": 400001.0
+                          }
+                        }
+                      },
+                      "TargetValue": 1.0,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetForceStreamingThisFrame",
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitStreamingJobFinished",
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.WaitSecond",
+                      "WaitTime": {
+                        "FixedValue": {
+                          "RawValue": 1717986920,
+                          "Value": 0.4
+                        }
+                      },
+                      "MaxAdvencePerTick": -1.0,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.BlockInputController",
+                      "ActionNameList": [],
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.ToastPile",
+                      "DescTextID": {
+                        "Hash": -232433397,
+                        "Hash64": 2338527755027988709
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.FormationMoveAddGroup",
+          "StreamId": 85,
+          "Pattern": "CavalryBeast_Bus",
+          "Members": [
+            {
+              "InstanceID": 400001
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "Maze_Riding_SwitchRun_Off"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.FormationMoveSetStreamSpeed",
+              "StreamId": 85,
+              "Speed": 0.6,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.FormationMoveGroupCallback",
+          "GroupId": 85,
+          "OnReachCurveEnd": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomBoolV2",
+              "Name": {
+                "Value": "FCV_CavalryBeast_Teleport"
+              },
+              "Value": {},
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCheckFloorCustomBool",
+                "Name": {
+                  "Value": "FCV_PlayerRidingState"
+                },
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.BlockInputController",
+                  "Enable": true,
+                  "ActionNameList": [],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.PlayFullScreenTransfer",
+                  "Type": "Black",
+                  "PrevDuration": 1.0,
+                  "KeepDuration": 2.0,
+                  "PostDuration": 1.0,
+                  "Action": [
+                    {
+                      "$type": "RPG.GameCore.ScrTrfActTaskList",
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.SetForceStreamingThisFrame",
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.WaitStreamingJobFinished",
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.BlockInputController",
+                          "ActionNameList": [],
+                          "TaskEnabled": true,
+                          "IsClientOnly": true
+                        }
+                      ]
+                    }
+                  ],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "OnCurveEndTeleport": [
+            {
+              "$type": "RPG.GameCore.SetFloorCustomBoolV2",
+              "Name": {
+                "Value": "FCV_CavalryBeast_Teleport"
+              },
+              "Value": {
+                "Value": true
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "Maze_Riding_SwitchRun_On"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.FormationMoveSetStreamSpeed",
+              "StreamId": 85,
+              "Speed": 1.6,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.TriggerGroupEvent",
+          "EventName": {
+            "Value": "MoveResume"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "ValueSource": {},
+  "Type": "Group",
+  "EntityEventList": []
+}

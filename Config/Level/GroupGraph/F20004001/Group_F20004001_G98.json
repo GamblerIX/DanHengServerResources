@@ -1,0 +1,478 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [
+            8016203
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMissionCustomValue",
+            "MainMissionID": 8016203,
+            "MissionCustomValue": {
+              "Name": "OldValue_0",
+              "isLocal": true,
+              "isRange": true,
+              "ValidValueParamList": [
+                0,
+                1
+              ]
+            },
+            "EquationType": "Equal",
+            "TargetValue": 1,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvCreateEntityAsync",
+              "InstanceIDList": [
+                400019,
+                400020
+              ],
+              "AdvancedSpawnList": [],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvCreateEntityAsync",
+              "InstanceIDList": [
+                400018
+              ],
+              "AdvancedSpawnList": [],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupButtonListTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300001
+            ]
+          },
+          "TriggerName": "MissionTrigger",
+          "ButtonsByName": [],
+          "ButtonConfigs": [
+            {
+              "ID": "OpenCam",
+              "IconType": {
+                "JsonValueStr": "ChatLoopIcon"
+              },
+              "ButtonText": {
+                "Value": "TalkSentenceConfig_TalkSentenceText_816203098"
+              },
+              "ShowPriority": "Default"
+            }
+          ],
+          "InteractAngleRange": 180.0,
+          "OwnerForwardAngleRange": 90.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvOnButtonPressed",
+          "ButtonName": "OpenCam",
+          "OnPressedCallback": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "G98_OpenCam"
+              },
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "opendecal"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.DecalPuzzleStart",
+              "DecalConfigIDs": [
+                10,
+                11,
+                12,
+                13
+              ],
+              "Title": {
+                "Hash": -509757811,
+                "Hash64": 11367550031984137970
+              },
+              "Scale": 1.0,
+              "DecalWidth": 2.0,
+              "DecalHeight": 2.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetMissionWayPoint",
+              "SubMissionID": 801620302,
+              "OverideMissionWayPointType": true,
+              "WayPointGroupID": 98,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "DecalPuzzle_Finish"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.DecalPuzzleEnd",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitPhotoGraphResult",
+          "WaitPhotoResult": [
+            "8016203_Photo"
+          ],
+          "OnSuccess": [
+            {
+              "$type": "RPG.GameCore.TriggerCustomString",
+              "CustomString": {
+                "Value": "Talk_801620302"
+              },
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvDestroyGroupEntity",
+              "InstanceIDList": [
+                300004
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvEnableTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300001
+                ]
+              },
+              "TriggerName": "MissionTrigger",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvDistrictEnableTrigger",
+              "GroupID": {
+                "FixedValue": {
+                  "RawValue": 420906795008,
+                  "Value": 98.0
+                }
+              },
+              "DistrictID": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvDistrictSetupTrigger",
+          "GroupID": {
+            "FixedValue": {
+              "RawValue": 420906795008,
+              "Value": 98.0
+            }
+          },
+          "DistrictID": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TickInterval": 0.5,
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.ShowFuncBtn",
+              "Show": true,
+              "HideWhenGraphFinish": true,
+              "PuzzleFunc": "TriggerCustomString",
+              "ShowBtnFucHint": true,
+              "CustomString": {
+                "Value": "opendecal"
+              },
+              "ShowBtnEffect": true,
+              "OverrideIconPath": "SpriteOutput/PhotoGraffti/SkillIcon_Graffti.png",
+              "OverrideBtnHint": {
+                "Hash": -509757813,
+                "Hash64": 3817528409920833217
+              },
+              "MissionID": {
+                "FixedValue": {
+                  "RawValue": 34429329723097088,
+                  "Value": 8016203.0
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "OnExit": [
+            {
+              "$type": "RPG.GameCore.ShowFuncBtn",
+              "HideWhenGraphFinish": true,
+              "PuzzleFunc": "TriggerCustomString",
+              "ShowBtnFucHint": true,
+              "CustomString": {
+                "Value": "opendecal"
+              },
+              "ShowBtnEffect": true,
+              "OverrideIconPath": "SpriteOutput/PhotoGraffti/SkillIcon_Graffti.png",
+              "OverrideBtnHint": {
+                "Hash": -509757813,
+                "Hash64": 3817528409920833217
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DecalPuzzleEnd",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PlayNPCBubbleTalk",
+          "BubbleTalkInfoList": [
+            {
+              "AutoSkipTime": 8.0,
+              "GroupID": 98,
+              "GroupNpcID": 400005,
+              "TalkSentenceID": 816203605
+            },
+            {
+              "AutoSkipTime": 8.0,
+              "GroupID": 98,
+              "GroupNpcID": 400005,
+              "TalkSentenceID": 816203606
+            },
+            {
+              "AutoSkipTime": 8.0,
+              "GroupID": 98,
+              "GroupNpcID": 400005,
+              "TalkSentenceID": 816203607
+            }
+          ],
+          "BubbleTalkType": "Normal",
+          "IsLoop": true,
+          "LoopInterval": 10.0,
+          "InstantFinish": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "MaxAdvencePerTick": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PlayNPCBubbleTalk",
+          "BubbleTalkInfoList": [
+            {
+              "AutoSkipTime": 8.0,
+              "GroupID": 98,
+              "GroupNpcID": 400004,
+              "TalkSentenceID": 816203601
+            },
+            {
+              "AutoSkipTime": 8.0,
+              "GroupID": 98,
+              "GroupNpcID": 400004,
+              "TalkSentenceID": 816203602
+            }
+          ],
+          "BubbleTalkType": "Normal",
+          "IsLoop": true,
+          "LoopInterval": 10.0,
+          "InstantFinish": true,
+          "UniqueID": 1,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "MaxAdvencePerTick": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PlayNPCBubbleTalk",
+          "BubbleTalkInfoList": [
+            {
+              "AutoSkipTime": 8.0,
+              "GroupID": 98,
+              "GroupNpcID": 400011,
+              "TalkSentenceID": 816203603
+            },
+            {
+              "AutoSkipTime": 8.0,
+              "GroupID": 98,
+              "GroupNpcID": 400011,
+              "TalkSentenceID": 816203604
+            }
+          ],
+          "BubbleTalkType": "Normal",
+          "IsLoop": true,
+          "LoopInterval": 10.0,
+          "InstantFinish": true,
+          "UniqueID": 2,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitSecond",
+          "WaitTime": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "MaxAdvencePerTick": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PlayNPCBubbleTalk",
+          "BubbleTalkInfoList": [
+            {
+              "AutoSkipTime": 8.0,
+              "GroupID": 98,
+              "GroupNpcID": 400023,
+              "TalkSentenceID": 816203608
+            },
+            {
+              "AutoSkipTime": 8.0,
+              "GroupID": 98,
+              "GroupNpcID": 400023,
+              "TalkSentenceID": 816203609
+            }
+          ],
+          "BubbleTalkType": "Normal",
+          "IsLoop": true,
+          "LoopInterval": 10.0,
+          "InstantFinish": true,
+          "UniqueID": 3,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "DecalPuzzle_Terminate"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.SetMissionWayPoint",
+              "SubMissionID": 801620302,
+              "OverideMissionWayPointType": true,
+              "MissionWayPointType": "NPC",
+              "OverideWayPointGroupID": true,
+              "WayPointGroupID": 98,
+              "OverideWayPointEntityID": true,
+              "WayPointEntityID": 400012,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group"
+}

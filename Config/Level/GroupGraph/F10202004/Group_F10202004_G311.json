@@ -1,0 +1,114 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EnterArea_G{GroupID}"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PlayMissionTalk",
+              "MuteBattleVO": true,
+              "SimpleTalkList": [
+                {
+                  "TextSpeed": 20.0,
+                  "TalkSentenceID": 202190302,
+                  "ProtectTime": 2.0
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300002
+            ]
+          },
+          "TriggerName": "MissionTrigger",
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "EnterArea_G{GroupID}"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "DisableAfterTriggered": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetAILeadWay",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvNpcEx",
+            "FetchType": "SingleNpcByNpcID",
+            "SingleNpcID": {
+              "GroupID": {
+                "FixedValue": {
+                  "RawValue": 1335734829056,
+                  "Value": 311.0
+                }
+              },
+              "GroupNpcID": {
+                "FixedValue": {
+                  "RawValue": 1717991213367296,
+                  "Value": 400001.0
+                }
+              }
+            }
+          },
+          "EntityInstanceID": {
+            "FixedValue": {
+              "RawValue": 1717991213367296,
+              "Value": 400001.0
+            }
+          },
+          "PathwayGroupID": 311,
+          "PathwayID": 1,
+          "MotionFlag": "Run",
+          "SpeedScale": 1.0,
+          "WaitForPlayer": true,
+          "StartWaitDistance": 7.0,
+          "StopWaitDistance": 5.0,
+          "StartWalkDistance": 2.5,
+          "EndWalkDistance": 3.5,
+          "OverStepRadius": 0.5,
+          "RepathTime": 0.5,
+          "OnReach": [
+            {
+              "$type": "RPG.GameCore.ClientFinishMission",
+              "SubmissionID": 202190103,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group"
+}

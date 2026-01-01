@@ -1,0 +1,326 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.GroupInitMemberEntityDynamicValues",
+          "EntityInstanceID": 300001,
+          "InitDynamicValueSet": {
+            "FloatOverrides": [
+              {
+                "Name": "FlySpeed",
+                "Value": {
+                  "FixedValue": {
+                    "RawValue": 42949672960,
+                    "Value": 10.0
+                  }
+                }
+              }
+            ],
+            "StringOverrides": [
+              {
+                "Name": "TargetPointAlias",
+                "Value": {
+                  "Value": "01"
+                }
+              }
+            ],
+            "UIntOverrides": [
+              {
+                "Name": "TestInt",
+                "Value": {
+                  "FixedValue": {
+                    "RawValue": 425201762304,
+                    "Value": 99.0
+                  }
+                }
+              }
+            ]
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SetGraphDynamicString",
+          "Name": "TargetPointAlias",
+          "TargetIDs": [
+            300001
+          ],
+          "Value": {
+            "Value": "01"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300002
+            ]
+          },
+          "TriggerName": "MissionTrigger",
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "EnterArea_G{GroupID}"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "DisableAfterTriggered": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EnterArea_G{GroupID}"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PlayMissionTalk",
+              "MuteBattleVO": true,
+              "SimpleTalkList": [
+                {
+                  "TextSpeed": 20.0,
+                  "TalkSentenceID": 140311201,
+                  "ProtectTime": 2.0
+                },
+                {
+                  "TextSpeed": 20.0,
+                  "TalkSentenceID": 140311202,
+                  "ProtectTime": 2.0
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvClientChangePropState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+                "FetchType": "SinglePropByPropID",
+                "SinglePropID": {
+                  "GroupID": {
+                    "FixedValue": {
+                      "RawValue": 244813135872,
+                      "Value": 57.0
+                    }
+                  },
+                  "ID": {
+                    "FixedValue": {
+                      "RawValue": 1288494483767296,
+                      "Value": 300001.0
+                    }
+                  }
+                }
+              },
+              "FromState": "Locked",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetGraphDynamicString",
+              "Name": "TargetPointAlias",
+              "TargetIDs": [
+                300001
+              ],
+              "Value": {
+                "Value": "End"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitCustomString",
+          "CustomString": {
+            "Value": "G57_ButterFly2"
+          },
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.AdvCreateGroupEntity",
+          "InstanceIDList": [
+            300003
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.AdvClientChangePropState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetFetchAdvPropEx",
+            "FetchType": "SinglePropByPropID",
+            "SinglePropID": {
+              "GroupID": {
+                "FixedValue": {
+                  "RawValue": 244813135872,
+                  "Value": 57.0
+                }
+              },
+              "ID": {
+                "FixedValue": {
+                  "RawValue": 1288494483767296,
+                  "Value": 300001.0
+                }
+              }
+            }
+          },
+          "ToState": "Open",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EnterArea_G57_Performance"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PlayFullScreenTransfer",
+              "Type": "Black",
+              "PrevDuration": 0.5,
+              "KeepDuration": 0.5,
+              "PostDuration": -1.0,
+              "Action": [
+                {
+                  "$type": "RPG.GameCore.ScrTrfActPerformanceGroup",
+                  "AdvCreateGroupEntity": {
+                    "InstanceIDList": [
+                      300003
+                    ],
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "AdvDestroyGroupEntity": {
+                    "InstanceIDList": [
+                      300001
+                    ],
+                    "TaskEnabled": true,
+                    "IsClientOnly": true
+                  },
+                  "CaptureNpc": [],
+                  "SwitchCharacterAnchor": {
+                    "ResetAnimation": true,
+                    "ResetCamera": true,
+                    "ClearSpecialVision": true,
+                    "IsClientOnly": true
+                  },
+                  "ActiveVirtualCamera": {
+                    "IsActive": true,
+                    "VCameraDitherMaxDistance": 1.0,
+                    "CenterPosX": -1.0,
+                    "CenterPosY": -1.0,
+                    "IsClientOnly": true
+                  },
+                  "ActiveTemplateVirtualCamera": {
+                    "IsActive": true,
+                    "IsClientOnly": true
+                  },
+                  "AdvNpcFaceToPlayer": {
+                    "FromDialog": true,
+                    "TryFaceToFace": true,
+                    "NpcLookAtPlayer": true,
+                    "PlayerLookAtNpc": true,
+                    "StopLookAtOnGraphEnd": true,
+                    "TurnBackOnGraphEnd": true,
+                    "SteerImmediately": true,
+                    "FinishImmadiate": true,
+                    "WaitFinishMode": "WaitFaceAngle",
+                    "ForceToStandBy": true,
+                    "IsClientOnly": true
+                  }
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "ValueSource": {},
+              "PerformanceType": "D",
+              "PerformanceID": 104030702,
+              "MaskConfig": {
+                "EndBlack": "Full",
+                "MaskColor": "Black"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ClientFinishMission",
+              "SubmissionID": 104030702,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+          "TargetType": {
+            "$type": "RPG.GameCore.GroupFetchLocalTarget",
+            "TargetType": "Prop",
+            "Targets": [
+              300004
+            ]
+          },
+          "TriggerName": "MissionTrigger",
+          "OnEnter": [
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "EnterArea_G57_Performance"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "DisableAfterTriggered": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}

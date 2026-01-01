@@ -1,0 +1,122 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": []
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.SetStageItemState",
+          "ItemList": [
+            {
+              "BlockAlias": "Bar_2F_Bathroom",
+              "PrefabAlias": "BathSalt_01"
+            },
+            {
+              "BlockAlias": "Bar_2F_Bathroom",
+              "PrefabAlias": "BathSalt_02"
+            },
+            {
+              "BlockAlias": "Bar_2F_Bathroom",
+              "PrefabAlias": "BathSalt_03"
+            },
+            {
+              "BlockAlias": "Bar_2F_Bathroom",
+              "PrefabAlias": "BathSalt_04"
+            }
+          ],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_RaidChangeSalt"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+                "Name": {
+                  "Value": "FCV_RaidChangeSalt"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetStageItemState",
+                  "ItemList": [
+                    {
+                      "BlockAlias": "Bar_2F_Bathroom",
+                      "PrefabAlias": "BathSalt_04"
+                    }
+                  ],
+                  "EnableState": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetStageItemState",
+                  "ItemList": [
+                    {
+                      "BlockAlias": "Bar_2F_Bathroom",
+                      "PrefabAlias": "BathSalt_00"
+                    }
+                  ],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "FailedTaskList": [
+                {
+                  "$type": "RPG.GameCore.SetStageItemState",
+                  "ItemList": [
+                    {
+                      "BlockAlias": "Bar_2F_Bathroom",
+                      "PrefabAlias": "BathSalt_04"
+                    }
+                  ],
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetStageItemState",
+                  "ItemList": [
+                    {
+                      "BlockAlias": "Bar_2F_Bathroom",
+                      "PrefabAlias": "BathSalt_00"
+                    }
+                  ],
+                  "EnableState": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}

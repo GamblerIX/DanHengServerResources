@@ -1,0 +1,166 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "G353OpenRaid"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.StartDialogueEntityInteract",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "Targets": [
+                  400001
+                ]
+              },
+              "LevelGraphPath": "Config/Level/Props/InteractMode/TriggerEvent_TriggerType_08.json",
+              "UseOverrideData": true,
+              "ValueSource": {
+                "Values": [
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "Level/Common_Adventure/UseInteractNPCFront.prefab",
+                    "Key": "DialogueEntityInteract_AreaPath"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "UseInteractNPCFront,UseInteractNPCFront_Camera",
+                    "Key": "DialogueEntityInteract_CameraKey"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "UseInteractNPCFront",
+                    "Key": "DialogueEntityInteract_AreaName"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedFloat",
+                    "Value": 1.0,
+                    "Key": "ResetEntityTransform"
+                  }
+                ],
+                "SharedValues": [
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "Level/Common_Adventure/UseInteractNPCFront.prefab",
+                    "Key": "DialogueEntityInteract_AreaPath"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "UseInteractNPCFront,UseInteractNPCFront_Camera",
+                    "Key": "DialogueEntityInteract_CameraKey"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedString",
+                    "Value": "UseInteractNPCFront",
+                    "Key": "DialogueEntityInteract_AreaName"
+                  },
+                  {
+                    "$type": "RPG.GameCore.SharedFloat",
+                    "Value": 1.0,
+                    "Key": "ResetEntityTransform"
+                  }
+                ]
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ShowHalfScreenPage",
+              "ShowByCustomTask": true,
+              "CustomShowUI": [
+                {
+                  "$type": "RPG.GameCore.OpenTreasureChallenge",
+                  "RaidID": 40449,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "OnUIExit": [],
+              "EndDialogueOnUIExit": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [
+            104055108
+          ],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareSubMissionState",
+            "SubMissionID": 104055108,
+            "SubMissionState": "Finish",
+            "Inverse": true,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.TriggerPerformance",
+              "ValueSource": {},
+              "PerformanceType": "D",
+              "PerformanceID": 104055105,
+              "MaskConfig": {
+                "StartBlack": "NoPre",
+                "EndBlack": "Full",
+                "MaskColor": "Black"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.PerformanceEndSeq",
+              "Cases": [
+                {
+                  "Case": 1,
+                  "OnSuccess": [
+                    {
+                      "$type": "RPG.GameCore.TriggerGroupEvent",
+                      "EventName": {
+                        "Value": "G353OpenRaid"
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ]
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.ClientFinishMission",
+              "SubmissionID": 104055108,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}

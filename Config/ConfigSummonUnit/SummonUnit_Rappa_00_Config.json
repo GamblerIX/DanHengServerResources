@@ -1,0 +1,210 @@
+{
+  "GroupConfigName": "FollowField",
+  "ConfigEntityPath": "Config/ConfigEntity/SummonUnit/SummonUnit_Common_TeamField_Entity.json",
+  "TickLodTemplateName": "DefaultStaticEntity",
+  "ShoesType": "boot",
+  "AttachPoint": "Origin",
+  "Duration": {
+    "FixedValue": {
+      "RawValue": -4294967296,
+      "Value": -1.0
+    }
+  },
+  "OnCreate": [
+    {
+      "$type": "RPG.GameCore.DisableMazeLockTarget",
+      "Target": {
+        "$type": "RPG.GameCore.TargetAlias",
+        "Alias": "AdvLocalPlayer"
+      },
+      "Disable": true,
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    },
+    {
+      "$type": "RPG.GameCore.WaitSecond",
+      "WaitTime": {
+        "FixedValue": {
+          "RawValue": 83751862274,
+          "Value": 19.5
+        }
+      },
+      "MaxAdvencePerTick": -1.0,
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    },
+    {
+      "$type": "RPG.GameCore.SetSummonUnitTriggerEnable",
+      "SummonUnit": {
+        "$type": "RPG.GameCore.TargetAlias",
+        "Alias": "Caster"
+      },
+      "TriggerNames": [
+        "HitNpcMonsterTrigger"
+      ],
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    }
+  ],
+  "OnDestroy": [
+    {
+      "$type": "RPG.GameCore.DisableMazeLockTarget",
+      "Target": {
+        "$type": "RPG.GameCore.TargetAlias",
+        "Alias": "AdvLocalPlayer"
+      },
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    },
+    {
+      "$type": "RPG.GameCore.RemoveMazeBuff",
+      "TargetType": {
+        "$type": "RPG.GameCore.TargetAlias",
+        "Alias": "AdvLocalPlayer"
+      },
+      "ID": 131702,
+      "TaskEnabled": true,
+      "IsClientOnly": true
+    }
+  ],
+  "TriggerConfig": {
+    "CustomTriggers": [
+      {
+        "TriggerName": "HitNpcMonsterTrigger",
+        "DefaultEnable": true,
+        "Radius": {
+          "FixedValue": {
+            "RawValue": 9019431322,
+            "Value": 2.1
+          }
+        },
+        "UseVerticalBound": true,
+        "NeedRaycast": true,
+        "RayStartOffsetY": 1.0,
+        "TargetTypes": [
+          "NPCMonster"
+        ],
+        "OnlyCheckFilterOnEnter": true,
+        "OnTriggerEnter": [
+          {
+            "$type": "RPG.GameCore.AdventureTriggerTargetAbility",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "CasterSummoner"
+            },
+            "SkillType": "MazeSkill",
+            "AbilityName": "LocalPlayer_Rappa_00_MazeSkill_TriggerHitMonster",
+            "AbilityTargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          }
+        ],
+        "SkipFakeAvatar": true
+      },
+      {
+        "TriggerName": "HitNPCTrigger",
+        "DefaultEnable": true,
+        "Radius": {
+          "FixedValue": {
+            "RawValue": 9019431322,
+            "Value": 2.1
+          }
+        },
+        "UseVerticalBound": true,
+        "NeedRaycast": true,
+        "RayStartOffsetY": 1.0,
+        "TargetTypes": [
+          "NPC"
+        ],
+        "TargetFilter": {
+          "$type": "RPG.GameCore.ByTargetHitBoxActive",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ParamEntity"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        "OnlyCheckFilterOnEnter": true,
+        "OnTriggerEnter": [
+          {
+            "$type": "RPG.GameCore.TriggerHitTarget",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "HitConfig": {
+              "HitAnimation": "Hit",
+              "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Rappa_00/Eff_Avatar_Rappa_00_MazeSkill01_Hit01.prefab",
+              "HitEffectHeight": 1.0
+            },
+            "OnlyHitClientTarget": true,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          }
+        ],
+        "OnTriggerExit": [],
+        "SkipFakeAvatar": true
+      },
+      {
+        "TriggerName": "HitPropTrigger",
+        "DefaultEnable": true,
+        "Radius": {
+          "FixedValue": {
+            "RawValue": 9019431322,
+            "Value": 2.1
+          }
+        },
+        "UseVerticalBound": true,
+        "NeedRaycast": true,
+        "RayStartOffsetY": 1.0,
+        "TargetTypes": [
+          "Prop"
+        ],
+        "TargetFilter": {
+          "$type": "RPG.GameCore.ByIsPropLockable",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "ParamEntity"
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        "OnlyCheckFilterOnEnter": true,
+        "OnTriggerEnter": [
+          {
+            "$type": "RPG.GameCore.TriggerHitProp",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "ClientMode": "PreShow",
+            "HitConfig": {
+              "HitAnimation": "Hit",
+              "HitEffect": "Effects/Eff_Prefab/Eff_Avatar/Eff_Rappa_00/Eff_Avatar_Rappa_00_MazeSkill01_Hit01.prefab",
+              "HitEffectHeight": 1.0
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          }
+        ],
+        "OnTriggerExit": [],
+        "OnTriggerEnterRollback": [
+          {
+            "$type": "RPG.GameCore.PropDestructReset",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "TaskActionTarget"
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          }
+        ],
+        "SkipFakeAvatar": true
+      }
+    ]
+  }
+}

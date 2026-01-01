@@ -1,0 +1,294 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": []
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorSavedValueChangeV2",
+          "Name": {
+            "Value": "FSV_LoadFlower"
+          },
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+            "DynamicName": {
+              "Value": "FSV_LoadFlower"
+            },
+            "CompareType": "Equal",
+            "CompareValue": 1,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.SetFilterVolumeEnable",
+              "TargetFilterVolume": {
+                "Value": "VolumeR13_Flower"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "SartAchieve"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "SartAchieve"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.AdvDistrictSetupTrigger",
+              "GroupID": {
+                "FixedValue": {
+                  "RawValue": 661424963584,
+                  "Value": 154.0
+                }
+              },
+              "DistrictID": {
+                "FixedValue": {
+                  "RawValue": 2147487942967296,
+                  "Value": 500001.0
+                }
+              },
+              "TickInterval": 0.5,
+              "OnEnter": [
+                {
+                  "$type": "RPG.GameCore.AvdMonitorPlayerRun",
+                  "Duration": 20.0,
+                  "MotionFlags": [
+                    "Run",
+                    "Walk",
+                    "FastRun"
+                  ],
+                  "OnSatisfy": [
+                    {
+                      "$type": "RPG.GameCore.SetAdvAchievement",
+                      "AchievementID": 4044211,
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
+                    }
+                  ],
+                  "StopEvent": {
+                    "Value": "Stop154"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "OnExit": [
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "Stop154"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+            "DynamicName": {
+              "Value": "FSV_LoadFlower"
+            },
+            "CompareType": "Equal",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetFilterVolumeEnable",
+              "TargetFilterVolume": {
+                "Value": "VolumeR13_Flower"
+              },
+              "IsEnable": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.SetFilterVolumeEnable",
+              "TargetFilterVolume": {
+                "Value": "VolumeR13_Flower"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.TriggerGroupEvent",
+              "EventName": {
+                "Value": "SartAchieve"
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByCompareItemNum",
+                "ItemPair": [
+                  {
+                    "ItemID": 150063,
+                    "ItemNum": 1
+                  },
+                  {
+                    "ItemID": 150065,
+                    "ItemNum": 1
+                  },
+                  {
+                    "ItemID": 150069,
+                    "ItemNum": 1
+                  },
+                  {
+                    "ItemID": 150071,
+                    "ItemNum": 1
+                  }
+                ],
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareQuestProgress",
+                "QuestID": {
+                  "FixedValue": {
+                    "RawValue": 9451556571185152,
+                    "Value": 2200612.0
+                  }
+                },
+                "Progress": {
+                  "FixedValue": {
+                    "RawValue": 42949672960,
+                    "Value": 10.0
+                  }
+                },
+                "EquationType": "Equal",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareQuestProgress",
+                "QuestID": {
+                  "FixedValue": {
+                    "RawValue": 9451552276217856,
+                    "Value": 2200611.0
+                  }
+                },
+                "Progress": {
+                  "FixedValue": {
+                    "RawValue": 42949672960,
+                    "Value": 10.0
+                  }
+                },
+                "EquationType": "Equal",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareQuestProgress",
+                "QuestID": {
+                  "FixedValue": {
+                    "RawValue": 9451547981250560,
+                    "Value": 2200610.0
+                  }
+                },
+                "Progress": {
+                  "FixedValue": {
+                    "RawValue": 85899345920,
+                    "Value": 20.0
+                  }
+                },
+                "EquationType": "Equal",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareQuestProgress",
+                "QuestID": {
+                  "FixedValue": {
+                    "RawValue": 9451539391315968,
+                    "Value": 2200608.0
+                  }
+                },
+                "Progress": {
+                  "FixedValue": {
+                    "RawValue": 42949672960,
+                    "Value": 10.0
+                  }
+                },
+                "EquationType": "Equal",
+                "TaskEnabled": true,
+                "IsClientOnly": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.RequestSetServerGroupPropertyV2",
+              "GroupID": 154,
+              "DynamicName": {
+                "Value": "FSV_LoadConnection"
+              },
+              "Value": 1,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.LoopWaitServerGroupPropertyChange",
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}

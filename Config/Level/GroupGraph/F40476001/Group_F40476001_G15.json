@@ -1,0 +1,241 @@
+{
+  "OnInitSequece": [],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EnterArea_G15_2"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.AdvSetAILeadWay",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "Targets": [
+                  400003
+                ]
+              },
+              "PathwayGroupID": 15,
+              "PathwayID": 2,
+              "MotionFlag": "Run",
+              "SpeedScale": 1.1,
+              "StartWaitDistance": 7.0,
+              "StopWaitDistance": 5.0,
+              "ForcePlayerWalk": true,
+              "StartWalkDistance": 80.0,
+              "EndWalkDistance": 100.0,
+              "OverStepRadius": 0.5,
+              "RepathTime": 0.5,
+              "OnReach": [
+                {
+                  "$type": "RPG.GameCore.AdvEntityFaceTo",
+                  "SourceType": {
+                    "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                    "Targets": [
+                      400003
+                    ]
+                  },
+                  "TargetType": {
+                    "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                    "Targets": [
+                      400002
+                    ]
+                  },
+                  "EnableSteer": true,
+                  "EnableLookAt": true,
+                  "LookAtPoint": "Head",
+                  "FinishImmediately": true,
+                  "WaitFinishMode": "WaitAnimFinish",
+                  "TurnBackOnGraphEnd": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "PathOffset": [],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitGroupEvent",
+          "EventName": {
+            "Value": "EnterArea_G15"
+          },
+          "OnEvent": [
+            {
+              "$type": "RPG.GameCore.PlayMissionTalk",
+              "MuteBattleVO": true,
+              "SimpleTalkList": [
+                {
+                  "TextSpeed": 20.0,
+                  "TalkSentenceID": 146789205,
+                  "ProtectTime": 2.0
+                },
+                {
+                  "TextSpeed": 20.0,
+                  "TalkSentenceID": 146789206,
+                  "ProtectTime": 2.0
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvSetAILeadWay",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "Targets": [
+                  400002
+                ]
+              },
+              "PathwayGroupID": 15,
+              "PathwayID": 1,
+              "MotionFlag": "Run",
+              "SpeedScale": 1.3,
+              "StartWaitDistance": 7.0,
+              "StopWaitDistance": 5.0,
+              "ForcePlayerWalk": true,
+              "StartWalkDistance": 80.0,
+              "EndWalkDistance": 100.0,
+              "OverStepRadius": 0.5,
+              "RepathTime": 0.5,
+              "OnReach": [
+                {
+                  "$type": "RPG.GameCore.AdvEntityFaceTo",
+                  "SourceType": {
+                    "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                    "Targets": [
+                      400002
+                    ]
+                  },
+                  "TargetType": {
+                    "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                    "Targets": [
+                      400003
+                    ]
+                  },
+                  "EnableSteer": true,
+                  "EnableLookAt": true,
+                  "LookAtPoint": "Head",
+                  "FinishImmediately": true,
+                  "WaitFinishMode": "WaitAnimFinish",
+                  "TurnBackOnGraphEnd": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.ClientFinishMission",
+                  "SubmissionID": 104371314,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "PathOffset": [],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.CollectDataConditions",
+          "TaskIDList": [
+            104371314
+          ],
+          "MainMissionIDList": [],
+          "PerformanceIDList": [],
+          "PerformanceIDDsList": [],
+          "CustomValueMainMissionIDList": [],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareSubMissionState",
+            "SubMissionID": 104371314,
+            "SubMissionState": "Finish",
+            "Inverse": true,
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvCreateGroupEntityV2",
+              "InstanceIDList": [
+                400002,
+                400003
+              ],
+              "SkipCreated": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.AdvSetupCustomTaskTrigger",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300001
+                ]
+              },
+              "TriggerName": "MissionTrigger",
+              "OnEnter": [
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "EnterArea_G15"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.TriggerGroupEvent",
+                  "EventName": {
+                    "Value": "EnterArea_G15_2"
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "DisableAfterTriggered": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AdvCreateGroupEntityV2",
+              "InstanceIDList": [
+                400008,
+                400009
+              ],
+              "SkipCreated": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}

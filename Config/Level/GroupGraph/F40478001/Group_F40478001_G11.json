@@ -1,0 +1,169 @@
+{
+  "OnInitSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareFloorSavedValue",
+            "DynamicName": {
+              "Value": "FSV_LightStateByMainMission"
+            },
+            "CompareType": "Equal",
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.GroupInitMemberEntityPropState",
+              "PropInstanceID": 300001,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetStageItemState",
+              "ItemList": [
+                {
+                  "BlockAlias": "Light_Control",
+                  "PrefabAlias": "LightVolumeDown"
+                }
+              ],
+              "EnableState": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetStageItemState",
+              "ItemList": [
+                {
+                  "BlockAlias": "Light_Control",
+                  "PrefabAlias": "LightVolumeUp"
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.GroupInitMemberEntityPropState",
+              "PropInstanceID": 300001,
+              "InitPropState": "Open",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetStageItemState",
+              "ItemList": [
+                {
+                  "BlockAlias": "Light_Control",
+                  "PrefabAlias": "LightVolumeDown"
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetStageItemState",
+              "ItemList": [
+                {
+                  "BlockAlias": "Light_Control",
+                  "PrefabAlias": "LightVolumeUp"
+                }
+              ],
+              "EnableState": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    }
+  ],
+  "OnStartSequece": [
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_LiftLightShow"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.AdvClientChangePropState",
+              "TargetType": {
+                "$type": "RPG.GameCore.GroupFetchLocalTarget",
+                "TargetType": "Prop",
+                "Targets": [
+                  300001
+                ]
+              },
+              "ToState": "Open",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    },
+    {
+      "TaskList": [
+        {
+          "$type": "RPG.GameCore.WaitFloorCustomValueChangeV2",
+          "Name": {
+            "Value": "FCV_TombLightOn"
+          },
+          "OnChange": [
+            {
+              "$type": "RPG.GameCore.SetStageItemState",
+              "ItemList": [
+                {
+                  "BlockAlias": "Light_Control",
+                  "PrefabAlias": "LightVolumeDown"
+                }
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.SetStageItemState",
+              "ItemList": [
+                {
+                  "BlockAlias": "Light_Control",
+                  "PrefabAlias": "LightVolumeUp"
+                }
+              ],
+              "EnableState": true,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "Condition": {
+            "$type": "RPG.GameCore.ByCompareFloorCustomFloatV2",
+            "Name": {
+              "Value": "FCV_TombLightOn"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "TaskEnabled": true,
+            "IsClientOnly": true
+          },
+          "IsLoop": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        }
+      ]
+    }
+  ],
+  "Type": "Group",
+  "EntityEventList": []
+}
