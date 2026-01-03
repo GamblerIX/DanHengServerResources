@@ -1581,7 +1581,9 @@
             "Alias": "Caster"
           },
           "PrepareAbilityName": "StageAbility_GridFight_AdvancedRen_00_Bonus",
-          "InsertActionPriority": "Character_HighPriorityAction",
+          "Priority": {
+            "JsonValueStr": "Character_HighPriorityAction"
+          },
           "PlayReadyAnim": true,
           "CanInsertUltraSkill": true,
           "SkillTypeWhenDelayed": "_Count",
@@ -2627,163 +2629,9 @@
                     "$type": "RPG.GameCore.ByHaveEnemyAlive",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
+                      "Alias": "Caster"
                     },
-                    "TaskEnabled": true
-                  },
-                  "AutoStandbyOnAbilityFinish": true,
-                  "TaskEnabled": true
-                }
-              ],
-              "TaskEnabled": true
-            }
-          ]
-        },
-        {
-          "Event": "OnListenAfterAction",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.SetDynamicValueByModifierValue",
-              "ReadTargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "Caster"
-              },
-              "ValueType": "Layer",
-              "Multiplier": {
-                "FixedValue": {
-                  "RawValue": 4294967296,
-                  "Value": 1.0
-                }
-              },
-              "DynamicKey": "_Layer",
-              "TaskEnabled": true
-            },
-            {
-              "$type": "RPG.GameCore.SetEnergyBarState",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "Active": "True",
-              "BarType": 2,
-              "CurrentState": "Normal",
-              "CD": {},
-              "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1205Passive.png",
-              "MaxCount": {
-                "FixedValue": {
-                  "RawValue": -149061134974976,
-                  "Value": -34706.0
-                }
-              },
-              "CurrentCount": {
-                "FixedValue": {
-                  "RawValue": -149061134974976,
-                  "Value": -34706.0
-                }
-              },
-              "ActiveCount": {
-                "FixedValue": {
-                  "RawValue": -4294967296,
-                  "Value": -1.0
-                }
-              },
-              "SkipInCharmAction": true,
-              "TaskEnabled": true
-            },
-            {
-              "$type": "RPG.GameCore.PredicateTaskList",
-              "Predicate": {
-                "$type": "RPG.GameCore.ByCompareModifierValue",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ModifierOwnerEntity"
-                },
-                "ValueType": "Layer",
-                "CompareType": "GreaterEqual",
-                "CompareValue": {
-                  "FixedValue": {
-                    "RawValue": -149061134974976,
-                    "Value": -34706.0
-                  }
-                },
-                "Logic": "Or",
-                "TaskEnabled": true
-              },
-              "SuccessTaskList": [
-                {
-                  "$type": "RPG.GameCore.SetEnergyBarState",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "Active": "True",
-                  "BarType": 2,
-                  "CurrentState": "Active",
-                  "CD": {},
-                  "IconPath": "SpriteOutput/BuffIcon/Inlevel/Avatar/Icon1205Passive.png",
-                  "MaxCount": {
-                    "FixedValue": {
-                      "RawValue": -149061134974976,
-                      "Value": -34706.0
-                    }
-                  },
-                  "CurrentCount": {
-                    "FixedValue": {
-                      "RawValue": -149061134974976,
-                      "Value": -34706.0
-                    }
-                  },
-                  "ActiveCount": {
-                    "FixedValue": {
-                      "RawValue": -4294967296,
-                      "Value": -1.0
-                    }
-                  },
-                  "SkipInCharmAction": true,
-                  "TaskEnabled": true
-                },
-                {
-                  "$type": "RPG.GameCore.TurnInsertAbility",
-                  "AbilityName": {
-                    "Value": "StageAbility_GridFight_AdvancedRen_00_Passive1Atk_Ability"
-                  },
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "ModifierOwnerEntity"
-                  },
-                  "AbilityTarget": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllDarkTeam"
-                  },
-                  "InsertAbilityPriority": "AvatarInsertAttackSelf",
-                  "DynamicValues": {
-                    "MDF_MaxCharge": {
-                      "FixedValue": {
-                        "RawValue": -149061134974976,
-                        "Value": -34706.0
-                      }
-                    }
-                  },
-                  "OwnerAliveState": "Bit_Alive",
-                  "TargetAliveState": "Bit_Alive",
-                  "CanRunOnUnselectableTarget": true,
-                  "ShowInActionBar": true,
-                  "PreCheck": {
-                    "$type": "RPG.GameCore.TurnInsertAbilityCondition",
-                    "Type": "AbilityOwnerInsertCount",
-                    "Count": {
-                      "FixedValue": {
-                        "RawValue": 4294967296,
-                        "Value": 1.0
-                      }
-                    }
-                  },
-                  "ActivePredicate": {
-                    "$type": "RPG.GameCore.ByHaveEnemyAlive",
-                    "TargetType": {
-                      "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
-                    },
+                    "IncludeUnselectable": true,
                     "TaskEnabled": true
                   },
                   "AutoStandbyOnAbilityFinish": true,
@@ -2937,8 +2785,9 @@
                     "$type": "RPG.GameCore.ByHaveEnemyAlive",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
+                      "Alias": "Caster"
                     },
+                    "IncludeUnselectable": true,
                     "TaskEnabled": true
                   },
                   "AutoStandbyOnAbilityFinish": true,
@@ -3092,8 +2941,9 @@
                     "$type": "RPG.GameCore.ByHaveEnemyAlive",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
+                      "Alias": "Caster"
                     },
+                    "IncludeUnselectable": true,
                     "TaskEnabled": true
                   },
                   "AutoStandbyOnAbilityFinish": true,
@@ -3247,8 +3097,9 @@
                     "$type": "RPG.GameCore.ByHaveEnemyAlive",
                     "TargetType": {
                       "$type": "RPG.GameCore.TargetAlias",
-                      "Alias": "ParamEntity"
+                      "Alias": "Caster"
                     },
+                    "IncludeUnselectable": true,
                     "TaskEnabled": true
                   },
                   "AutoStandbyOnAbilityFinish": true,
