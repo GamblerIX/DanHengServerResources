@@ -294,48 +294,6 @@
               "Priority": -80,
               "CallbackConfig": [
                 {
-                  "$type": "RPG.GameCore.AddModifier",
-                  "TargetType": {
-                    "$type": "RPG.GameCore.TargetAlias",
-                    "Alias": "AllLightTeam"
-                  },
-                  "AliveOnly": true,
-                  "ModifierName": {
-                    "Value": "MAvatar_GridFight_FuXuan_00_Halo"
-                  },
-                  "Chance": {
-                    "FixedValue": {
-                      "RawValue": -4294967296,
-                      "Value": -1.0
-                    }
-                  },
-                  "MaxTargetCount": {
-                    "FixedValue": {
-                      "RawValue": -4294967296,
-                      "Value": -1.0
-                    }
-                  },
-                  "DynamicValues": {
-                    "MDF_DamageReduce": {
-                      "FixedValue": {
-                        "RawValue": -149061134974976,
-                        "Value": -34706.0
-                      }
-                    },
-                    "MDF_EnergyMax": {
-                      "FixedValue": {
-                        "RawValue": -149061134974976,
-                        "Value": -34706.0
-                      }
-                    }
-                  },
-                  "IsShowUIMessageFromModel": true,
-                  "IsShowUIMessageOnUpdate": true,
-                  "ShowUIMessageInternalTime": -1.0,
-                  "UseFixedPosition": true,
-                  "TaskEnabled": true
-                },
-                {
                   "$type": "RPG.GameCore.PredicateTaskList",
                   "Predicate": {
                     "$type": "RPG.GameCore.ByRankActivated",
@@ -518,6 +476,29 @@
                 },
                 "IncludeBattleEvent": true,
                 "DynamicValues": {
+                  "MDF_EnergyMax": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  }
+                },
+                "IsHaloStatus": true,
+                "AliveOnly": "Keep"
+              },
+              {
+                "Name": "MAvatar_GridFight_FuXuan_00_Halo",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "AllLightTeam.RemoveServant"
+                },
+                "DynamicValues": {
+                  "MDF_DamageReduce": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
                   "MDF_EnergyMax": {
                     "FixedValue": {
                       "RawValue": -149061134974976,
@@ -1054,6 +1035,113 @@
           "LifeStepMoment": "ModifierPhase2End",
           "ApplyBehaviorFlagBindEffects": true,
           "_CallbackList": [
+            {
+              "Event": "OnListenAfterBeingHitAll",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByAnd",
+                    "PredicateList": [
+                      {
+                        "$type": "RPG.GameCore.ByTargetTeam",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "Team": "TeamLight",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByTargetEntityType",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "EntityTypeMask": "Avatar",
+                        "AliveStateMask": "Mask_AliveOrLimbo",
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareHPRatio",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "CompareType": "LessEqual",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "Caster"
+                        },
+                        "DynamicKey": {
+                          "Value": "_BE_Switch"
+                        },
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": 4294967296,
+                            "Value": 1.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      }
+                    ],
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": {
+                        "Value": "Avatar_GridFight_FuXuan_00_BE_Insert"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "AbilityTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "InsertAbilityPriority": "AvatarHealOthers",
+                      "DynamicValues": {
+                        "_HPRecover": {
+                          "FixedValue": {
+                            "RawValue": -149061134974976,
+                            "Value": -34706.0
+                          }
+                        }
+                      },
+                      "OwnerAliveState": "Bit_Alive",
+                      "TargetAliveState": "Bit_Alive",
+                      "CanRunOnUnselectableTarget": true,
+                      "PreCheck": {
+                        "$type": "RPG.GameCore.TurnInsertAbilityCondition",
+                        "Type": "AbilityOwnerInsertUnusedCount",
+                        "Count": {
+                          "FixedValue": {
+                            "RawValue": 4294967296,
+                            "Value": 1.0
+                          }
+                        }
+                      },
+                      "AutoStandbyOnAbilityFinish": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
             {
               "Event": "OnListenHPChange",
               "CallbackConfig": [
@@ -2126,7 +2214,7 @@
           "$type": "RPG.GameCore.HealHP",
           "TargetType": {
             "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "AllLightTeam"
+            "Alias": "AllLightTeam.RemoveServant"
           },
           "AliveOnly": true,
           "FormulaType": "HealByTargetLostHP",

@@ -486,34 +486,6 @@
                           "$type": "RPG.GameCore.AddModifier",
                           "TargetType": {
                             "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ParamEntity"
-                          },
-                          "AliveOnly": true,
-                          "ModifierName": {
-                            "Value": "MStageAbility_GridFight_Yunli_00_Blocking_ForTeammate"
-                          },
-                          "Chance": {
-                            "FixedValue": {
-                              "RawValue": -4294967296,
-                              "Value": -1.0
-                            }
-                          },
-                          "MaxTargetCount": {
-                            "FixedValue": {
-                              "RawValue": -4294967296,
-                              "Value": -1.0
-                            }
-                          },
-                          "IsShowUIMessageFromModel": true,
-                          "IsShowUIMessageOnUpdate": true,
-                          "ShowUIMessageInternalTime": -1.0,
-                          "UseFixedPosition": true,
-                          "TaskEnabled": true
-                        },
-                        {
-                          "$type": "RPG.GameCore.AddModifier",
-                          "TargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
                             "Alias": "ModifierOwnerEntity"
                           },
                           "AliveOnly": true,
@@ -536,6 +508,27 @@
                           "IsShowUIMessageOnUpdate": true,
                           "ShowUIMessageInternalTime": -1.0,
                           "UseFixedPosition": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetModifierDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "ModifierName": {
+                            "Value": "MStageAbility_GridFight_Yunli_00_Blocking_ForTeammate"
+                          },
+                          "DynamicKey": {
+                            "Value": "TeamMateBlock"
+                          },
+                          "NewValue": {
+                            "FixedValue": {
+                              "RawValue": 4294967296,
+                              "Value": 1.0
+                            }
+                          },
+                          "ModifyFunction": "Set",
                           "TaskEnabled": true
                         },
                         {
@@ -1233,6 +1226,34 @@
                   "ShowUIMessageInternalTime": -1.0,
                   "UseFixedPosition": true,
                   "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "AliveOnly": true,
+                  "ModifierName": {
+                    "Value": "MStageAbility_GridFight_Yunli_00_Blocking_ForTeammate"
+                  },
+                  "Chance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxTargetCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "IsShowUIMessageFromModel": true,
+                  "IsShowUIMessageOnUpdate": true,
+                  "ShowUIMessageInternalTime": -1.0,
+                  "UseFixedPosition": true,
+                  "TaskEnabled": true
                 }
               ]
             },
@@ -1406,6 +1427,56 @@
                         "Value": "MStageAbility_GridFight_Yunli_00_BlockingCD"
                       },
                       "TaskEnabled": true
+                    },
+                    {
+                      "$type": "RPG.GameCore.SetModifierDynamicValue",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam"
+                      },
+                      "ModifierName": {
+                        "Value": "MStageAbility_GridFight_Yunli_00_Blocking_ForTeammate"
+                      },
+                      "DynamicKey": {
+                        "Value": "TeamMateBlock"
+                      },
+                      "NewValue": {},
+                      "ModifyFunction": "Set",
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "Event": "OnListenBeforeAction",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareTarget",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "CompareType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "AliveStateMask": "Mask_AliveOrLimbo",
+                    "Inverse": true,
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.SetEntityForceVisible",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "TaskEnabled": true,
+                      "IsClientOnly": true
                     }
                   ],
                   "TaskEnabled": true
@@ -4055,17 +4126,6 @@
           "Event": "OnDestroy",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.RemoveModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "AllLightTeam"
-              },
-              "ModifierName": {
-                "Value": "MStageAbility_GridFight_Yunli_00_Blocking_ForTeammate"
-              },
-              "TaskEnabled": true
-            },
-            {
               "$type": "RPG.GameCore.SetEnergyBarState",
               "TargetType": {
                 "$type": "RPG.GameCore.TargetAlias",
@@ -4181,161 +4241,153 @@
       ],
       "_CallbackList": [
         {
-          "Event": "OnDestroy",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.SetLocalOffsetAsMoveTarget",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "TaskEnabled": true,
-              "IsClientOnly": true
-            }
-          ]
-        },
-        {
           "Event": "OnBeforeBeingHit",
           "CallbackConfig": [
             {
-              "$type": "RPG.GameCore.ModifyDamageData",
-              "AttackData_DamageValue": {},
-              "AttackData_DamagePercentage": {},
-              "AttackData_FinalDamageMax": {},
-              "AttackData_BreakBaseDamage": {},
-              "AttackData_BreakDamagePercentage": {},
-              "AttackData_SPHitRatio": {},
-              "Attacker_AttackAddedRatio": {},
-              "Attacker_AttackDelta": {},
-              "Attacker_AttackConvert": {},
-              "Attacker_PhysicalAddedRatio": {},
-              "Attacker_FireAddedRatio": {},
-              "Attacker_IceAddedRatio": {},
-              "Attacker_ThunderAddedRatio": {},
-              "Attacker_WindAddedRatio": {},
-              "Attacker_QuantumAddedRatio": {},
-              "Attacker_ImaginaryAddedRatio": {},
-              "Attacker_AllDamageAddedRatio": {},
-              "Attacker_AllDamageTypeAddedRatio": {},
-              "Attacker_DotDamageAddedRatio": {},
-              "Attacker_BaseDamageMultiRatio": {
-                "FixedValue": {
-                  "RawValue": 4294967296,
-                  "Value": 1.0
-                }
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareDynamicValue",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "ModifierOwnerEntity"
+                },
+                "DynamicKey": {
+                  "Value": "TeamMateBlock"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "TaskEnabled": true
               },
-              "Attacker_StanceBreakAddedRatio": {},
-              "Attacker_ForceStanceBreakRatio": {
-                "FixedValue": {
-                  "RawValue": -9223372036854775808,
-                  "Value": -2147483648.5
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ModifyDamageData",
+                  "AttackData_DamageValue": {},
+                  "AttackData_DamagePercentage": {},
+                  "AttackData_FinalDamageMax": {},
+                  "AttackData_BreakBaseDamage": {},
+                  "AttackData_BreakDamagePercentage": {},
+                  "AttackData_SPHitRatio": {},
+                  "Attacker_AttackAddedRatio": {},
+                  "Attacker_AttackDelta": {},
+                  "Attacker_AttackConvert": {},
+                  "Attacker_PhysicalAddedRatio": {},
+                  "Attacker_FireAddedRatio": {},
+                  "Attacker_IceAddedRatio": {},
+                  "Attacker_ThunderAddedRatio": {},
+                  "Attacker_WindAddedRatio": {},
+                  "Attacker_QuantumAddedRatio": {},
+                  "Attacker_ImaginaryAddedRatio": {},
+                  "Attacker_AllDamageAddedRatio": {},
+                  "Attacker_AllDamageTypeAddedRatio": {},
+                  "Attacker_DotDamageAddedRatio": {},
+                  "Attacker_BaseDamageMultiRatio": {
+                    "FixedValue": {
+                      "RawValue": 4294967296,
+                      "Value": 1.0
+                    }
+                  },
+                  "Attacker_StanceBreakAddedRatio": {},
+                  "Attacker_ForceStanceBreakRatio": {
+                    "FixedValue": {
+                      "RawValue": -9223372036854775808,
+                      "Value": -2147483648.5
+                    }
+                  },
+                  "Attacker_BreakDamageAddedRatio": {},
+                  "Attacker_BreakDamageExtraAddedRatio": {},
+                  "Attacker_PhysicalPenetrate": {},
+                  "Attacker_FirePenetrate": {},
+                  "Attacker_IcePenetrate": {},
+                  "Attacker_ThunderPenetrate": {},
+                  "Attacker_WindPenetrate": {},
+                  "Attacker_QuantumPenetrate": {},
+                  "Attacker_ImaginaryPenetrate": {},
+                  "Attacker_AllDamageTypePenetrate": {},
+                  "Attacker_FatigueRatio": {},
+                  "Attacker_CriticalChance": {},
+                  "Attacker_CriticalDamage": {},
+                  "Attacker_SPRatio": {},
+                  "AttackerSkill_SPBase": {},
+                  "Defender_DefenceAddedRatio": {},
+                  "Defender_DefenceDelta": {},
+                  "Defender_DefenceConvert": {},
+                  "Defender_PhysicalResistance": {},
+                  "Defender_FireResistance": {},
+                  "Defender_IceResistance": {},
+                  "Defender_ThunderResistance": {},
+                  "Defender_WindResistance": {},
+                  "Defender_QuantumResistance": {},
+                  "Defender_ImaginaryResistance": {},
+                  "Defender_AllDamageTypeResistance": {},
+                  "Defender_AllDamageReduce": {},
+                  "Defender_PhysicalTakenRatio": {},
+                  "Defender_FireTakenRatio": {},
+                  "Defender_IceTakenRatio": {},
+                  "Defender_ThunderTakenRatio": {},
+                  "Defender_WindTakenRatio": {},
+                  "Defender_QuantumTakenRatio": {},
+                  "Defender_ImaginaryTakenRatio": {},
+                  "Defender_AllDamageTypeTakenRatio": {},
+                  "Defender_Monster_DamageTakenRatio": {},
+                  "Defender_PhysicalStanceBreakTakenRatio": {},
+                  "Defender_FireStanceBreakTakenRatio": {},
+                  "Defender_IceStanceBreakTakenRatio": {},
+                  "Defender_ThunderStanceBreakTakenRatio": {},
+                  "Defender_WindStanceBreakTakenRatio": {},
+                  "Defender_QuantumStanceBreakTakenRatio": {},
+                  "Defender_ImaginaryStanceBreakTakenRatio": {},
+                  "Defender_StanceWeakAddedRatio": {},
+                  "Defender_StanceBreakTakenRatio": {},
+                  "Defender_StanceBreakResistance": {},
+                  "AttackData_ConstFinalDamage": {},
+                  "AttackData_MortallyWonded": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "AttackData_ForceCritical": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "AttackData_CanIgnoreAttackTypeCritical": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "Attacker_ExtraAllDamageAddedRatio1": {},
+                  "Attacker_ExtraAllDamageAddedRatio2": {},
+                  "Attacker_ExtraAllDamageAddedRatio3": {},
+                  "Attacker_ExtraAllDamageAddedRatio4": {},
+                  "Attacker_ExtraAttackAddedRatio1": {},
+                  "Attacker_ExtraAttackAddedRatio2": {},
+                  "Attacker_ExtraAttackAddedRatio3": {},
+                  "Attacker_ExtraAttackAddedRatio4": {},
+                  "Defender_ExtraDefenceAddedRatio1": {},
+                  "Defender_ExtraDefenceAddedRatio2": {},
+                  "Defender_ExtraDefenceAddedRatio3": {},
+                  "Defender_ExtraDefenceAddedRatio4": {},
+                  "Attacker_ExtraLuckChance": {},
+                  "Attacker_ExtraLuckDamage": {},
+                  "TaskEnabled": true
                 }
-              },
-              "Attacker_BreakDamageAddedRatio": {},
-              "Attacker_BreakDamageExtraAddedRatio": {},
-              "Attacker_PhysicalPenetrate": {},
-              "Attacker_FirePenetrate": {},
-              "Attacker_IcePenetrate": {},
-              "Attacker_ThunderPenetrate": {},
-              "Attacker_WindPenetrate": {},
-              "Attacker_QuantumPenetrate": {},
-              "Attacker_ImaginaryPenetrate": {},
-              "Attacker_AllDamageTypePenetrate": {},
-              "Attacker_FatigueRatio": {},
-              "Attacker_CriticalChance": {},
-              "Attacker_CriticalDamage": {},
-              "Attacker_SPRatio": {},
-              "AttackerSkill_SPBase": {},
-              "Defender_DefenceAddedRatio": {},
-              "Defender_DefenceDelta": {},
-              "Defender_DefenceConvert": {},
-              "Defender_PhysicalResistance": {},
-              "Defender_FireResistance": {},
-              "Defender_IceResistance": {},
-              "Defender_ThunderResistance": {},
-              "Defender_WindResistance": {},
-              "Defender_QuantumResistance": {},
-              "Defender_ImaginaryResistance": {},
-              "Defender_AllDamageTypeResistance": {},
-              "Defender_AllDamageReduce": {},
-              "Defender_PhysicalTakenRatio": {},
-              "Defender_FireTakenRatio": {},
-              "Defender_IceTakenRatio": {},
-              "Defender_ThunderTakenRatio": {},
-              "Defender_WindTakenRatio": {},
-              "Defender_QuantumTakenRatio": {},
-              "Defender_ImaginaryTakenRatio": {},
-              "Defender_AllDamageTypeTakenRatio": {},
-              "Defender_Monster_DamageTakenRatio": {},
-              "Defender_PhysicalStanceBreakTakenRatio": {},
-              "Defender_FireStanceBreakTakenRatio": {},
-              "Defender_IceStanceBreakTakenRatio": {},
-              "Defender_ThunderStanceBreakTakenRatio": {},
-              "Defender_WindStanceBreakTakenRatio": {},
-              "Defender_QuantumStanceBreakTakenRatio": {},
-              "Defender_ImaginaryStanceBreakTakenRatio": {},
-              "Defender_StanceWeakAddedRatio": {},
-              "Defender_StanceBreakTakenRatio": {},
-              "Defender_StanceBreakResistance": {},
-              "AttackData_ConstFinalDamage": {},
-              "AttackData_MortallyWonded": {
-                "FixedValue": {
-                  "RawValue": -4294967296,
-                  "Value": -1.0
-                }
-              },
-              "AttackData_ForceCritical": {
-                "FixedValue": {
-                  "RawValue": -4294967296,
-                  "Value": -1.0
-                }
-              },
-              "AttackData_CanIgnoreAttackTypeCritical": {
-                "FixedValue": {
-                  "RawValue": -4294967296,
-                  "Value": -1.0
-                }
-              },
-              "Attacker_ExtraAllDamageAddedRatio1": {},
-              "Attacker_ExtraAllDamageAddedRatio2": {},
-              "Attacker_ExtraAllDamageAddedRatio3": {},
-              "Attacker_ExtraAllDamageAddedRatio4": {},
-              "Attacker_ExtraAttackAddedRatio1": {},
-              "Attacker_ExtraAttackAddedRatio2": {},
-              "Attacker_ExtraAttackAddedRatio3": {},
-              "Attacker_ExtraAttackAddedRatio4": {},
-              "Defender_ExtraDefenceAddedRatio1": {},
-              "Defender_ExtraDefenceAddedRatio2": {},
-              "Defender_ExtraDefenceAddedRatio3": {},
-              "Defender_ExtraDefenceAddedRatio4": {},
-              "Attacker_ExtraLuckChance": {},
-              "Attacker_ExtraLuckDamage": {},
+              ],
               "TaskEnabled": true
-            }
-          ]
-        },
-        {
-          "Event": "OnStack",
-          "CallbackConfig": [
-            {
-              "$type": "RPG.GameCore.SetLocalOffsetAsMoveTarget",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ModifierOwnerEntity"
-              },
-              "LocalOffset": {
-                "z": 1.0,
-                "magnitude": 1.0,
-                "sqrMagnitude": 1.0
-              },
-              "TaskEnabled": true,
-              "IsClientOnly": true
             }
           ]
         }
       ],
       "Count": -1,
-      "Stacking": "Unique"
+      "Stacking": "Unique",
+      "DynamicValues": {}
     },
     "MStageAbility_GridFight_Yunli_00_BlockingCD": {
       "LifeTime": -1,

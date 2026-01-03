@@ -21041,6 +21041,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
+                  "InsertActionPriority": "PROG_Default",
                   "PlayReadyAnim": true,
                   "SkillTypeWhenDelayed": "_Count",
                   "TaskEnabled": true
@@ -21184,6 +21185,7 @@
                     "$type": "RPG.GameCore.TargetAlias",
                     "Alias": "ModifierOwnerEntity"
                   },
+                  "InsertActionPriority": "PROG_Default",
                   "PlayReadyAnim": true,
                   "SkillTypeWhenDelayed": "_Count",
                   "TaskEnabled": true
@@ -29519,6 +29521,7 @@
         },
         {
           "Event": "OnAfterAttack",
+          "Priority": 100,
           "CallbackConfig": [
             {
               "$type": "RPG.GameCore.AddModifier",
@@ -30499,94 +30502,127 @@
                       "TaskEnabled": true
                     },
                     {
-                      "$type": "RPG.GameCore.DamageByAttackProperty",
-                      "TargetType": {
-                        "$type": "RPG.GameCore.TargetAlias",
-                        "Alias": "ParamEntity"
-                      },
-                      "AttackProperty": {
-                        "DamageType": {
-                          "SourceType": "ReadTargetType",
-                          "DamageType": "Fire",
-                          "ReadTargetType": {
-                            "$type": "RPG.GameCore.TargetAlias",
-                            "Alias": "ModifierOwnerEntity"
-                          }
-                        },
-                        "FormulaType": "ByBreakDamage",
-                        "DamagePercentage": {},
-                        "DamageValue": {},
-                        "ExtraDamagePercentage": {},
-                        "StanceValue": {},
-                        "HitSplitRatio": {
-                          "FixedValue": {
-                            "RawValue": 4294967296,
-                            "Value": 1.0
-                          }
-                        },
-                        "SPHitRatio": {},
-                        "AttackType": "ElementDamage",
-                        "DamageTag": [
-                          {
-                            "JsonValueStr": "FeverBreak"
-                          }
-                        ],
-                        "BreakDamagePercentage": {
+                      "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                      "Name": "DealSuperBreakDamage_DamagePerformance",
+                      "DynamicValues": {
+                        "DamagePercentage": {
                           "FixedValue": {
                             "RawValue": -149061134974976,
                             "Value": -34706.0
                           }
-                        },
-                        "FinalFormulaType": "ByPureDamage",
-                        "FrameHalt": {},
-                        "HitEffectMinMutexTime": {
-                          "FixedValue": {
-                            "RawValue": 214748368,
-                            "Value": 0.05
-                          }
-                        },
-                        "HitEffectMaxMutexCount": {
-                          "FixedValue": {
-                            "RawValue": 4294967296,
-                            "Value": 1.0
-                          }
-                        },
-                        "HitEffectHeight": 1.5,
-                        "HitPosHeight": 0.75
+                        }
                       },
-                      "CanTriggerLastKill": true,
-                      "DisplayData": {
-                        "AttachPoint": "SelectRoot",
-                        "AdditionalDisplay": {
-                          "UIMessageHeight": {
-                            "FixedValue": {
-                              "RawValue": 3221225475,
-                              "Value": 0.75
-                            }
-                          },
-                          "DitherRangeX": {
-                            "FixedValue": {
-                              "RawValue": 214748365,
-                              "Value": 0.05
-                            }
-                          },
-                          "DitherRangeY": {
-                            "FixedValue": {
-                              "RawValue": 429496730,
-                              "Value": 0.1
-                            }
-                          }
-                        },
-                        "Duration": 1.5,
-                        "Scale": 1.0,
-                        "FixedPosition": true,
-                        "ElementDamageType": "Super"
+                      "ParamTarget": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
                       },
-                      "CanOverkill": true,
-                      "PerformanceDelay": {
-                        "FixedValue": {
-                          "RawValue": -149061134974976,
-                          "Value": -34706.0
+                      "TemplateParamSequences": {
+                        "DamagePerformance": {
+                          "TaskList": [
+                            {
+                              "$type": "RPG.GameCore.IncludeTaskListTemplate",
+                              "Name": "PursuedDamage_PerformanceDelay",
+                              "ParamTarget": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.DamageByAttackProperty",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ParamEntity"
+                              },
+                              "AttackProperty": {
+                                "DamageType": {
+                                  "SourceType": "ReadTargetType",
+                                  "DamageType": "Fire",
+                                  "ReadTargetType": {
+                                    "$type": "RPG.GameCore.TargetAlias",
+                                    "Alias": "ModifierOwnerEntity"
+                                  }
+                                },
+                                "FormulaType": "ByBreakDamage",
+                                "DamagePercentage": {},
+                                "DamageValue": {},
+                                "ExtraDamagePercentage": {},
+                                "StanceValue": {},
+                                "HitSplitRatio": {
+                                  "FixedValue": {
+                                    "RawValue": 4294967296,
+                                    "Value": 1.0
+                                  }
+                                },
+                                "SPHitRatio": {},
+                                "AttackType": "ElementDamage",
+                                "DamageTag": [
+                                  {
+                                    "JsonValueStr": "FeverBreak"
+                                  }
+                                ],
+                                "BreakDamagePercentage": {
+                                  "FixedValue": {
+                                    "RawValue": -149061134974976,
+                                    "Value": -34706.0
+                                  }
+                                },
+                                "FinalFormulaType": "ByPureDamage",
+                                "FrameHalt": {},
+                                "HitEffectMinMutexTime": {
+                                  "FixedValue": {
+                                    "RawValue": 214748368,
+                                    "Value": 0.05
+                                  }
+                                },
+                                "HitEffectMaxMutexCount": {
+                                  "FixedValue": {
+                                    "RawValue": 4294967296,
+                                    "Value": 1.0
+                                  }
+                                },
+                                "HitEffectHeight": 1.5,
+                                "HitPosHeight": 0.75
+                              },
+                              "CanTriggerLastKill": true,
+                              "DisplayData": {
+                                "AttachPoint": "SelectRoot",
+                                "AdditionalDisplay": {
+                                  "UIMessageHeight": {
+                                    "FixedValue": {
+                                      "RawValue": 3221225475,
+                                      "Value": 0.75
+                                    }
+                                  },
+                                  "DitherRangeX": {
+                                    "FixedValue": {
+                                      "RawValue": 214748365,
+                                      "Value": 0.05
+                                    }
+                                  },
+                                  "DitherRangeY": {
+                                    "FixedValue": {
+                                      "RawValue": 429496730,
+                                      "Value": 0.1
+                                    }
+                                  }
+                                },
+                                "Duration": 1.5,
+                                "Scale": 1.0,
+                                "FixedPosition": true,
+                                "ElementDamageType": "Super"
+                              },
+                              "CanOverkill": true,
+                              "PerformanceDelay": {
+                                "FixedValue": {
+                                  "RawValue": -149061134974976,
+                                  "Value": -34706.0
+                                }
+                              },
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
                         }
                       },
                       "TaskEnabled": true

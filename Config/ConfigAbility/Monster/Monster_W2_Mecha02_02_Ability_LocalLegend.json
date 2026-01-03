@@ -1,0 +1,2499 @@
+{
+  "AbilityList": [
+    {
+      "Modifiers": {
+        "MMonster_W2_Mecha02_02_DeathRattle": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "BehaviorFlagList": [
+            "Deathrattle",
+            "KeepOnDeathrattle"
+          ],
+          "_CallbackList": [
+            {
+              "Event": "OnDeathrattle",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.DispelStatus",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "OnlyCanDispel": true,
+                  "BuffType": "Debuff",
+                  "IsSilentDispel": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetDieImmediately",
+                  "Enable": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareDynamicValue",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "DynamicKey": {
+                      "Value": "_ChangePhaseKill"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": {
+                        "Value": "Monster_W2_Mecha02_02_LocalLegend_DeathRattle_Insert"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "InsertAbilityPriority": "LevelPerformMonster",
+                      "OwnerAliveState": "Mask_AliveOrLimbo",
+                      "TargetAliveState": "Mask_AliveOrLimbo",
+                      "CanRunOnUnselectableTarget": true,
+                      "ShowInActionBar": true,
+                      "AutoStandbyOnAbilityFinish": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.TurnInsertAbility",
+                      "AbilityName": {
+                        "Value": "Monster_W2_Mecha02_02_LocalLegend_DeathRattle_Insert"
+                      },
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ModifierOwnerEntity"
+                      },
+                      "InsertAbilityPriority": "MonsterDeathRattle",
+                      "OwnerAliveState": "Mask_AliveOrLimbo",
+                      "TargetAliveState": "Mask_AliveOrLimbo",
+                      "CanRunOnUnselectableTarget": true,
+                      "ShowInActionBar": true,
+                      "AutoStandbyOnAbilityFinish": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        }
+      },
+      "Name": "Monster_W2_Mecha02_02_LocalLegend_PassiveSkillInitiate",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MMonster_W2_Mecha02_02_DeathRattle"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DefineDynamicValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "DynamicKey": {
+            "Value": "W2_Mecha02_02_DeathRattle"
+          },
+          "ResetValue": {},
+          "ContextScope": "TargetEntity",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByAnd",
+            "PredicateList": [
+              {
+                "$type": "RPG.GameCore.ByTargetAliveState",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "MMonster_W4_Manta_00_LocalLegend"
+                },
+                "AliveStateMask": "Bit_Alive",
+                "TaskEnabled": true
+              },
+              {
+                "$type": "RPG.GameCore.ByCompareMonsterID",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "MMonster_W4_Manta_00_LocalLegend"
+                },
+                "TargetMonsterID": {
+                  "FixedValue": {
+                    "RawValue": 17407558285262848,
+                    "Value": 4053013.0
+                  }
+                },
+                "TaskEnabled": true
+              }
+            ],
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetDynamicValueByCopying",
+              "FromTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "MMonster_W4_Manta_00_LocalLegend"
+              },
+              "FromDynamicKey": {
+                "Value": "_DotDamageRatio"
+              },
+              "ToTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "ToDynamicKey": {
+                "Value": "_DotDamageRatio"
+              },
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W2_Mecha02_02_LocalLegend_Skill01_Phase01",
+      "TargetInfo": {
+        "TargetType": "AllEnemy"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "CustomFormationName": "Monster_4052010_Skill01",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "FormationTarget": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LightTeamEntity"
+          },
+          "CustomFormationName": "Monster_4052010_Skill01_0",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "CustomFormationIgnoreDying": true,
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": "TeamFormation",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "Monster_W2_Mecha02_02_LocalLegend_Skill01_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "Monster_W2_Mecha02_02_Skill01_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill01",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W2_Mecha02_02_LocalLegend_Skill01_Phase02",
+      "TargetInfo": {
+        "TargetType": "AllEnemy"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 2147483650,
+              "Value": 0.5
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Ice"
+            },
+            "FormulaType": "ByAttack",
+            "DamagePercentage": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "DamageValue": {},
+            "ExtraDamagePercentage": {},
+            "StanceValue": {},
+            "HitSplitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "SPHitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "AttackType": "Normal",
+            "BreakDamagePercentage": {},
+            "FrameHalt": {},
+            "HitAnimation": "Hit_H",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Mecha02_02/Eff_Monster_W2_Mecha02_02_Skill01_Hit01.prefab",
+            "HitEffectMinMutexTime": {
+              "FixedValue": {
+                "RawValue": 214748368,
+                "Value": 0.05
+              }
+            },
+            "HitEffectMaxMutexCount": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "HitEffectHeight": -1.0,
+            "HitTimeSlowType": "Impact",
+            "HitPosHeight": 0.75
+          },
+          "CanOverkill": true,
+          "PerformanceDelay": {},
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.RemoveModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy"
+          },
+          "ModifierName": {
+            "Value": "MMonster_W4_Manta_00_Virus_Transfer"
+          },
+          "OnlyRemoveCasterAdded": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill01",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SkillPerformFinish",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W2_Mecha02_02_LocalLegend_DeathRattle_Insert",
+      "TargetInfo": {
+        "TargetType": "AllTeamMember"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.ShowSkillTextDialog",
+          "SkillName": {
+            "Hash": 949878281,
+            "Hash64": 17039044437886640628
+          },
+          "IsDark": true,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.ExitBreakState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "CancelRecoverAnim": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SetTeamFormation",
+          "Team": "TeamLight",
+          "FormationType": "LightTeamNormal",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "None"
+          },
+          "TeamMemberCountingOption": "IgnoreTempLeave",
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.VCameraConfigChange",
+          "CameraConfig": {
+            "NormalConfig": {
+              "CameraState": "CastAnimation",
+              "AnchorTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnchorOffset": {
+                "x": 2.91,
+                "y": 0.25,
+                "z": -7.99,
+                "normalized": {
+                  "x": 0.342067331,
+                  "y": 0.0293872263,
+                  "z": -0.9392158,
+                  "normalized": {
+                    "x": 0.342067361,
+                    "y": 0.0293872282,
+                    "z": -0.939215839,
+                    "magnitude": 1.0,
+                    "sqrMagnitude": 1.00000012
+                  },
+                  "magnitude": 0.99999994,
+                  "sqrMagnitude": 0.99999994
+                },
+                "magnitude": 8.507097,
+                "sqrMagnitude": 72.3707
+              },
+              "AimTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AimOffset": {
+                "y": -0.75,
+                "normalized": {
+                  "y": -1.0,
+                  "magnitude": 1.0,
+                  "sqrMagnitude": 1.0
+                },
+                "magnitude": 0.75,
+                "sqrMagnitude": 0.5625
+              },
+              "NearClipping": 0.1,
+              "ForbidDynamicOffset": true,
+              "ResetToDefault": true,
+              "UseSkillPerformIgnoreDynamicOffset": true,
+              "UseAimTargetToCameraFocus": true
+            },
+            "ShowEntityConfig": {
+              "ShowTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllTeamMember"
+              },
+              "FieldHideMode": "All"
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByAddValue",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "Key": {
+            "Value": "W2_Mecha02_02_DeathRattle"
+          },
+          "AddValue": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "Min": {},
+          "Max": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "ContextScope": "TargetEntity",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Die",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 3650722205,
+              "Value": 0.85
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 644245095,
+              "Value": 0.15
+            }
+          },
+          "EventList": [
+            {
+              "NormalizedTime": {
+                "FixedValue": {
+                  "RawValue": 42949673,
+                  "Value": 0.01
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.VCameraConfigChange",
+                  "CameraConfig": {
+                    "NormalConfig": {
+                      "CameraState": "CameraMotion",
+                      "AnchorTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "AimTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "Caster"
+                      },
+                      "FollowDamp": 12.0,
+                      "AimDamp": 3.0,
+                      "MoveForwardDis": 2.5,
+                      "NearClipping": 0.1,
+                      "ForbidDynamicOffset": true,
+                      "UseSkillPerformIgnoreDynamicOffset": true,
+                      "UseAimTargetToCameraFocus": true
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "NormalizedTime": {
+                "FixedValue": {
+                  "RawValue": 2319282342,
+                  "Value": 0.54
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.VCameraConfigChange",
+                  "CameraConfig": {
+                    "NormalConfig": {
+                      "CameraState": "CasterToTargetPerform",
+                      "TemplateName": "Monster_Common_Summon",
+                      "AnchorTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllEnemy"
+                      },
+                      "AimTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllTeamMember"
+                      },
+                      "NearClipping": 0.1,
+                      "ForbidDynamicOffset": true,
+                      "UseSkillPerformIgnoreDynamicOffset": true,
+                      "UseAimTargetToCameraFocus": true
+                    },
+                    "BlendConfig": {
+                      "BlendType": "Cut",
+                      "CustomCurveName": "BlendCut_00to1",
+                      "BlendTime": 0.1,
+                      "FOVSmoothDampTime": -1.0,
+                      "FrameBlendWeightStart": 1.0,
+                      "FrameBlendDuration": 1.0
+                    },
+                    "ShowEntityConfig": {
+                      "ShowTargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllTeamMember"
+                      },
+                      "IsAliveOnly": true,
+                      "FieldHideMode": "All"
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            },
+            {
+              "NormalizedTime": {
+                "FixedValue": {
+                  "RawValue": 2448131361,
+                  "Value": 0.57
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.VCameraConfigChange",
+                  "CameraConfig": {
+                    "ShakeConfigV2": {
+                      "ShakeScale": 1.0,
+                      "ShakeRange": 0.43,
+                      "PositionAmplitude": 1.0,
+                      "ShakeTime": 0.3,
+                      "LoopTime": 1.0,
+                      "ShakeDistance": 20.0,
+                      "ShakeDir": {
+                        "x": 0.15,
+                        "y": 0.4,
+                        "z": 0.05,
+                        "normalized": {
+                          "x": 0.348742932,
+                          "y": 0.9299811,
+                          "z": 0.116247639,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.0
+                        },
+                        "magnitude": 0.430116266,
+                        "sqrMagnitude": 0.185
+                      },
+                      "BaseOnCamera": true,
+                      "LerpBackAfterShake": true,
+                      "BaseCycle": 0.06,
+                      "RangeAttenuation": 0.95,
+                      "RangeAttenuationDelay": 999.0,
+                      "RangeAttenuationDuration": -1.0,
+                      "PerlinNoiseAmplitude": {
+                        "x": 0.05,
+                        "y": 0.15,
+                        "z": 0.05,
+                        "normalized": {
+                          "x": 0.301511347,
+                          "y": 0.9045341,
+                          "z": 0.301511347,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.00000012
+                        },
+                        "magnitude": 0.165831238,
+                        "sqrMagnitude": 0.0275
+                      },
+                      "PerlinNoiseFreq": {
+                        "x": 12.0,
+                        "y": 14.0,
+                        "z": 16.0,
+                        "normalized": {
+                          "x": 0.49153915,
+                          "y": 0.573462367,
+                          "z": 0.655385554,
+                          "magnitude": 1.0,
+                          "sqrMagnitude": 1.00000012
+                        },
+                        "magnitude": 24.41311,
+                        "sqrMagnitude": 596.0
+                      },
+                      "IsUsePositionNoise": true,
+                      "IsUseRotationNoise": true
+                    }
+                  },
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.DamageByAttackProperty",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllTeammate"
+                  },
+                  "AttackProperty": {
+                    "DamageType": {
+                      "DamageType": "Ice"
+                    },
+                    "FormulaType": "ByMaxHP",
+                    "DamagePercentage": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    },
+                    "DamageValue": {},
+                    "ExtraDamagePercentage": {},
+                    "StanceValue": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    },
+                    "HitSplitRatio": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "SPHitRatio": {},
+                    "StanceDamageType": {
+                      "DamageType": "Ice"
+                    },
+                    "AttackType": "Normal",
+                    "BreakDamagePercentage": {},
+                    "FrameHalt": {},
+                    "HitAnimation": "Hit_H",
+                    "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W2_Mecha02_02/Eff_Monster_W2_Mecha02_02_DieHit01.prefab",
+                    "HitEffectMinMutexTime": {
+                      "FixedValue": {
+                        "RawValue": 214748368,
+                        "Value": 0.05
+                      }
+                    },
+                    "HitEffectMaxMutexCount": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "HitEffectHeight": -1.0,
+                    "HitTimeSlowType": "Impact",
+                    "HitPosHeight": 0.75
+                  },
+                  "CanOverkill": true,
+                  "PerformanceDelay": {},
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "MMonster_W4_Manta_00_LocalLegend"
+                  },
+                  "AliveOnly": true,
+                  "ModifierName": {
+                    "Value": "MMonster_W4_Manta_00_LocalLegend_Virus_Monster"
+                  },
+                  "Chance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxTargetCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "LifeTime": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DotHPRatio": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    },
+                    "MDF_DotDamageRatio": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    }
+                  },
+                  "InheritCaster": "TargetSelf",
+                  "IsShowUIMessageFromModel": true,
+                  "IsShowUIMessageOnUpdate": true,
+                  "ShowUIMessageInternalTime": -1.0,
+                  "UseFixedPosition": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllTeammate - MMonster_W4_Manta_00_LocalLegend"
+                  },
+                  "AliveOnly": true,
+                  "ModifierName": {
+                    "Value": "MMonster_W4_Manta_00_LocalLegend_Virus_Monster"
+                  },
+                  "Chance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxTargetCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "LifeTime": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DotHPRatio": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    },
+                    "MDF_DotDamageRatio": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    }
+                  },
+                  "InheritCaster": "TargetSelf",
+                  "IsShowUIMessageFromModel": true,
+                  "IsShowUIMessageOnUpdate": true,
+                  "ShowUIMessageInternalTime": -1.0,
+                  "UseFixedPosition": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.RadialBlurEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "None"
+                  },
+                  "Active": true,
+                  "Duration": -1.0,
+                  "BlurX": 0.5,
+                  "BlurY": 0.5,
+                  "BlurRadius": 1.0,
+                  "Iteration": 8,
+                  "BlurStart": 0.01,
+                  "BlurFeather": 0.15,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.DamagePerformFinish",
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
+              "NormalizedTime": {
+                "FixedValue": {
+                  "RawValue": 2534030707,
+                  "Value": 0.59
+                }
+              },
+              "TaskList": [
+                {
+                  "$type": "RPG.GameCore.RadialBlurEffect",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "None"
+                  },
+                  "Duration": -1.0,
+                  "BlurX": 0.5,
+                  "BlurY": 0.5,
+                  "BlurRadius": 0.5,
+                  "Iteration": 6,
+                  "BlurStart": 0.2,
+                  "BlurFeather": 0.1,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                },
+                {
+                  "$type": "RPG.GameCore.SetEntityVisible",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "MuteColliderWhenInvisible": true,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ]
+            }
+          ],
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Claymore_01_LocalLegend03_Skill03_Phase01",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.SetSkillTargetFormationByPos",
+          "Team": "TeamLight",
+          "CustomCenterTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "DarkTeamCenter"
+          },
+          "IgnoreHitBoxRadius": true,
+          "TargetFormation": {
+            "LocalDelta": {
+              "z": 9.0,
+              "normalized": {
+                "z": 1.0,
+                "magnitude": 1.0,
+                "sqrMagnitude": 1.0
+              },
+              "magnitude": 9.0,
+              "sqrMagnitude": 81.0
+            },
+            "Yaw": 180.0
+          },
+          "LeftSideFormations": [],
+          "RightSideFormations": [],
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "Monster_W4_Claymore_01_LocalLegend03_Skill03_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "Monster_W4_Claymore_01_Skill03_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": "AbilityTargetEntity",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimStateWithMove",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill03",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 3865470570,
+              "Value": 0.9
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "MovingRangeList": [
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AbilityTargetEntity"
+              },
+              "IgnoreRadius": true,
+              "Speed": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "OffsetTargetDistance": {
+                "FixedValue": {
+                  "RawValue": 26843545601,
+                  "Value": 6.25
+                }
+              },
+              "NormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 330712480,
+                  "Value": 0.08
+                }
+              },
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 446676598,
+                  "Value": 0.1
+                }
+              },
+              "MovePercentage": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "DefaultMoveDistance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              }
+            },
+            {
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "TeamFormation"
+              },
+              "IgnoreRadius": true,
+              "Speed": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "OffsetTargetDistance": {},
+              "NormalizedTimeStart": {
+                "FixedValue": {
+                  "RawValue": 2503965935,
+                  "Value": 0.58
+                }
+              },
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 3092376456,
+                  "Value": 0.72
+                }
+              },
+              "MovePercentage": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "DefaultMoveDistance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              }
+            }
+          ],
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Claymore_01_LocalLegend03_Skill03_Phase02",
+      "TargetInfo": {
+        "TargetType": "SkillTargetEntityList"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 429496730,
+              "Value": 0.1
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SkillExecutionStart",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill03",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 1258425418,
+              "Value": 0.29
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.DamageByAttackProperty",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AbilityTargetEntity"
+          },
+          "AttackProperty": {
+            "DamageType": {
+              "DamageType": "Physical"
+            },
+            "FormulaType": "ByAttack",
+            "DamagePercentage": {
+              "FixedValue": {
+                "RawValue": -149061134974976,
+                "Value": -34706.0
+              }
+            },
+            "DamageValue": {},
+            "ExtraDamagePercentage": {},
+            "StanceValue": {},
+            "HitSplitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "SPHitRatio": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "AttackType": "Normal",
+            "BreakDamagePercentage": {},
+            "FrameHalt": {},
+            "HitAnimation": "Hit_H",
+            "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Claymore_01/Eff_Monster_W4_Claymore_01_Skill03_Hit.prefab",
+            "HitEffectMinMutexTime": {
+              "FixedValue": {
+                "RawValue": 214748368,
+                "Value": 0.05
+              }
+            },
+            "HitEffectMaxMutexCount": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "HitEffectHeight": 0.375,
+            "HitPosHeight": 0.75
+          },
+          "DisplayData": {
+            "DitherRangeX": 0.03,
+            "DitherRangeY": 0.03,
+            "AttachPoint": "SelectRoot",
+            "Duration": 1.5,
+            "Scale": 1.0,
+            "FixedPosition": true
+          },
+          "CanOverkill": true,
+          "PerformanceDelay": {},
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.SkillPerformFinish",
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Griffin_01_LocalLegend_PassiveSkillInitiate",
+      "TargetInfo": {
+        "TargetType": "Caster"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.AddModifier",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AliveOnly": true,
+          "ModifierName": {
+            "Value": "MMonster_Common_MuteHitFly"
+          },
+          "Chance": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "MaxTargetCount": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "IsShowUIMessageFromModel": true,
+          "IsShowUIMessageOnUpdate": true,
+          "ShowUIMessageInternalTime": -1.0,
+          "UseFixedPosition": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Griffin_01_LocalLegend_Skill01_Phase01",
+      "TargetInfo": {
+        "TargetType": "AllEnemy"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.MoveToTargetPosition",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "DarkTeamCenter"
+          },
+          "IgnoreRadius": true,
+          "OffsetTargetDistance": {},
+          "MovePercentage": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.LookAt",
+          "PerformerType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "TargetType": "EnemyTeamCenter",
+          "ToTargetRatio": 1.0,
+          "Duration": -1.0,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityInherentTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "LeftToRightLightTeamTarget"
+          },
+          "AbilityName": {
+            "Value": "Monster_W4_Griffin_01_LocalLegend_Skill01_Phase02"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAbility",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AbilityName": {
+            "Value": "Monster_W4_Griffin_01_Skill01_Camera"
+          },
+          "IsSkillPerform": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "SkillUse",
+          "AnimStateName": "Skill02",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 4294967296,
+              "Value": 1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {},
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.TriggerAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimLogicState": "Idle",
+          "NormalizedTimeStart": {},
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTimeWait": {
+            "FixedValue": {
+              "RawValue": -4294967296,
+              "Value": -1.0
+            }
+          },
+          "NormalizedTransitionDuration": {
+            "FixedValue": {
+              "RawValue": 1073741825,
+              "Value": 0.25
+            }
+          },
+          "WaitAnimState": true,
+          "TaskEnabled": true
+        }
+      ]
+    },
+    {
+      "Name": "Monster_W4_Griffin_01_LocalLegend_Skill01_Phase02",
+      "TargetInfo": {
+        "TargetType": "InherentTargetEntity"
+      },
+      "OnStart": [
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "TargetIntensity": 0.4,
+          "FadeDuration": 0.5,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SetDynamicValueByCharacterCount",
+          "DynamicKey": "PosCount",
+          "ReadTargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "AllEnemy.RemoveServant"
+          },
+          "AliveOnly": true,
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "PosCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 17179869184,
+                "Value": 4.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetTeamFormation",
+              "FormationTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeamIgnoreServant.SortByFormation.Reverse"
+              },
+              "CustomFormationName": "Monster_4033030_Skill01_4P",
+              "CustomCenterTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "TeamMemberCountingOption": "IgnoreTempLeave",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "PosCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 12884901888,
+                "Value": 3.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetTeamFormation",
+              "FormationTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeamIgnoreServant.SortByFormation.Reverse"
+              },
+              "CustomFormationName": "Monster_4033030_Skill01_3P",
+              "CustomCenterTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "TeamMemberCountingOption": "IgnoreTempLeave",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "PosCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 8589934592,
+                "Value": 2.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetTeamFormation",
+              "FormationTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeamIgnoreServant.SortByFormation.Reverse"
+              },
+              "CustomFormationName": "Monster_4033030_Skill01_2P",
+              "CustomCenterTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "TeamMemberCountingOption": "IgnoreTempLeave",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "PosCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.SetTeamFormation",
+              "FormationTarget": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "AllLightTeamIgnoreServant.SortByFormation.Reverse"
+              },
+              "CustomFormationName": "Monster_4033030_Skill01_1P",
+              "CustomCenterTargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "DarkTeamCenter"
+              },
+              "TeamMemberCountingOption": "IgnoreTempLeave",
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 644245095,
+              "Value": 0.15
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SkillExecutionStart",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "PosCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 17179869184,
+                "Value": 4.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1567663063,
+                  "Value": 0.37
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_01.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1782411428,
+                  "Value": 0.42
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_02.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1997159793,
+                  "Value": 0.47
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_03.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 2211908158,
+                  "Value": 0.52
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_04.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "PosCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 12884901888,
+                "Value": 3.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1675037247,
+                  "Value": 0.39
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_01.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1889785612,
+                  "Value": 0.44
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_02.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 2104533977,
+                  "Value": 0.49
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_03.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "PosCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 8589934592,
+                "Value": 2.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1675037247,
+                  "Value": 0.39
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_01.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 2104533977,
+                  "Value": 0.49
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_02.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareDynamicValue",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "DynamicKey": {
+              "Value": "PosCount"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 4294967296,
+                "Value": 1.0
+              }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.WaitAnimState",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AnimStateName": "Skill02",
+              "NormalizedTimeEnd": {
+                "FixedValue": {
+                  "RawValue": 1889785612,
+                  "Value": 0.44
+                }
+              },
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.DamageByAttackProperty",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Monster_W4_Griffin_01_Skill01_GriffinTarget_01.WithServant.RemoveUnselectable"
+              },
+              "AttackProperty": {
+                "DamageType": {
+                  "DamageType": "Wind"
+                },
+                "FormulaType": "ByAttack",
+                "DamagePercentage": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                },
+                "DamageValue": {},
+                "ExtraDamagePercentage": {},
+                "StanceValue": {},
+                "HitSplitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "SPHitRatio": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "AttackType": "Normal",
+                "BreakDamagePercentage": {},
+                "FrameHalt": {},
+                "HitAnimation": "Hit_H",
+                "HitEffect": "Effects/Eff_Prefab/Eff_Monster/Eff_W4_Griffin_01/Eff_Monster_W4_Griffin_01_Skill01_Hit01.prefab",
+                "HitEffectMinMutexTime": {
+                  "FixedValue": {
+                    "RawValue": 214748368,
+                    "Value": 0.05
+                  }
+                },
+                "HitEffectMaxMutexCount": {
+                  "FixedValue": {
+                    "RawValue": 4294967296,
+                    "Value": 1.0
+                  }
+                },
+                "HitEffectHeight": -1.0,
+                "HitTimeSlowType": "Impact",
+                "HitPosHeight": 0.75
+              },
+              "CanOverkill": true,
+              "PerformanceDelay": {},
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.DamagePerformFinish",
+          "TaskEnabled": true
+        },
+        {
+          "$type": "RPG.GameCore.GlobalMainIntensityEffect",
+          "IsRevert": true,
+          "FadeDuration": 0.4,
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.WaitAnimState",
+          "TargetType": {
+            "$type": "RPG.GameCore.TargetAlias",
+            "Alias": "Caster"
+          },
+          "AnimStateName": "Skill02",
+          "NormalizedTimeEnd": {
+            "FixedValue": {
+              "RawValue": 3865470570,
+              "Value": 0.9
+            }
+          },
+          "TaskEnabled": true,
+          "IsClientOnly": true
+        },
+        {
+          "$type": "RPG.GameCore.SkillPerformFinish",
+          "TaskEnabled": true
+        }
+      ],
+      "DynamicValues": {}
+    }
+  ]
+}

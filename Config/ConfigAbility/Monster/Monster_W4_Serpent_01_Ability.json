@@ -337,6 +337,394 @@
           "Count": -1,
           "Stacking": "Unique"
         },
+        "MMonster_W4_Serpent_01_RLBoss_ChangePhaseController": {
+          "LifeTime": -1,
+          "MaxLayer": 99,
+          "LayerAddWhenStack": {},
+          "WorkingTurn": "OwnerTurn",
+          "LifeStepMoment": "ModifierPhase2End",
+          "ApplyBehaviorFlagBindEffects": true,
+          "_CallbackList": [
+            {
+              "Event": "OnLimboWaitHeal",
+              "Priority": -90,
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 4294967296,
+                        "Value": 1.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareDynamicValue",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "DynamicKey": {
+                          "Value": "ChangePhase"
+                        },
+                        "ContextScope": "TargetEntity",
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": 4294967296,
+                            "Value": 1.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "CasterSummonedMinions"
+                          },
+                          "ModifierName": {
+                            "Value": "MMonster_W4_Serpent_01_Summon_Deathrattle"
+                          },
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.ForceKill",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "CasterSummonedMinions"
+                          },
+                          "DeathSource": "KilledBySelf",
+                          "CanOverkill": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.RemoveModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "ModifierName": {
+                            "Value": "MMonster_W4_Serpent_01_Charge01"
+                          },
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.DefineDynamicValue",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "DynamicKey": {
+                            "Value": "ChangePhase"
+                          },
+                          "ResetValue": {},
+                          "ContextScope": "TargetEntity",
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.TriggerAnimState",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "AnimLogicState": "SkillUse",
+                          "AnimStateName": "ChangePhaseStart",
+                          "NormalizedTimeStart": {},
+                          "NormalizedTimeEnd": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "NormalizedTimeWait": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "NormalizedTransitionDuration": {},
+                          "WaitAnimState": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.DispelStatus",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "OnlyCanDispel": true,
+                          "BuffType": "Debuff",
+                          "IsSilentDispel": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "ModifierName": {
+                            "Value": "MCommon_Endurance"
+                          },
+                          "Chance": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "MaxTargetCount": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "IsShowUIMessageFromModel": true,
+                          "IsShowUIMessageOnUpdate": true,
+                          "ShowUIMessageInternalTime": -1.0,
+                          "UseFixedPosition": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.SetMonsterPhase",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "Caster"
+                          },
+                          "SetMode": "Inc",
+                          "PhaseNum": 1,
+                          "ApplyOverrideConfig": true,
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.TurnInsertAbility",
+                          "AbilityName": {
+                            "Value": "Monster_W4_Serpent_01_ChangePhase1"
+                          },
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ModifierOwnerEntity"
+                          },
+                          "InsertAbilityPriority": "MonsterChangePhase",
+                          "OwnerAliveState": "Mask_AliveOrLimbo",
+                          "TargetAliveState": "Mask_AliveOrLimbo",
+                          "CanRunOnUnselectableTarget": true,
+                          "ShowInActionBar": true,
+                          "AutoStandbyOnAbilityFinish": true,
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "FailedTaskList": [
+                    {
+                      "$type": "RPG.GameCore.PredicateTaskList",
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ModifierOwnerEntity"
+                        },
+                        "CompareType": "Equal",
+                        "CompareValue": {
+                          "FixedValue": {
+                            "RawValue": 8589934592,
+                            "Value": 2.0
+                          }
+                        },
+                        "TaskEnabled": true
+                      },
+                      "SuccessTaskList": [
+                        {
+                          "$type": "RPG.GameCore.PredicateTaskList",
+                          "Predicate": {
+                            "$type": "RPG.GameCore.ByCompareDynamicValue",
+                            "TargetType": {
+                              "$type": "RPG.GameCore.TargetAlias",
+                              "Alias": "ModifierOwnerEntity"
+                            },
+                            "DynamicKey": {
+                              "Value": "ChangePhase"
+                            },
+                            "ContextScope": "TargetEntity",
+                            "CompareType": "Equal",
+                            "CompareValue": {
+                              "FixedValue": {
+                                "RawValue": 4294967296,
+                                "Value": 1.0
+                              }
+                            },
+                            "TaskEnabled": true
+                          },
+                          "SuccessTaskList": [
+                            {
+                              "$type": "RPG.GameCore.RemoveModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "CasterSummonedMinions"
+                              },
+                              "ModifierName": {
+                                "Value": "MMonster_W4_Serpent_01_Summon_Deathrattle"
+                              },
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.ForceKill",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "CasterSummonedMinions"
+                              },
+                              "DeathSource": "KilledBySelf",
+                              "CanOverkill": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.RemoveModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "ModifierName": {
+                                "Value": "MMonster_W4_Serpent_01_Charge01"
+                              },
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.DefineDynamicValue",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "DynamicKey": {
+                                "Value": "ChangePhase"
+                              },
+                              "ResetValue": {},
+                              "ContextScope": "TargetEntity",
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.TriggerAnimState",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "AnimLogicState": "SkillUse",
+                              "AnimStateName": "ChangePhaseStart",
+                              "NormalizedTimeStart": {},
+                              "NormalizedTimeEnd": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "NormalizedTimeWait": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "NormalizedTransitionDuration": {},
+                              "WaitAnimState": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.DispelStatus",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "OnlyCanDispel": true,
+                              "BuffType": "Debuff",
+                              "IsSilentDispel": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.AddModifier",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "ModifierName": {
+                                "Value": "MCommon_Endurance"
+                              },
+                              "Chance": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "MaxTargetCount": {
+                                "FixedValue": {
+                                  "RawValue": -4294967296,
+                                  "Value": -1.0
+                                }
+                              },
+                              "IsShowUIMessageFromModel": true,
+                              "IsShowUIMessageOnUpdate": true,
+                              "ShowUIMessageInternalTime": -1.0,
+                              "UseFixedPosition": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.SetMonsterPhase",
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "Caster"
+                              },
+                              "SetMode": "Inc",
+                              "PhaseNum": 1,
+                              "ApplyOverrideConfig": true,
+                              "TaskEnabled": true
+                            },
+                            {
+                              "$type": "RPG.GameCore.TurnInsertAbility",
+                              "AbilityName": {
+                                "Value": "Monster_W4_Serpent_01_ChangePhase1"
+                              },
+                              "TargetType": {
+                                "$type": "RPG.GameCore.TargetAlias",
+                                "Alias": "ModifierOwnerEntity"
+                              },
+                              "InsertAbilityPriority": "MonsterChangePhase",
+                              "OwnerAliveState": "Mask_AliveOrLimbo",
+                              "TargetAliveState": "Mask_AliveOrLimbo",
+                              "CanRunOnUnselectableTarget": true,
+                              "ShowInActionBar": true,
+                              "AutoStandbyOnAbilityFinish": true,
+                              "TaskEnabled": true
+                            }
+                          ],
+                          "TaskEnabled": true
+                        },
+                        {
+                          "$type": "RPG.GameCore.RemoveSelfModifier",
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            }
+          ],
+          "Count": -1,
+          "Stacking": "Unique"
+        },
         "MMonster_W4_Serpent_01_PickUpMessage": {
           "LifeTime": -1,
           "MaxLayer": 99,
@@ -486,31 +874,242 @@
           "TaskEnabled": true
         },
         {
-          "$type": "RPG.GameCore.AddModifier",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCheckCustomValueBool",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "Key": {
+              "Hash": 1563013071,
+              "HashKey": "1563013071"
+            },
+            "TaskEnabled": true
           },
-          "AliveOnly": true,
-          "ModifierName": {
-            "Value": "MMonster_W4_Serpent_01_ChangePhaseController"
-          },
-          "Chance": {
-            "FixedValue": {
-              "RawValue": -4294967296,
-              "Value": -1.0
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AliveOnly": true,
+              "ModifierName": {
+                "Value": "MMonster_W4_Serpent_01_RLBoss_ChangePhaseController"
+              },
+              "Chance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "MaxTargetCount": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "IsShowUIMessageFromModel": true,
+              "IsShowUIMessageOnUpdate": true,
+              "ShowUIMessageInternalTime": -1.0,
+              "UseFixedPosition": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AliveOnly": true,
+              "ModifierName": {
+                "Value": "Monster_W4_Serpent_01_RLBoss_Passive"
+              },
+              "Chance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "MaxTargetCount": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "DynamicValues": {
+                "MDF_DamageUpRatio_PerLayer": {
+                  "FixedValue": {
+                    "RawValue": -149061134974976,
+                    "Value": -34706.0
+                  }
+                }
+              },
+              "IsShowUIMessageFromModel": true,
+              "IsShowUIMessageOnUpdate": true,
+              "ShowUIMessageInternalTime": -1.0,
+              "UseFixedPosition": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.PreloadBattleEventByID",
+              "BattleEventID": [
+                20038
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.CreateBattleEvent",
+              "EventID": {
+                "FixedValue": {
+                  "RawValue": 86062554677248,
+                  "Value": 20038.0
+                }
+              },
+              "Team": "TeamLight",
+              "TotalDamageTeam": "TeamDark",
+              "OnBattleEventCreate": [
+                {
+                  "$type": "RPG.GameCore.SetTargetUniqueName",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "UniqueName": {
+                    "RawString": "SelectTarget"
+                  },
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "AliveOnly": true,
+                  "ModifierName": {
+                    "Value": "MMonster_W4_Serpent_01_PickUpMessage"
+                  },
+                  "Chance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxTargetCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "IsShowUIMessageFromModel": true,
+                  "IsShowUIMessageOnUpdate": true,
+                  "ShowUIMessageInternalTime": -1.0,
+                  "UseFixedPosition": true,
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
             }
-          },
-          "MaxTargetCount": {
-            "FixedValue": {
-              "RawValue": -4294967296,
-              "Value": -1.0
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.AddModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "AliveOnly": true,
+              "ModifierName": {
+                "Value": "MMonster_W4_Serpent_01_ChangePhaseController"
+              },
+              "Chance": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "MaxTargetCount": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "IsShowUIMessageFromModel": true,
+              "IsShowUIMessageOnUpdate": true,
+              "ShowUIMessageInternalTime": -1.0,
+              "UseFixedPosition": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.PreloadBattleEventByID",
+              "BattleEventID": [
+                20030
+              ],
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.CreateBattleEvent",
+              "EventID": {
+                "FixedValue": {
+                  "RawValue": 86028194938880,
+                  "Value": 20030.0
+                }
+              },
+              "Team": "TeamLight",
+              "TotalDamageTeam": "TeamDark",
+              "OnBattleEventCreate": [
+                {
+                  "$type": "RPG.GameCore.SetTargetUniqueName",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "UniqueName": {
+                    "RawString": "SelectTarget"
+                  },
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "ParamEntity"
+                  },
+                  "AliveOnly": true,
+                  "ModifierName": {
+                    "Value": "MMonster_W4_Serpent_01_PickUpMessage"
+                  },
+                  "Chance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxTargetCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "IsShowUIMessageFromModel": true,
+                  "IsShowUIMessageOnUpdate": true,
+                  "ShowUIMessageInternalTime": -1.0,
+                  "UseFixedPosition": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.ShowBattleEventButton",
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
             }
-          },
-          "IsShowUIMessageFromModel": true,
-          "IsShowUIMessageOnUpdate": true,
-          "ShowUIMessageInternalTime": -1.0,
-          "UseFixedPosition": true,
+          ],
           "TaskEnabled": true
         },
         {
@@ -565,72 +1164,6 @@
           "IsShowUIMessageOnUpdate": true,
           "ShowUIMessageInternalTime": -1.0,
           "UseFixedPosition": true,
-          "TaskEnabled": true
-        },
-        {
-          "$type": "RPG.GameCore.PreloadBattleEventByID",
-          "BattleEventID": [
-            20030
-          ],
-          "TaskEnabled": true,
-          "IsClientOnly": true
-        },
-        {
-          "$type": "RPG.GameCore.CreateBattleEvent",
-          "EventID": {
-            "FixedValue": {
-              "RawValue": 86028194938880,
-              "Value": 20030.0
-            }
-          },
-          "Team": "TeamLight",
-          "TotalDamageTeam": "TeamDark",
-          "OnBattleEventCreate": [
-            {
-              "$type": "RPG.GameCore.SetTargetUniqueName",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "UniqueName": {
-                "RawString": "SelectTarget"
-              },
-              "TaskEnabled": true
-            },
-            {
-              "$type": "RPG.GameCore.AddModifier",
-              "TargetType": {
-                "$type": "RPG.GameCore.TargetAlias",
-                "Alias": "ParamEntity"
-              },
-              "AliveOnly": true,
-              "ModifierName": {
-                "Value": "MMonster_W4_Serpent_01_PickUpMessage"
-              },
-              "Chance": {
-                "FixedValue": {
-                  "RawValue": -4294967296,
-                  "Value": -1.0
-                }
-              },
-              "MaxTargetCount": {
-                "FixedValue": {
-                  "RawValue": -4294967296,
-                  "Value": -1.0
-                }
-              },
-              "IsShowUIMessageFromModel": true,
-              "IsShowUIMessageOnUpdate": true,
-              "ShowUIMessageInternalTime": -1.0,
-              "UseFixedPosition": true,
-              "TaskEnabled": true
-            },
-            {
-              "$type": "RPG.GameCore.ShowBattleEventButton",
-              "TaskEnabled": true,
-              "IsClientOnly": true
-            }
-          ],
           "TaskEnabled": true
         }
       ]
@@ -976,20 +1509,80 @@
           "IsClientOnly": true
         },
         {
-          "$type": "RPG.GameCore.ShowUIPage",
-          "AssetPath": "UI/Common/Widget/BattlePhaseChangeHint.prefab",
-          "UITextNodes": [
-            {
-              "TextPath": "AreaInfoPanel/Title/Text",
-              "TextContent": {
-                "Hash": -660789618,
-                "Hash64": 17737825813150993272
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterPhase",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 8589934592,
+                "Value": 2.0
               }
+            },
+            "TaskEnabled": true
+          },
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattlePhaseChangeHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": -602640412,
+                    "Hash64": 9622126420009900264
+                  }
+                }
+              ],
+              "LifeTime": 2.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
             }
           ],
-          "LifeTime": 2.0,
-          "TaskEnabled": true,
-          "IsClientOnly": true
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 12884901888,
+                    "Value": 3.0
+                  }
+                },
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.ShowUIPage",
+                  "AssetPath": "UI/Common/Widget/BattlePhaseChangeHint.prefab",
+                  "UITextNodes": [
+                    {
+                      "TextPath": "AreaInfoPanel/Title/Text",
+                      "TextContent": {
+                        "Hash": 963443529,
+                        "Hash64": 10177033666434796536
+                      }
+                    }
+                  ],
+                  "LifeTime": 2.0,
+                  "TaskEnabled": true,
+                  "IsClientOnly": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
+          "TaskEnabled": true
         },
         {
           "$type": "RPG.GameCore.SetActionDelay",
@@ -1117,21 +1710,83 @@
           "TaskEnabled": true
         },
         {
-          "$type": "RPG.GameCore.DefineDynamicValue",
-          "TargetType": {
-            "$type": "RPG.GameCore.TargetAlias",
-            "Alias": "Caster"
+          "$type": "RPG.GameCore.PredicateTaskList",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByCompareMonsterPhase",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "Caster"
+            },
+            "CompareType": "Equal",
+            "CompareValue": {
+              "FixedValue": {
+                "RawValue": 8589934592,
+                "Value": 2.0
+              }
+            },
+            "TaskEnabled": true
           },
-          "DynamicKey": {
-            "Value": "Phase_Flag"
-          },
-          "ResetValue": {
-            "FixedValue": {
-              "RawValue": 8589934592,
-              "Value": 2.0
+          "SuccessTaskList": [
+            {
+              "$type": "RPG.GameCore.DefineDynamicValue",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "Caster"
+              },
+              "DynamicKey": {
+                "Value": "Phase_Flag"
+              },
+              "ResetValue": {
+                "FixedValue": {
+                  "RawValue": 8589934592,
+                  "Value": 2.0
+                }
+              },
+              "ContextScope": "TargetEntity",
+              "TaskEnabled": true
             }
-          },
-          "ContextScope": "TargetEntity",
+          ],
+          "FailedTaskList": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                "TargetType": {
+                  "$type": "RPG.GameCore.TargetAlias",
+                  "Alias": "Caster"
+                },
+                "CompareType": "Equal",
+                "CompareValue": {
+                  "FixedValue": {
+                    "RawValue": 12884901888,
+                    "Value": 3.0
+                  }
+                },
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.DefineDynamicValue",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "DynamicKey": {
+                    "Value": "Phase_Flag"
+                  },
+                  "ResetValue": {
+                    "FixedValue": {
+                      "RawValue": 12884901888,
+                      "Value": 3.0
+                    }
+                  },
+                  "ContextScope": "TargetEntity",
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ],
           "TaskEnabled": true
         },
         {
@@ -1930,6 +2585,91 @@
                 }
               },
               "RefreshTeamLocation": true,
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "Key": {
+                      "Hash": 1563013071,
+                      "HashKey": "1563013071"
+                    },
+                    "TaskEnabled": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCompareMonsterPhase",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "Caster"
+                    },
+                    "CompareType": "Equal",
+                    "CompareValue": {
+                      "FixedValue": {
+                        "RawValue": 12884901888,
+                        "Value": 3.0
+                      }
+                    },
+                    "TaskEnabled": true
+                  }
+                ],
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.SummonMonster",
+                  "SummonMonsterDataList": [
+                    {
+                      "MonsterID": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "LocationType": "KeepOnEdge",
+                      "InitAnimStateName": "StandBy"
+                    }
+                  ],
+                  "DelayRatio": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "RefreshTeamLocation": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.SummonMonster",
+                  "SummonMonsterDataList": [
+                    {
+                      "MonsterID": {
+                        "FixedValue": {
+                          "RawValue": -149061134974976,
+                          "Value": -34706.0
+                        }
+                      },
+                      "LocationType": "KeepOnEdge",
+                      "InitAnimStateName": "StandBy"
+                    }
+                  ],
+                  "DelayRatio": {
+                    "FixedValue": {
+                      "RawValue": -149061134974976,
+                      "Value": -34706.0
+                    }
+                  },
+                  "RefreshTeamLocation": true,
+                  "TaskEnabled": true
+                }
+              ],
               "TaskEnabled": true
             },
             {
@@ -5414,6 +6154,18 @@
                         "EntityTypeMask": "Avatar",
                         "AliveStateMask": "Mask_AliveOrLimbo",
                         "TaskEnabled": true
+                      },
+                      {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "ModifierName": {
+                          "Value": "Monster_W4_Serpent_01_RLBoss_Skill06Judge"
+                        },
+                        "Inverse": true,
+                        "TaskEnabled": true
                       }
                     ],
                     "TaskEnabled": true
@@ -5801,6 +6553,7 @@
             "$type": "RPG.GameCore.TargetFetchUniqueNameEntity",
             "UniqueName": "SelectTarget"
           },
+          "InsertActionPriority": "PROG_Default",
           "SkillType": "ControlSkill03",
           "PlayReadyAnim": true,
           "SkillTypeWhenDelayed": "_Count",
@@ -6372,6 +7125,52 @@
                   "IsShowUIMessageOnUpdate": true,
                   "ShowUIMessageInternalTime": -1.0,
                   "UseFixedPosition": true,
+                  "TaskEnabled": true
+                },
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCheckCustomValueBool",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetFetchUniqueNameEntity",
+                      "UniqueName": "W4_Serpent_01"
+                    },
+                    "Key": {
+                      "Hash": 1563013071,
+                      "HashKey": "1563013071"
+                    },
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.AddModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AbilityTargetEntity"
+                      },
+                      "AliveOnly": true,
+                      "ModifierName": {
+                        "Value": "Monster_W4_Serpent_01_RLBoss_Skill06Choose"
+                      },
+                      "Chance": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "MaxTargetCount": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "IsShowUIMessageFromModel": true,
+                      "IsShowUIMessageOnUpdate": true,
+                      "ShowUIMessageInternalTime": -1.0,
+                      "UseFixedPosition": true,
+                      "TaskEnabled": true
+                    }
+                  ],
                   "TaskEnabled": true
                 },
                 {
@@ -10219,6 +11018,323 @@
       ],
       "Count": -1,
       "Stacking": "Unique"
+    },
+    "Monster_W4_Serpent_01_RLBoss_Passive": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "_CallbackList": [
+        {
+          "Event": "OnBeforeSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillName",
+                "SkillName": "Skill06",
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.PredicateTaskList",
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByCompareCharacterNumber",
+                    "AliveOnly": true,
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "AllLightTeam.RemoveServant"
+                    },
+                    "Predicate": {
+                      "$type": "RPG.GameCore.ByIsContainModifier",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "ModifierName": {
+                        "Value": "Monster_W4_Serpent_01_RLBoss_Skill06Choose"
+                      },
+                      "Inverse": true,
+                      "TaskEnabled": true
+                    },
+                    "CompareType": "Greater",
+                    "CompareNumber": {},
+                    "IgnorePuppet": true,
+                    "TaskEnabled": true
+                  },
+                  "SuccessTaskList": [
+                    {
+                      "$type": "RPG.GameCore.Retarget",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "AllLightTeam.RemoveServant"
+                      },
+                      "Predicate": {
+                        "$type": "RPG.GameCore.ByIsContainModifier",
+                        "TargetType": {
+                          "$type": "RPG.GameCore.TargetAlias",
+                          "Alias": "ParamEntity"
+                        },
+                        "ModifierName": {
+                          "Value": "Monster_W4_Serpent_01_RLBoss_Skill06Choose"
+                        },
+                        "TaskEnabled": true
+                      },
+                      "MaxNumber": {
+                        "FixedValue": {
+                          "RawValue": -4294967296,
+                          "Value": -1.0
+                        }
+                      },
+                      "TaskList": [
+                        {
+                          "$type": "RPG.GameCore.AddModifier",
+                          "TargetType": {
+                            "$type": "RPG.GameCore.TargetAlias",
+                            "Alias": "ParamEntity"
+                          },
+                          "AliveOnly": true,
+                          "ModifierName": {
+                            "Value": "Monster_W4_Serpent_01_RLBoss_Skill06Judge"
+                          },
+                          "Chance": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "MaxTargetCount": {
+                            "FixedValue": {
+                              "RawValue": -4294967296,
+                              "Value": -1.0
+                            }
+                          },
+                          "IsShowUIMessageFromModel": true,
+                          "IsShowUIMessageOnUpdate": true,
+                          "ShowUIMessageInternalTime": -1.0,
+                          "UseFixedPosition": true,
+                          "TaskEnabled": true
+                        }
+                      ],
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ]
+        },
+        {
+          "Event": "OnAfterSkillUse",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByAny",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillName",
+                    "SkillName": "Skill04",
+                    "TaskEnabled": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByCurrentSkillName",
+                    "SkillName": "Skill05",
+                    "TaskEnabled": true
+                  }
+                ],
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.AddModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "Caster"
+                  },
+                  "AliveOnly": true,
+                  "ModifierName": {
+                    "Value": "Monster_W4_Nikadory_00_RLBoss_DamageUp"
+                  },
+                  "Chance": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "MaxTargetCount": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "DynamicValues": {
+                    "MDF_DamageUpRatio_PerLayer": {
+                      "FixedValue": {
+                        "RawValue": -149061134974976,
+                        "Value": -34706.0
+                      }
+                    }
+                  },
+                  "IsShowUIMessageFromModel": true,
+                  "IsShowUIMessageOnUpdate": true,
+                  "ShowUIMessageInternalTime": -1.0,
+                  "CustomUIModelAttachPointName": "SelectRoot",
+                  "UseFixedPosition": true,
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.PredicateTaskList",
+              "Predicate": {
+                "$type": "RPG.GameCore.ByCurrentSkillName",
+                "SkillName": "Skill07",
+                "TaskEnabled": true
+              },
+              "SuccessTaskList": [
+                {
+                  "$type": "RPG.GameCore.RemoveModifier",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "AllLightTeam"
+                  },
+                  "ModifierName": {
+                    "Value": "Monster_W4_Serpent_01_RLBoss_Skill06Judge"
+                  },
+                  "TaskEnabled": true
+                }
+              ],
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "Unique",
+      "DynamicValues": {}
+    },
+    "Monster_W4_Serpent_01_RLBoss_TriggerDamage": {
+      "LifeTime": 1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "_CallbackList": [
+        {
+          "Event": "OnStack",
+          "CallbackConfig": [
+            {
+              "$type": "RPG.GameCore.TriggerModifierCustomEvent",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "EventType": {
+                "JsonValueStr": "DOT"
+              },
+              "DynamicKey": "DOT_TriggerRatio",
+              "Value": {
+                "FixedValue": {
+                  "RawValue": 4294967296,
+                  "Value": 1.0
+                }
+              },
+              "MaxNumber": {
+                "FixedValue": {
+                  "RawValue": -4294967296,
+                  "Value": -1.0
+                }
+              },
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.ShowUIPage",
+              "AssetPath": "UI/Common/Widget/BattleAlertHint.prefab",
+              "UITextNodes": [
+                {
+                  "TextPath": "AreaInfoPanel/Title/Text",
+                  "TextContent": {
+                    "Hash": -1913752657,
+                    "Hash64": 11912721679516970776
+                  }
+                }
+              ],
+              "LifeTime": 3.0,
+              "TaskEnabled": true,
+              "IsClientOnly": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveModifier",
+              "TargetType": {
+                "$type": "RPG.GameCore.TargetAlias",
+                "Alias": "ModifierOwnerEntity"
+              },
+              "ModifierName": {
+                "Value": "MMonster_W2_Beast01_04_SkillP02_GoldBlood_DOT"
+              },
+              "TaskEnabled": true
+            },
+            {
+              "$type": "RPG.GameCore.RemoveSelfModifier",
+              "TaskEnabled": true
+            }
+          ]
+        }
+      ],
+      "Count": -1,
+      "Stacking": "Unique"
+    },
+    "Monster_W4_Serpent_01_RLBoss_Skill06Choose": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "Count": -1,
+      "Stacking": "Unique"
+    },
+    "Monster_W4_Serpent_01_RLBoss_Skill06Judge": {
+      "LifeTime": -1,
+      "MaxLayer": 99,
+      "LayerAddWhenStack": {},
+      "WorkingTurn": "OwnerTurn",
+      "LifeStepMoment": "ModifierPhase2End",
+      "ApplyBehaviorFlagBindEffects": true,
+      "Count": -1,
+      "Stacking": "Unique"
+    }
+  },
+  "GlobalTargetAlias": {
+    "BattleEvent20038_Avatar": {
+      "$type": "RPG.GameCore.TargetSequence",
+      "Sequence": [
+        {
+          "$type": "RPG.GameCore.TargetAlias",
+          "Alias": "AllLightTeam"
+        },
+        {
+          "$type": "RPG.GameCore.TargetFilter",
+          "Predicate": {
+            "$type": "RPG.GameCore.ByIsContainModifier",
+            "TargetType": {
+              "$type": "RPG.GameCore.TargetAlias",
+              "Alias": "ParamEntity"
+            },
+            "ModifierName": {
+              "Value": "Monster_W4_Serpent_01_RLBoss_Skill06Judge"
+            },
+            "TaskEnabled": true
+          }
+        }
+      ]
     }
   }
 }

@@ -11,6 +11,49 @@
           "ApplyBehaviorFlagBindEffects": true,
           "_CallbackList": [
             {
+              "Event": "OnBeforeDying",
+              "CallbackConfig": [
+                {
+                  "$type": "RPG.GameCore.Retarget",
+                  "TargetType": {
+                    "$type": "RPG.GameCore.TargetAlias",
+                    "Alias": "BattleEventEntityList"
+                  },
+                  "Predicate": {
+                    "$type": "RPG.GameCore.ByHasSummonRelation",
+                    "SummonerType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ModifierOwnerEntity"
+                    },
+                    "ServantType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "TaskEnabled": true
+                  },
+                  "MaxNumber": {
+                    "FixedValue": {
+                      "RawValue": -4294967296,
+                      "Value": -1.0
+                    }
+                  },
+                  "TaskList": [
+                    {
+                      "$type": "RPG.GameCore.ForceKill",
+                      "TargetType": {
+                        "$type": "RPG.GameCore.TargetAlias",
+                        "Alias": "ParamEntity"
+                      },
+                      "DeathSource": "KilledBySelf",
+                      "CanOverkill": true,
+                      "TaskEnabled": true
+                    }
+                  ],
+                  "TaskEnabled": true
+                }
+              ]
+            },
+            {
               "Event": "OnHPChange",
               "CallbackConfig": [
                 {
@@ -3651,14 +3694,32 @@
             {
               "$type": "RPG.GameCore.PredicateTaskList",
               "Predicate": {
-                "$type": "RPG.GameCore.ByIsContainModifier",
-                "TargetType": {
-                  "$type": "RPG.GameCore.TargetAlias",
-                  "Alias": "ParamEntity"
-                },
-                "ModifierName": {
-                  "Value": "MCommon_CTRL_Frozen"
-                },
+                "$type": "RPG.GameCore.ByAnd",
+                "PredicateList": [
+                  {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "MCommon_CTRL_Frozen"
+                    },
+                    "TaskEnabled": true
+                  },
+                  {
+                    "$type": "RPG.GameCore.ByIsContainModifier",
+                    "TargetType": {
+                      "$type": "RPG.GameCore.TargetAlias",
+                      "Alias": "ParamEntity"
+                    },
+                    "ModifierName": {
+                      "Value": "StageAbility_GridFight_MonsterTag_2007_Tag"
+                    },
+                    "Inverse": true,
+                    "TaskEnabled": true
+                  }
+                ],
                 "TaskEnabled": true
               },
               "SuccessTaskList": [
