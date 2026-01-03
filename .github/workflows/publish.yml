@@ -1,0 +1,76 @@
+name: Publish Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version Number (e.g. v3.7.0). Required for manual trigger.'
+        required: true
+        default: 'v3.7.x'
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine Tag Name
+        id: get_tag
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo "TAG_NAME=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+            echo "IS_MANUAL=true" >> $GITHUB_OUTPUT
+          else
+            echo "TAG_NAME=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+            echo "IS_MANUAL=false" >> $GITHUB_OUTPUT
+          fi
+        shell: bash
+
+      - name: Generate Changelog
+        id: changelog
+        run: |
+          # Retrieve the previous tag to generate the diff log
+          PREV_TAG=$(git describe --tags --abbrev=0 ${TAG_NAME}^ 2>/dev/null || echo "")
+          
+          echo "Previous tag: $PREV_TAG"
+          
+          if [ -z "$PREV_TAG" ]; then
+             echo "No previous tag found. Generating log from inception."
+             git log --pretty=format:"- %h %s" > release_notes.md
+          else
+             if [ "${{ steps.get_tag.outputs.IS_MANUAL }}" == "true" ]; then
+                # For manual trigger, we compare previous tag to HEAD
+                echo "Generating log from $PREV_TAG to HEAD"
+                git log ${PREV_TAG}..HEAD --pretty=format:"- %h %s" > release_notes.md
+             else
+                # For tag push, we compare previous tag to current tag
+                echo "Generating log from $PREV_TAG to ${{ steps.get_tag.outputs.TAG_NAME }}"
+                git log ${PREV_TAG}..${{ steps.get_tag.outputs.TAG_NAME }} --pretty=format:"- %h %s" > release_notes.md
+             fi
+          fi
+          
+          # Check if file is empty
+          if [ ! -s release_notes.md ]; then
+             echo "No changes found." > release_notes.md
+          fi
+        shell: bash
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.get_tag.outputs.TAG_NAME }}
+          name: Release ${{ steps.get_tag.outputs.TAG_NAME }}
+          body_path: release_notes.md
+          draft: false
+          prerelease: false
+          make_latest: true
