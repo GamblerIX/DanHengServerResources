@@ -1,4 +1,4 @@
-name: Publish Release
+name: "发布版本 (Publish Release)"
 
 on:
   push:
@@ -7,24 +7,24 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version Number (e.g. v3.7.0). Required for manual trigger.'
+        description: '版本号 (例如 v3.7.0). 手动触发时必填.'
         required: true
         default: 'v3.7.x'
 
 jobs:
   release:
-    name: Create Release
+    name: 创建发布
     runs-on: ubuntu-latest
     permissions:
       contents: write
     
     steps:
-      - name: Checkout code
+      - name: 检出代码
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Determine Tag Name
+      - name: 确定标签名称
         id: get_tag
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
@@ -36,41 +36,46 @@ jobs:
           fi
         shell: bash
 
-      - name: Generate Changelog
+      - name: 生成变更日志
         id: changelog
         run: |
-          # Retrieve the previous tag to generate the diff log
+          # 获取上一个标签以生成差异日志
           PREV_TAG=$(git describe --tags --abbrev=0 ${TAG_NAME}^ 2>/dev/null || echo "")
           
-          echo "Previous tag: $PREV_TAG"
+          echo "上一个标签: $PREV_TAG"
           
           if [ -z "$PREV_TAG" ]; then
-             echo "No previous tag found. Generating log from inception."
+             echo "未找到上一个标签。生成此版本之前的所有日志。"
              git log --pretty=format:"- %h %s" > release_notes.md
           else
              if [ "${{ steps.get_tag.outputs.IS_MANUAL }}" == "true" ]; then
-                # For manual trigger, we compare previous tag to HEAD
-                echo "Generating log from $PREV_TAG to HEAD"
+                # 对于手动触发，比较上一个标签到 HEAD
+                echo "生成从 $PREV_TAG 到 HEAD 的日志"
                 git log ${PREV_TAG}..HEAD --pretty=format:"- %h %s" > release_notes.md
              else
-                # For tag push, we compare previous tag to current tag
-                echo "Generating log from $PREV_TAG to ${{ steps.get_tag.outputs.TAG_NAME }}"
+                # 对于标签推送，比较上一个标签到当前标签
+                echo "生成从 $PREV_TAG 到 ${{ steps.get_tag.outputs.TAG_NAME }} 的日志"
                 git log ${PREV_TAG}..${{ steps.get_tag.outputs.TAG_NAME }} --pretty=format:"- %h %s" > release_notes.md
              fi
           fi
           
-          # Check if file is empty
+          # 检查文件是否为空
           if [ ! -s release_notes.md ]; then
-             echo "No changes found." > release_notes.md
+             echo "未发现变更。" > release_notes.md
           fi
         shell: bash
 
-      - name: Create Release
+      - name: 打包资源文件
+        run: |
+          zip -r resources-${{ steps.get_tag.outputs.TAG_NAME }}.zip Config ExcelOutput Story TextMap ConfigManifest.json
+
+      - name: 创建发布
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.get_tag.outputs.TAG_NAME }}
-          name: Release ${{ steps.get_tag.outputs.TAG_NAME }}
+          name: 发布 ${{ steps.get_tag.outputs.TAG_NAME }}
           body_path: release_notes.md
           draft: false
           prerelease: false
           make_latest: true
+          files: resources-${{ steps.get_tag.outputs.TAG_NAME }}.zip
