@@ -40,6 +40,7 @@ jobs:
         id: changelog
         run: |
           # 获取上一个标签以生成差异日志
+          TAG_NAME="${{ steps.get_tag.outputs.TAG_NAME }}"
           PREV_TAG=$(git describe --tags --abbrev=0 ${TAG_NAME}^ 2>/dev/null || echo "")
           
           echo "上一个标签: $PREV_TAG"
@@ -54,8 +55,8 @@ jobs:
                 git log ${PREV_TAG}..HEAD --pretty=format:"- %h %s" > release_notes.md
              else
                 # 对于标签推送，比较上一个标签到当前标签
-                echo "生成从 $PREV_TAG 到 ${{ steps.get_tag.outputs.TAG_NAME }} 的日志"
-                git log ${PREV_TAG}..${{ steps.get_tag.outputs.TAG_NAME }} --pretty=format:"- %h %s" > release_notes.md
+                echo "生成从 $PREV_TAG 到 $TAG_NAME 的日志"
+                git log ${PREV_TAG}..${TAG_NAME} --pretty=format:"- %h %s" > release_notes.md
              fi
           fi
           
